@@ -100,6 +100,15 @@ export const ManageUsers = () => {
     return (
         <AdminRoute>
             <RoleModal  />
+            <div className="flex justify-between" >
+                <div>Manage Users</div>
+                <select>
+                    <option value="all" >All</option>
+                    <option value="admin" >Admin</option>
+                    <option value="user" >User</option>
+
+                </select>
+            </div>
             <div className="flex-grow grid grid-cols-[1fr_1fr_1fr] gap-2" >
                 <div>Name</div>
                 <div>Username</div>

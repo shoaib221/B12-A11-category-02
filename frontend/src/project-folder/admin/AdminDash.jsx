@@ -11,9 +11,9 @@ export const AdminDash = () => {
 
 
     return (
-        <div className='flex gap-8' >
+        <div className='flex flex-col lg:flex-row gap-8' >
 
-            <div className='flex flex-col min-w-12' >
+            <div className='flex lg:flex-col overflow-auto gap-2' >
                 <div onClick={ () => setCur('profile') } >My Profile</div>
                 <div onClick={ () => setCur('add') } >Add Scholarship</div>
                 <div onClick={ () => setCur('scholarships') } > Manage Scholarships </div>

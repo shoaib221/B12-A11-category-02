@@ -12,21 +12,25 @@ const ScholarshipSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    universityImage: {
+    image: {
         type: String,
     },
-    universityCountry: {
-        type: String,
-        required: true
-    },
-    universityCity: {
+    country: {
         type: String,
         required: true
     },
-    universityWorldRank: {
+    city: {
+        type: String,
+        required: true
+    },
+    worldRank: {
         type: Number
     },
     scholarshipCategory: {
+        type: String,
+        required: true
+    },
+    subjectCategory: {
         type: String,
         required: true
     },
@@ -39,15 +43,14 @@ const ScholarshipSchema = new mongoose.Schema({
     },
     applicationFees: {
         type: Number
-
     },
     serviceCharge: {
         type: Number,
     },
-    applicationDeadline: {
+    deadline: {
         type: Date
     },
-    scholarshipPostDate: {
+    postedAt: {
         type: Date
     },
     postedBy: {
@@ -69,15 +72,15 @@ const ApplicationSchema= mongoose.Schema({
         type: String,
         required: true
     },
-    userId: {
+    applicantId: {
         type: String,
         required: true
     },
-    userName: {
+    applicantName: {
         type: String,
         required: true
     },
-    userEmail: {
+    applicantEmail: {
         type: String,
         required: true
     },
@@ -87,7 +90,9 @@ const ApplicationSchema= mongoose.Schema({
         default: "pending"
     },
     paymentStatus: {
-        type: String
+        type: String,
+        required: true,
+        default: "unpaid"
     },
     applicationDate: {
         type: Date

@@ -58,13 +58,28 @@ export const requireAuthJWT = async (req, res, next) => {
 // #todo
 
 export const requireAdmin = async (req, res, next) => {
-    console.log("require admin")
+    //console.log("require admin")
     try {
         let user = await User.findOne( { username: req.user_email } );
         //console.dir(user)
-        console.log(user)
+        //console.log(user)
         if( user.role !== 'admin' ) throw Error("Only admins can access!");
-        console.log( user )
+        //console.log( user )
+        next();
+    } catch (err) {
+        res.status(400).json( { error: err.message } );
+    }
+}
+
+
+export const requireModerator = async (req, res, next) => {
+    //console.log("require admin")
+    try {
+        let user = await User.findOne( { username: req.user_email } );
+        //console.dir(user)
+        //console.log(user)
+        if( user.role !== 'moderator' ) throw Error("Only Moderators can access!");
+        //console.log( user )
         next();
     } catch (err) {
         res.status(400).json( { error: err.message } );

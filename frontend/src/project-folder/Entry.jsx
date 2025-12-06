@@ -22,6 +22,10 @@ export const Entry = () => {
     //         .catch(err => console.dir(err))
     // }, [])
 
+    function scrollToTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     return (
         <>
             <Nav />
@@ -30,6 +34,8 @@ export const Entry = () => {
                 <Outlet />
             </div>
             <Footer />
+
+            <div onClick={ scrollToTop } className='fixed bottom-4 right-4 z-5' >Back To Top</div>
         </>
     );
 };
