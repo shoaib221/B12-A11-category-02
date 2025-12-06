@@ -1,0 +1,13 @@
+.cen-hor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cen-ver {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+

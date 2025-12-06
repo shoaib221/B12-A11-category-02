@@ -1,0 +1,34 @@
+model -> page -> data fetching -> styling
+
+context -> hook -> page -> main
+
+
+
+
+
+#todo
+    assign rider for parcels
+    tracking timeline
+    mongodb aggregation & pipelining
+    chart
+    
+    media
+    socket
+    
+    check the errors of previous assignment
+    
+
+Admin 
+    email abcd.1234@email.com
+    password Abcd-1234
+    
+Moderator
+    email efgh.1234@email.com
+    password Efgh-1234
+
+    
+
+
+
+
+
