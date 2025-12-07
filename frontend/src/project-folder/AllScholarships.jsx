@@ -40,3 +40,15 @@ export const AllScholarships = () => {
     );
 };
 
+
+
+// All Scholarships Page
+// Display all scholarships available on the platform in a responsive grid layout.
+// Search Functionality: Include a search bar to find scholarships by Scholarship Name,
+// University Name, or Degree.
+// Filter Functionality: Include options to filter scholarships by specific criteria (e.g.,
+// Scholarship Category, Subject Category, or Location).
+// Card Information: Each scholarship card must display the University Image, University
+// Name, Scholarship Category, Location, Application Fees (if any), and a "View Details"
+// button. "View Details" Button: Clicking this button navigates the user to the Scholarship
+// Details page.

@@ -88,8 +88,8 @@ const Apply = async (req, res, next) => {
                 applicationId: application._id.toString(),
             },
             mode: 'payment',
-            success_url: `${YOUR_DOMAIN}/payment_successful?session_id={CHECKOUT_SESSION_ID}`,
-            cancel_url: `${YOUR_DOMAIN}/payment_canceled`
+            success_url: `${YOUR_DOMAIN}/payment_success?session_id={CHECKOUT_SESSION_ID}`,
+            cancel_url: `${YOUR_DOMAIN}/payment_failed?session_id={CHECKOUT_SESSION_ID}`
         });
 
         res.status(200).json({ url: session.url, application });
@@ -175,10 +175,101 @@ const FetchApplicationsByModerator = async (req, res, next) => {
 }
 
 
+const FetchReviews = async (req, res, next) => {
+
+    try {
+        let reviews = await Review.find({}).sort({ _id: -1 });
+        res.status(200).json({ reviews });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+const MyReviews = async (req, res, next) => {
+    try {
+        let reviews = await Review.find({ reviewerEmail: req.user_email }).sort({ date: -1 });
+        res.status(200).json({ reviews });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+const AddReview = async (req, res, next) => {
+    try {
+        let review = { ...req.body };
+        let reviewer  = await User.findOne({ username: req.user_email });
+        if( !reviewer ) throw Error("No such user");
+        review.reviewerName = reviewer.name;
+        review.reviewerEmail = reviewer.username;
+        review.reviewerImage = reviewer.photo;
+        review.date = new Date();
+        review = Review(review);
+        await review.save();
+        res.status(201).json({ message: "Review added", review });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+
+const RemoveReview = async (req, res, next) => {
+    try {
+        let { reviewId } = req.body;
+        let review = await Review.findOne({
+            _id: reviewId
+        });
+        if (!review) throw Error("No such review");
+        await Review.deleteOne({ _id: reviewId });
+        res.status(200).json({ message: "Review removed" });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+
+const ModeratorDecisionOnApplication = async (req, res, next) => {
+    try {
+        let { applicationId, approve } = req.body;
+        let application = await Application.findOne({ _id: applicationId });
+        if (!application) throw Error("No such application");
+
+        application.applicationStatus = approve ? "approved" : "rejected";
+
+        application = await application.save();
+        res.status(200).json({ message: "Application updated", application });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+
+const ModeratorFeedback = async (req, res, next) => {
+    try {
+        let { applicationId, feedback } = req.body;
+        let application = await Application.findOne({ _id: applicationId });
+        if (!application) throw Error("No such application");
+        application.feedback = feedback;
+        application = await application.save();
+        res.status(200).json({ message: "Feedback added", application });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+}
+
+
+
+
 scholarshipRouter.post("/add", requireAuth, requireAdmin, AddScholarship);
 scholarshipRouter.get("/all", FetchScholarships);
 scholarshipRouter.get("/fetch/:id", requireAuth, FetchScholarshipById);
 scholarshipRouter.post("/apply", requireAuth, Apply);
 scholarshipRouter.get("/my-applications", requireAuth, FetchApplicationsByUser);
 scholarshipRouter.get("/applications", requireAuth, requireModerator, FetchApplicationsByModerator);
+scholarshipRouter.get("/reviews", requireAuth, requireModerator, FetchReviews);
+scholarshipRouter.get("/my-reviews", requireAuth, MyReviews);
+scholarshipRouter.post("/add-review", requireAuth, AddReview);
+scholarshipRouter.post("/remove-review", requireAuth, requireModerator, RemoveReview);
+scholarshipRouter.post("/decision", requireAuth, requireModerator, ModeratorDecisionOnApplication);
+scholarshipRouter.post("/feedback", requireAuth, requireModerator, ModeratorFeedback);
+
 

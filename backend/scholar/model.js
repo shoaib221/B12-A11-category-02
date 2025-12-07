@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { ObjectId } from 'mongodb';
 //   scholarshipCategory (Full fund/Partial/Self-fund), degree (Diploma/Bachelor/Masters), tuitionFees (optional), applicationFees, 
 // serviceCharge, applicationDeadline, scholarshipPostDate, postedUserEmail.
 const ScholarshipSchema = new mongoose.Schema({
@@ -6,7 +7,6 @@ const ScholarshipSchema = new mongoose.Schema({
     scholarshipName: {
         type: String,
         required: true,
-        unique: true,
     },
     universityName: {
         type: String,
@@ -42,16 +42,21 @@ const ScholarshipSchema = new mongoose.Schema({
         type: Number
     },
     applicationFees: {
-        type: Number
+        type: Number,
+        required: true
     },
     serviceCharge: {
         type: Number,
+        required: true
     },
     deadline: {
-        type: Date
+        type: Date,
+        required: true
     },
     postedAt: {
-        type: Date
+        type: Date,
+        required: true,
+        default: Date.now
     },
     postedBy: {
         type: String,
@@ -62,6 +67,8 @@ const ScholarshipSchema = new mongoose.Schema({
     
 });
 
+ScholarshipSchema.index({ scholarshipName: 1, universityName: 1  }, { unique: true });   
+
 export const Scholarship = mongoose.model("Scholarship", ScholarshipSchema);
 
 //Stores application data: scholarshipId, userId, userName, userEmail, universityName, scholarshipCategory, degree, applicationFees, serviceCharge, applicationStatus (default: pending), paymentStatus (unpaid/paid), applicationDate, feedback (added by moderator).
@@ -69,11 +76,11 @@ export const Scholarship = mongoose.model("Scholarship", ScholarshipSchema);
 const ApplicationSchema= mongoose.Schema({
 
     scholarshipId: {
-        type: String,
+        type: ObjectId,
         required: true
     },
     applicantId: {
-        type: String,
+        type: ObjectId,
         required: true
     },
     applicantName: {
@@ -108,30 +115,32 @@ export const Application = mongoose.model("Application", ApplicationSchema)
 //Stores students review data: 
 
 const ReviewSchema = mongoose.Schema({
+    applicationId: {
+        type: ObjectId,
+        required: true
+    },
     scholarshipId: {
-        type: String
+        type: ObjectId,
+        required: true
     },
-    universityName: {
-        type: String
-    },
-    userName: {
+    reviewerName: {
         type: String,
         required: true
     },
-    userEmail: {
+    reviewerEmail: {
         type: String,
         required: true
     },
-    userImage: {
+    reviewerImage: {
         type: String,
     },
-    ratingPoint: {
+    rating: {
         type: Number
     }, 
-    reviewComment: {
+    comment: {
         type: String
     }, 
-    reviewDate: {
+    date: {
         type: Date
     }
 

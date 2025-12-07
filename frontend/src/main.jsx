@@ -18,11 +18,13 @@ import { Entry } from './project-folder/Entry.jsx';
 import { DownWindowProvider } from './Nav/context.jsx';
 import { Theme } from './Theme/Theme.jsx';
 import { Pagination } from './pagination/pagination.jsx';
-import { StripeDemo, SuccesfulPayment } from './Stripe/stripe.jsx';
+
 import { ManageUsers } from './auth/ManageUsers.jsx';
 import { AllScholarships } from "./project-folder/AllScholarships.jsx"
 import { ScholarshipDetail } from './project-folder/ScholarshipDetail.jsx';
 import { Dashboard } from './project-folder/Dashboard.jsx';
+import { SuccesfulPayment, FailedPayment } from './project-folder/payment/payment.jsx'
+
 
 const queryClient = new QueryClient();
 
@@ -44,9 +46,10 @@ const App = () => {
                             <Route path='all-scholarships' element={ <AllScholarships /> } />
                             <Route path="scholarship-detail/:id" element={ <ScholarshipDetail /> } />
                             <Route path='dashboard' element={ <Dashboard /> } />
-                            <Route path='payment' element={ <StripeDemo /> } />
+                            
                             <Route path='manage-users' element={ <ManageUsers /> } />
-                            <Route path='payment_successful' element={ <SuccesfulPayment /> } />
+                            <Route path='payment_success' element={ <SuccesfulPayment /> } />
+                            <Route path='payment_failed' element={ <FailedPayment /> } />
                             <Route path="*" element={<NotFound />} />
                         </Route>
                     </Routes>

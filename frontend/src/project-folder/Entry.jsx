@@ -41,3 +41,14 @@ export const Entry = () => {
 };
 
 
+
+// Layout & Page Structure
+// Main Layout: Your site will have a main layout with a Navbar and Footer visible on most
+// pages (excluding the dashboard layout).
+// Navbar:
+// ● Always Visible: Logo, Home, All Scholarships.
+// ● Not Logged In: Login Button, Register Button.
+// ● Logged In: User Profile Image (with dropdown), Dashboard link, Logout.
+// Footer:
+// ● A standard footer with Logo, Copyright, and Social Media links.
+

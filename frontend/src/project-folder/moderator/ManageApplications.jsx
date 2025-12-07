@@ -41,8 +41,6 @@ export const ManageApplications = () => {
                     </div>
                 )) }
             </div>
-                
-
         </div>
     );
 };

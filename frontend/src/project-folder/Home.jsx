@@ -41,3 +41,14 @@ export const Home = () => {
     );
 };
 
+
+
+// Home Page
+// Banner: A hero section with a title, description, and a "Search Scholarship" button.
+// Top Scholarships (Dynamic): A section displaying the top 6 scholarships (e.g., those
+// with the lowest application fees or most recent post date). Each card must have a
+// "View Details" button.
+// Animation: You must implement animation on the Home page using framer-motion.
+// Two Extra Sections: Add two extra static sections. For example:
+// 1. A "Success Stories" or "Testimonials" section.
+// 2. A "Contact Us" or "F.A.Q" section.

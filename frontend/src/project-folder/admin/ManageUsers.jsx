@@ -65,7 +65,11 @@ export const useRoleChange = ({ refetch }) => {
                     onClick={ChangeRole}
                     className="mt-4 px-4 py-2 rounded bg-gray-300 hover:bg-gray-400 transition"
                 >
-                    Save
+                    Update
+                </button>
+
+                <button>
+                    Delete
                 </button>
             </div>
         </div>
@@ -121,7 +125,6 @@ export const ManageUsers = () => {
 
                             <button onClick={() => ShowModal(elem)} > Change </button>
                         </div>
-
                     </>
                 ))}
 

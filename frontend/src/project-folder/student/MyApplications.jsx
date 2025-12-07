@@ -12,6 +12,7 @@ export const MyApplications = () => {
     const { EditTag, showEdit } = useEditApplication();
     const { ReviewTag, showReview } = useReview();
     const [curApp, setCurApp] = React.useState(null);
+    
 
     const fetchApplications = async () => {
         let response = await axiosInstance.get('/scholarship/my-applications');
@@ -46,8 +47,11 @@ export const MyApplications = () => {
                         <div className='flex gap-2' >
                             <div onClick={ () => showDetail( application, true) } >Detail</div>
                             { application.applicationStatus === 'completed' && <div>Review</div> }
-                            { application.applicationStatus === 'pending' && 
-                                <div onClick={ () => showEdit( application, true) } >Edit</div> }
+                            { application.applicationStatus === 'pending' ? 
+                                <div onClick={ () => showEdit( application, true) } >Edit</div>
+                                :
+                                <div className='text-gray-400' onClick={ () => showReview(application, true) } >Review</div>
+                            }
                         </div>
                         
                     </div>

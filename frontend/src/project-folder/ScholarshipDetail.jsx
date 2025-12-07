@@ -57,9 +57,26 @@ export const ScholarshipDetail = () => {
                     onClick={Apply}
                     className='mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg' >Apply Now</button>
 
+
+                
+
                 <div className='text-2xl font-bold' >Review</div>
+
+
+
             </div>
         </PrivateRoute>
     );
 };
 
+
+
+// Scholarship Details Page
+// Display comprehensive information about the selected scholarship, including University
+// Image, Scholarship Name, University World Rank, Deadline, Location, Application Fees,
+// Scholarship Description, and Stipend/Coverage details.
+// Apply Button: A prominent "Apply for Scholarship" button.
+// ● By clicking this redirects the user to the Payment/Checkout page.
+// Reviews Section: Display all reviews associated with this scholarship/university. Show
+// the reviewer's image, name, date, rating, and comment. This data comes from the
+// Reviews Collection.

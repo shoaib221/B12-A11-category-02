@@ -18,7 +18,29 @@ export const useDetailApplication = () => {
             `}
         >
             {application && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
-                Detail Application
+
+                <div>University Name</div>
+                <div>University Address</div>
+                <div>Feedback</div>
+                <div>Subject Category</div>
+                <div>Application Fees</div>
+                <div>Application Status</div>
+                
+                <div>
+                    Scholarship { application.scholarshipDetails.scholarshipName }
+                </div>
+
+                <div>
+                    Applicant: { application.applicantName }
+                </div>
+
+                <div>
+                    Status: { application.applicationStatus }
+                </div>
+
+                <div>
+                    Payment: { application.paymentStatus }
+                </div>
 
                 <div className="flex justify-center gap-4" >
                     { application.paymentStatus === 'unpaid' && <button>Pay</button> }
