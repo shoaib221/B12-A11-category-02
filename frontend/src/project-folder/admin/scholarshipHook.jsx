@@ -1,62 +1,176 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
+
+let UpdateTag = ({ isOpen, scholarship, show }) => {
+    const [scholarshipName, setScholarshipName] = useState(null)
+    const [universityName, setUniversityName] = useState(null)
+    const [image, setImage] = useState(null)
+    const [country, setCountry] = useState(null)
+    const [city, setCity] = useState(null)
+    const [worldRank, setWorldRank] = useState(null)
+    const [subjectCategory, setSubjectCategory] = useState(null)
+    const [scholarshipCategory, setScholarshipCategory] = useState(null)
+    const [degree, setDegree] = useState(null)
+    const [tuitionFees, setTuitionFees] = useState(null)
+    const [applicationFees, setApplicationFees] = useState(null)
+    const [serviceCharge, setServiceCharge] = useState(null)
+    const [deadline, setDeadline] = useState(null)
+
+    useEffect(() => {
+        if (!scholarship) return;
+        setScholarshipName(scholarship.scholarshipName)
+        setUniversityName(scholarship.universityName)
+        setImage(scholarship.image)
+        setCountry(scholarship.country)
+        setCity(scholarship.city)
+        setWorldRank(scholarship.worldRank)
+        setSubjectCategory(scholarship.subjectCategory)
+        setScholarshipCategory(scholarship.scholarshipCategory)
+        setDegree(scholarship.degree)
+        setTuitionFees(scholarship.tuitionFees)
+        setApplicationFees(scholarship.applicationFees)
+        setServiceCharge(scholarship.serviceCharge)
+        setDeadline(scholarship.deadline)
+
+    }, [scholarship])
+
+    return (
+
+        <div
+            className={`
+                ${isOpen ? "block" : "hidden"}
+                top-0 left-0 overflow-auto p-4
+                fixed 
+                z-10 w-full h-full 
+                bg-black/40
+            `}
+        >
+
+
+            <div className="w-full mx-auto max-w-160 bg-white relative p-8 rounded-lg" >
+                <div className="absolute right-4 top-4" onClick={() => show(null, false)} >
+                    X
+                </div>
+                <br />
+
+                <div className="font-bold mt-4 text-center text-xl" >Edit scholarship data </div>
+                <br />
+
+                <label>
+                    <span className="font-bold" >Scholarship Name</span> <br />
+                    <input className="w-full my-4"
+                        value={scholarshipName} onChange={(e) => setScholarshipName(e.target.value)}  ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >Scholarship category</span> <br />
+                    <input className="w-full my-4"
+                        value={scholarshipCategory} onChange={(e) => setScholarshipCategory(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >Subject</span> <br />
+                    <input className="w-full my-4"
+                        value={subjectCategory} onChange={(e) => setSubjectCategory(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >University Name</span> <br />
+                    <input className="w-full my-4"
+                        value={universityName} onChange={(e) => setUniversityName(e.target.value)} ></input>
+                </label>
+                <br />
+                <label>
+                    <span className="font-bold" >City</span> <br />
+                    <input className="w-full my-4"
+                        value={city} onChange={(e) => setCity(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >Country</span> <br />
+                    <input className="w-full my-4"
+                        value={city} onChange={(e) => setCountry(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >World Rank</span> <br />
+                    <input className="w-full my-4"
+                        type="number" value={city} onChange={(e) => setWorldRank(e.target.value)} ></input>
+                </label>
+
+
+                <br />
+                <label>
+                    <span className="font-bold" >Degree</span> <br />
+                    <input className="w-full my-4"
+                        value={degree} onChange={(e) => setDegree(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >Tuition Fees</span> <br />
+                    <input className="w-full my-4"
+                        type="number" value={tuitionFees} onChange={(e) => setTuitionFees(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >Application Fees</span> <br />
+                    <input className="w-full my-4"
+                        type="number" value={applicationFees} onChange={(e) => setApplicationFees(e.target.value)} ></input>
+                </label>
+
+
+                <br />
+                <label>
+                    <span className="font-bold" >Service Charge</span> <br />
+                    <input className="w-full my-4"
+                        type="number" value={serviceCharge} onChange={(e) => setServiceCharge(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >Deadline</span> <br />
+                    <input className="w-full my-4"
+                        type="number" value={deadline} onChange={(e) => setDeadline(e.target.value)} ></input>
+                </label>
+
+                <br />
+                <br />
+
+                <div className="flex gap-4 justify-center" >
+                    <button className="bg-green-800 text-white py-2 px-4 rounded-xl" >Update</button>
+                    <button className="bg-red-800 text-white py-2 px-4 rounded-xl" >Delete</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    )
+};
 
 
 export const useUpdateScholarship = () => {
-    const [ isOpen, setIsOpen ] = React.useState( false );
-    const [ scholarshipData, setScholarshipData ] = React.useState( null );
-    let UpdateTag = () => (
-        <div
-            className={`
-                ${isOpen ? "flex" : "hidden"}
-                top-0 left-0
-                fixed items-center justify-center
-                z-10 w-full h-full
-                bg-black/40
-            `}
-        >
-            <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
-                Update Scholarship  
-                <div className="flex justify-center gap-4" >
-                    <button onClick={() => setIsOpen(false)} >Close</button>
-                </div>
-            </div>
-        </div>
-    );  
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [scholarshipData, setScholarshipData] = React.useState(null);
+
     let showUpdate = (scholarship, flag) => {
         console.log("show update")
-        if( scholarship ) setScholarshipData( scholarship );
-        setIsOpen( flag );
+        if (scholarship) setScholarshipData(scholarship);
+        setIsOpen(flag);
     }
-    return { UpdateTag, showUpdate };
+
+    let Tag = () => {
+        return <UpdateTag isOpen={isOpen} scholarship={scholarshipData} show={showUpdate} />
+    }
+    return { UpdateTag: Tag, showUpdate };
 }
 
 
-export const useDeleteScholarship = () => {
-    const [ isOpen, setIsOpen ] = React.useState( false );
-    const [ scholarshipData, setScholarshipData ] = React.useState( null );
-    let DeleteTag = () => (
-        <div
-            className={`    
-                ${isOpen ? "flex" : "hidden"}
-                top-0 left-0
-                fixed items-center justify-center
-                z-10 w-full h-full
-                bg-black/40
-            `}
-        >
-            <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
-                Delete Scholarship  
-                <div className="flex justify-center gap-4" >
-                    <button onClick={() => setIsOpen(false)} >Close</button>
-                </div>
-            </div>
-        </div>
-    );
-    let showDelete = (scholarship, flag) => {
-        console.log("show delete")
-        if( scholarship ) setScholarshipData( scholarship );
-        setIsOpen( flag );
-    }
-    return { DeleteTag, showDelete };
-}

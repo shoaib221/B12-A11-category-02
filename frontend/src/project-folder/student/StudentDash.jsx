@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import { UpdateProfile } from "../../auth/UpdateProfile";
 import { MyApplications } from './MyApplications';
 import { Review } from './Review';
+import { useSearchParams } from 'react-router-dom';
 
 
 export const StudentDash = () => {
     const [ cur, setCur ] = useState('profile')
+    let some = useSearchParams()
+    console.log(some)
 
 
     return (

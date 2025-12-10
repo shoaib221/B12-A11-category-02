@@ -8,17 +8,19 @@
 }
 
 #img1 {
-	background-image: url(/demophoto-1.jpg);
+	background-image: url(/demo1.jpg);
 }
 
 #img2 {
-	background-image: url(/demophoto-2.jpg);
+	background-image: url(/demo2.jpg);
 }
 
 #img3 {
-	background-image: url(/demophoto-3.jpg);
+	background-image: url(/demo3.jpg);
 }
 
 
-
+:root {
+	--color4: blue;
+}
 

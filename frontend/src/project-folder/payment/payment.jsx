@@ -1,4 +1,4 @@
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuthContext } from "../../auth/context";
 import { useEffect } from "react";
 
@@ -8,11 +8,12 @@ export const SuccesfulPayment = () => {
     const [ searchParams, setSearchParams ] = useSearchParams();
     const sessionId = searchParams.get( "session_id" );
     const { axiosInstance, user } = useAuthContext()
+    const navigate = useNavigate()
 
     useEffect( () => {
         if( !sessionId || !user ) return;
 
-        axiosInstance.post( "/payment/success", { session_id: sessionId } )
+        axiosInstance.post( "/scholarship/payment-success", { session_id: sessionId } )
             .then( res => console.log(res) )
             .catch( err => console.dir(err) )
 
@@ -20,11 +21,11 @@ export const SuccesfulPayment = () => {
 
     return (
         <div>
-            Successful
+            <div className="text-green-800" >Payment Successful</div>
 
             scholarshipname, university name, paid amount
 
-            <button>My Applications</button>
+            <button onClick={ () => navigate( `/dashboard?board=applications` ) } >My Applications</button>
         </div>
     )
 }

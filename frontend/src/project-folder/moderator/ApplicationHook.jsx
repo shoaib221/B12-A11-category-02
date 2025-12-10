@@ -1,18 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
+import { toast } from "react-toastify";
 
 
 
 export const useDetail = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [application, setApplication] = React.useState(null);
+    const [ isOpen, setIsOpen ] = useState(false)
+    const [ application, setApplication ] = useState(null)
     const { axiosInstance } = useAuthContext();
+    const [ status, setStatus ] = useState(null)
+
+    useEffect(() => {
+
+        if( application && isOpen )
+        {
+            setStatus(application.applicationStatus)
+        }
+
+    }, [application, isOpen])
 
 
-    let Decision = async (flag) => {
+    let Decision = async () => {
         const info = {
-            applicationId: application._id,
-            approve: flag
+            ...application,
+            approve: status
         }
 
         try {
@@ -39,27 +50,47 @@ export const useDetail = () => {
             {application && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
                 Application Details
                 <div className="flex flex-col gap-2 mt-4" >
-                    <div>Applicant Name: {application.applicantName}</div>
-                    <div>Applicant Email </div>
-                    <div>University Name </div>
-                    <div>Feedback </div>
-                    <div>Scholarship: {application.scholarshipDetails.scholarshipName}</div>
-                    <div>Status: 
-                        <select>
-                            <option value="pending" selected={application.applicationStatus === 'pending'} >Pending</option>
-                            <option value="completed" selected={application.applicationStatus === 'approved'} >Approved</option>
-                            <option value="processing" selected={application.applicationStatus === 'processing'} >Processing</option>
-                            <option value="rejected" selected={application.applicationStatus === 'rejected'} >Rejected</option>
+                    <div>
+                        <div className="font-bold" >Scholarship: </div>
+                        <div>{application.scholarshipDetails.scholarshipName}</div>
+                        <div> { application.scholarshipDetails.universityName } </div>
+                        <div>{application.scholarshipDetails.scholarshipCategory}</div>
+                        <div>{application.scholarshipDetails.subjectCategory}</div>
+                    </div>
+
+                    <div>
+                        <div className="font-bold" > Applicant Name: </div>
+                        <div> {application.applicantName} </div>
+                        <div> {application.applicantEmail} </div>
+                    </div>
+
+                    <div>
+                        <span className="font-bold" > Payment Status: </span> {application.paymentStatus}
+                        
+                    </div>
+                    <div>Submitted On: {application.applicationDate}</div>
+                    
+                    
+                    <div> 
+                        <div className="font-bold" >Feedback </div>
+                        <div>{application.feedback ? application.feedback  : "No feedback yet"}</div>
+
+                    </div>
+                    
+                    <div> <span className="font-bold"> Application Status:</span>
+                        <select value={status} onChange={ (e) => setStatus(e.target.value) } >
+                            <option value="pending"  >Pending</option>
+                            <option value="completed"  >Approved</option>
+                            <option value="processing"  >Processing</option>
+                            <option value="rejected"  >Rejected</option>
                         </select>
                     </div>
 
-                    <div>Payment Status: {application.paymentStatus}</div>
-                    <div>Submitted On: {new Date(application.submissionDate).toLocaleDateString()}</div>
                     
+
                 </div>
                 <div className="flex justify-center gap-4 mt-4" >
-                    <button>Update</button>
-                    
+                    <button onClick={Decision} >Update</button>
                     <button onClick={() => setIsOpen(false)} >Close</button>
                 </div>
             </div>}
@@ -76,11 +107,40 @@ export const useDetail = () => {
 }
 
 
-export const useFeedback = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [applicationData, setApplicationData] = React.useState(null);
 
-    let FeedbackTag = () => (
+
+let FeedbackTag = ({ isOpen, show, app }) => {
+    const [feedback, setFeedback] = useState(null)
+    const { axiosInstance } = useAuthContext()
+
+    useEffect(() => {
+        if( app && isOpen ) 
+        {
+            setFeedback( app.feedback )
+        }
+
+
+    }, [app, isOpen])
+
+    if (!isOpen) return null;
+
+    async function SendFeedback() {
+        let info ={
+            ...app, feedback
+        }
+
+        try {
+            let res= await axiosInstance.patch( "/scholarship/application", info )
+            toast.success("Feedback updated")
+            show(null, false)
+        } catch (err) {
+            console.error( err.response.data.error )
+        }
+
+    }
+
+
+    return (
         <div
             className={`
                 ${isOpen ? "flex" : "hidden"}
@@ -91,17 +151,40 @@ export const useFeedback = () => {
             `}
         >
             <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
-                Provide Feedback
+
+                <label className="block mb-3">
+                    <span className="text-sm font-medium">Write Your Feedback</span>
+                    <textarea
+                        type="text" value={feedback} onChange={(e) => setFeedback(e.target.value)}
+                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
+                        placeholder="Leave your thoughts..."
+                    />
+
+                </label>
+
                 <div className="flex justify-center gap-4" >
-                    <button onClick={() => setIsOpen(false)} >Close</button>
+                    <button onClick={SendFeedback} >Update</button>
+                    <button onClick={() => show(null, false)} >Close</button>
                 </div>
             </div>
-        </div>
-    );
+        </div>)
+};
+
+
+export const useFeedback = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [applicationData, setApplicationData] = React.useState(null);
+
+
     let showFeedback = (app, flag) => {
         console.log("show feedback")
         if (app) setApplicationData(app);
         setIsOpen(flag);
     }
-    return { FeedbackTag, showFeedback };
+
+    let Tag = () => {
+        return <FeedbackTag app={applicationData} show={showFeedback} isOpen={isOpen} />
+    }
+
+    return { FeedbackTag: Tag, showFeedback };
 }

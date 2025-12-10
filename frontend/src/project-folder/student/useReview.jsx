@@ -1,95 +1,102 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { set } from "react-hook-form";
+import { StarRating } from "../utils/StarRating";
+import { toast } from "react-toastify";
 
-
-export const useReview = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [applicationData, setApplicationData] = React.useState(null);
-    let ratingRef = React.useRef();
-    let commentRef = React.useRef();
+const ReviewTag = ({ open, app, show }) => {
+    const [comment, setComment] = useState("");
+    const [rating, setRating] = useState(0);
     const { axiosInstance } = useAuthContext();
+    const textareaRef = useRef(null);
 
-    useEffect( () => {
-        if (applicationData && isOpen) {
-            //console.log("Populating review modal with data:", applicationData);
-            if (commentRef.current) {
-                //console.log("Setting comment ref value:", applicationData.review ? applicationData.comment : "");
-                commentRef.current.value =  applicationData.comment;
-            }
-            if(ratingRef.current) {
-                ratingRef.current.value = applicationData.rating;
-            }
-        }
-    }, [applicationData, isOpen] );
+    // ✅ sync state ONLY when modal opens or review changes
+    
 
-
+    useEffect(() => {
+        if (open) textareaRef.current?.focus();
+    }, [open]);
 
     const AddReview = async () => {
-        if (!applicationData) return;
+        if (!app) return;
 
         const info = {
-            applicationId: applicationData._id,
-            scholarshipId: applicationData.scholarshipId,
-            comment: commentRef.current?.value,
-            rating: ratingRef.current?.value
+            applicationId: app._id,
+            scholarshipId: app.scholarshipId,
+            rating, comment
         };
 
         console.log("Submitting review:", info);
 
         try {
             let res = await axiosInstance.post("/scholarship/add-review", info);
-            console.log("Review submitted:", res.data);
-            setIsOpen(false);
+            toast.success("Review Added")
+            show( null, false )
         } catch (err) {
             console.error(err);
         }
     };
 
-    const showReview = (app, flag) => {
-        setIsOpen(flag);
-        if (app) {
-            setApplicationData(app);
-        }
-        
-    };
+    if (!open || !app) return null;
 
-    // ✨ Here is the KEY FIX — returning JSX, not a component function
-    const ReviewTag = () => (
+    
 
-        <div className={`fixed inset-0 ${isOpen ? 'flex' : 'hidden'} items-center justify-center bg-black/40 z-10`}>
-            <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow-lg">
-                <h2 className="text-lg font-semibold mb-2">Review Application</h2>
+    return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+            <div className="w-full max-w-lg rounded-lg bg-white p-4 shadow-lg">
+                <h2 className="mb-2 text-lg font-semibold">Add review</h2>
 
                 <textarea
-                    ref={commentRef}
-                    placeholder="Write your review here..."
-                    className="w-full h-40 border p-2 rounded-lg"
+                    ref={textareaRef}
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                    className="h-40 w-full resize-none rounded border p-2 focus:outline-none focus:ring"
+                    placeholder="Write your review..."
                 />
 
                 <div className="mt-4">Rating</div>
+                <StarRating value={rating} onChange={setRating} />
 
-                <div className="flex justify-center gap-4 mt-4">
+                <div className="mt-4 flex justify-end gap-3">
                     <button
-                        onClick={AddReview}
-                        className="px-4 py-2 bg-blue-600 text-white rounded"
+                        onClick={() => show(null, false)}
+                        className="rounded bg-gray-200 px-4 py-2"
                     >
-                        Submit Review
+                        Cancel
                     </button>
 
                     <button
-                        onClick={() => setIsOpen(false)}
-                        className="px-4 py-2 bg-gray-400 text-white rounded"
+                        onClick={AddReview}
+                        className="rounded bg-blue-600 px-4 py-2 text-white"
                     >
-                        Close
+                        Update
                     </button>
                 </div>
             </div>
         </div>
-
     );
+};
 
-    return { ReviewTag, showReview };
+
+export const useAddReview = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [applicationData, setApplicationData] = React.useState(null);
+    
+
+    const showReview = (app, flag) => {
+        setIsOpen(flag);
+        console.log(app);
+        if (app) {
+            setApplicationData(app);
+        }
+    };
+
+    let Tag = () => {
+        return <ReviewTag open={isOpen} app={applicationData} show={showReview} />
+    }
+
+
+    return { ReviewTag: Tag, showReview };
 };
 
 
@@ -97,6 +104,17 @@ export const useReview = () => {
 export const useReviewDetail = () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [review, setReview] = React.useState(null);
+    const { axiosInstance } = useAuthContext();
+
+    const DeleteReview = async () => {
+        try {
+            let res = await axiosInstance.post(`/scholarship/remove-review`, review);
+            console.log("Review deleted:", res.data);
+            setIsOpen(false);
+        } catch (error) {
+            console.error("Error deleting review:", error);
+        }
+    }
 
     let ReviewDetailTag = () => (
         <div
@@ -110,19 +128,67 @@ export const useReviewDetail = () => {
         >
             {review && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
                 <div className="flex flex-col gap-2 mt-4" >
-                    Scholarship Name, University Name, Comment, Rating, Date
-                    <div>Rating: {review.rating} / 5</div>
-                    <div>Comment: {review.comment}</div>
+                    <div>
+                        <span className="font-bold" >Scholarship: </span>
+                        <span>{review.scholarshipDetails.scholarshipName} </span>
+                    </div>
+                    <div>
+                        <span className="font-bold" >University: </span>
+                        <span>{review.scholarshipDetails.universityName}</span>
+                    </div>
+
+                    <div>
+                        <div className="font-bold" >Applicant's Name</div>
+                        <div> {review.reviewerName} </div>
+                    </div>
+
+
+
+                    <div>
+                        <div className="font-bold" >Comment: </div>
+                        <div>{review.comment}</div>
+                    </div>
+
+                    <div>
+                        <span>Rating: </span>
+                        <span>
+                            {[1, 2, 3, 4, 5].map((star) => (
+                                <span
+                                    key={star}
+                                    style={{
+                                        cursor: "pointer",
+                                        fontSize: "28px",
+                                        color: (review.rating) >= star ? "#facc15" : "#d1d5db",
+                                        transition: "color 0.2s",
+                                    }}
+
+                                >
+                                    ★
+                                </span>
+                            ))}
+
+                        </span>
+                    </div>
+
+                    <div>
+                        <span>Date: </span>
+                        <span>{new Date(review.date).toLocaleDateString()}</span>
+                    </div>
+
+
+
                 </div>
                 <div className="flex justify-center gap-4 mt-4" >
-                    <button onClick={() => setIsOpen(false)} >Close</button>
-                    <button>Delete</button>
+                    <button className="bg-black text-white" onClick={() => setIsOpen(false)} >Close</button>
+                    <button className="bg-red-800 text-white" onClick={DeleteReview} >Delete</button>
                 </div>
             </div>}
         </div>
-    )   
+    )
+
+
     let showReviewDetail = (rev, flag) => {
-        if( rev ) setReview( rev );
+        if (rev) setReview(rev);
         console.log(rev)
         setIsOpen(flag)
     }

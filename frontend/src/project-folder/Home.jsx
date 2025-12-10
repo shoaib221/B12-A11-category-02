@@ -17,26 +17,33 @@ export const Home = () => {
     const [ students, setStudents ] = useState([])
     
 
-    useEffect(() => {
-        if(!user) return;
+    // useEffect(() => {
+    //     if(!user) return;
 
-        async function fetchdata() {
-            let res= await axiosInstance.get( "/miscel/students-by-country" )
-            setStudents(res.data.students)
-            console.log( res.data.students )
-        }
+    //     async function fetchdata() {
+    //         let res= await axiosInstance.get( "/miscel/students-by-country" )
+    //         setStudents(res.data.students)
+    //         console.log( res.data.students )
+    //     }
 
-        fetchdata();
+    //     fetchdata();
 
-    }, [user])
+    // }, [user])
     
 
     return (
         <div className='block flex-grow relative' >
-            <Chart data={students} />
-            {/* <Banner2 />
+            
+            <Banner2 />
+            <br /><br />
+            <div className='text-center text-2xl font-bold' > <span className='text-[var(--color4)]' >Top</span>  Scholarships</div>
             <InfiniteSlider />
-            <ScrollProduct /> */}
+            <br /><br />
+            <div className='text-center text-2xl font-bold' > <span className='text-[var(--color4)]' >Succes</span>  Stories</div>
+            <ScrollProduct />
+
+            <br /> <br/>
+            <div className='text-center text-2xl font-bold' > <span className='text-[var(--color4)]' >FAQs</span></div>
         </div>
     );
 };

@@ -33,3 +33,23 @@ export const AdminDash = () => {
     );
 };
 
+
+
+// 1. Admin Dashboard 
+// ● My Profile: View profile info. 
+// ● Add Scholarship: A form to create new scholarships. 
+// ○ Fields: Scholarship Name, University Name, Image, Country, City, World 
+// Rank, Subject Category, Scholarship Category, Degree, Tuition Fees 
+// (optional), Application Fees, Service Charge, Deadline, Post Date, User 
+// Email. 
+// ● Manage Scholarships: Display a table of all scholarships added to the platform. 
+// ○ Action: "Update" (Button to edit scholarship details). 
+// ○ Action: "Delete" (Button to remove the scholarship). 
+// ● Manage Users: A table of all users. 
+// ○ Filter: Dropdown to filter by role (Student/Moderator/Admin). 
+// ○ Action: Change Role (Promote Student to Moderator or Admin, or demote). 
+// ○ Action: Delete User. 
+// ● Analytics: Visualize platform data. 
+// ○ Total Users, Total Fees Collected, Total Scholarships. 
+// ○ Chart: A Bar Chart or Pie Chart showing application counts per University 
+// or Scholarship Category.

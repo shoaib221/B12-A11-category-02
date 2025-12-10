@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { useReview, useReviewDetail } from './useReview';
+import {  useReviewDetail } from './useReview';
+import { useEditReview } from "./EditRevieHook"
 import { useAuthContext } from '../../auth/context';
 
 
@@ -7,7 +8,7 @@ import { useAuthContext } from '../../auth/context';
 export const Review = () => {
     const [ reviews, setReviews ] = React.useState([]);
     const { axiosInstance, user } = useAuthContext();
-    const { ReviewTag, showReview } = useReview();
+    const { ModalTag: EditReviewTag , showModal: showEdit } = useEditReview();
     const { ReviewDetailTag, showReviewDetail } = useReviewDetail();
 
     useEffect( () => {
@@ -27,19 +28,18 @@ export const Review = () => {
 
     return (
         <div>
-            <ReviewTag  />
+            <EditReviewTag />
             <ReviewDetailTag  />
             <div className='text-2xl font-bold' >My Reviews</div>
             <div className='mt-4 flex flex-col gap-4' >
                 { reviews && reviews.map( (review) => (
                     <div key={review._id} className='border p-4 rounded-lg flex justify-between' >
                         <div>
-                            <div className='mt-2' >Rating: { review.rating } / 5</div>
-                            <div className='mt-2' >Comment: { review.comment }</div>
+                            <div className='mt-2' > { review.scholarshipDetails.scholarshipName } </div>                            
                         </div>
 
                         <div>
-                            <button onClick={ () => showReview( review, true ) } >Edit</button>
+                            <button onClick={ () => showEdit( review, true ) } >Edit</button>
                             <button onClick={ () => showReviewDetail( review, true ) } >Detail</button>
                         </div>
                         

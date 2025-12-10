@@ -1,9 +1,11 @@
 import React from 'react';
 import { useAuthContext } from '../../auth/context';
+import { useReviewDetail } from "../student/useReview.jsx"
 
 export const AllReviews = () => {
     const { axiosInstance, user } = useAuthContext();
     const [ reviews, setReviews ] = React.useState([]);
+    const { ReviewDetailTag, showReviewDetail } = useReviewDetail()
 
     async function FetchReviews() {
         let res = await axiosInstance.get('scholarship/reviews');
@@ -18,6 +20,7 @@ export const AllReviews = () => {
 
     return (
         <div>
+            <ReviewDetailTag />
             <div className='text-2xl font-bold' >All Reviews</div>
             <div className='mt-4 flex flex-col gap-4' >
                 { reviews && reviews.map( (review) => (
@@ -30,8 +33,8 @@ export const AllReviews = () => {
                         </div>
 
                         <div>
-                            <button>Detail</button>
-                            <button>Delete</button>
+                            <button onClick={ () => showReviewDetail( review, true ) } >Detail</button>
+                            
                         </div>
 
                     </div>

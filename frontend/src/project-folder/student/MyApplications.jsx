@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuthContext } from '../../auth/context';
 import { useDetailApplication } from './useDetailApplication';
 import { useEditApplication } from './useEditApplication';
-import { useReview } from './useReview';
+import { useAddReview } from './useReview';
 
 
 export const MyApplications = () => {
@@ -10,8 +10,7 @@ export const MyApplications = () => {
     const { axiosInstance, user } = useAuthContext();
     const { DetailTag, showDetail } = useDetailApplication();
     const { EditTag, showEdit } = useEditApplication();
-    const { ReviewTag, showReview } = useReview();
-    const [curApp, setCurApp] = React.useState(null);
+    const { ReviewTag, showReview } = useAddReview();
     
 
     const fetchApplications = async () => {
