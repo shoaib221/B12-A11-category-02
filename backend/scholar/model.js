@@ -1,5 +1,6 @@
-import mongoose from 'mongoose';
-import { ObjectId } from 'mongodb';
+import mongoose, {Types} from 'mongoose';
+
+
 //   scholarshipCategory (Full fund/Partial/Self-fund), degree (Diploma/Bachelor/Masters), tuitionFees (optional), applicationFees, 
 // serviceCharge, applicationDeadline, scholarshipPostDate, postedUserEmail.
 const ScholarshipSchema = new mongoose.Schema({
@@ -76,11 +77,11 @@ export const Scholarship = mongoose.model("Scholarship", ScholarshipSchema);
 const ApplicationSchema= mongoose.Schema({
 
     scholarshipId: {
-        type: ObjectId,
+        type: Types.ObjectId,
         required: true
     },
     applicantId: {
-        type: ObjectId,
+        type: Types.ObjectId,
         required: true
     },
     applicantName: {
@@ -90,6 +91,15 @@ const ApplicationSchema= mongoose.Schema({
     applicantEmail: {
         type: String,
         required: true
+    },
+    education: {
+        type: String,
+    },
+    extras: {
+        type: String
+    },
+    message: {
+        type: String
     },
     applicationStatus: {
         type: String,
@@ -101,10 +111,19 @@ const ApplicationSchema= mongoose.Schema({
         required: true,
         default: "unpaid"
     },
+    transId : {
+        type: String
+    },
     applicationDate: {
         type: Date
     },
     feedback: {
+        type: String
+    },
+    moderatorId: {
+        type: Types.ObjectId
+    },
+    moderatorName: {
         type: String
     }
 
@@ -116,11 +135,11 @@ export const Application = mongoose.model("Application", ApplicationSchema)
 
 const ReviewSchema = mongoose.Schema({
     applicationId: {
-        type: ObjectId,
+        type: Types.ObjectId,
         required: true
     },
     scholarshipId: {
-        type: ObjectId,
+        type: Types.ObjectId,
         required: true
     },
     reviewerName: {
@@ -148,3 +167,26 @@ const ReviewSchema = mongoose.Schema({
 })
 
 export const Review = mongoose.model("Review", ReviewSchema)
+
+
+
+// Data Design: You must have at least four collections: 
+// 1. Users Collection:  
+// ○ Stores user information, including name, email, photoURL, and their role 
+// (e.g., "Student", "Moderator", "Admin"). 
+// 2. Scholarships Collection:  
+// ○ Stores scholarship data: scholarshipName, universityName, 
+// universityImage, universityCountry, universityCity, 
+// universityWorldRank, subjectCategory, scholarshipCategory (Full 
+// fund/Partial/Self-fund), degree (Diploma/Bachelor/Masters), 
+// tuitionFees (optional), applicationFees, serviceCharge, 
+// applicationDeadline, scholarshipPostDate, postedUserEmail. 
+// 3. Applications Collection:  
+// ○ Stores application data: scholarshipId, userId, userName, userEmail, 
+// universityName, scholarshipCategory, degree, applicationFees, 
+// serviceCharge, applicationStatus (default: pending), paymentStatus 
+// (unpaid/paid), applicationDate, feedback (added by moderator). 
+// 4. Reviews Collection:  
+// ○ Stores students review data: scholarshipId, universityName, 
+// userName, userEmail, userImage, ratingPoint, reviewComment, 
+// reviewDate. 

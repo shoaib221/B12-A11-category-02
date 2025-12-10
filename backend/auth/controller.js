@@ -167,7 +167,7 @@ const FirebaseRegister = async (req, res, next) => {
         }
 
 
-        real_user = await real_user.save();
+        await real_user.save();
 
 
 
@@ -209,8 +209,8 @@ const FetchUsers = async (req, res, next) => {
 const ChangeRole = async (req, res, next) => {
 
     try {
-        let { user, role } = req.body
-        user = await User.findOne({ username: user.username })
+        let { username, role } = req.body
+        let user = await User.findOne({ username })
         user.role = role;
         await user.save()
         res.status(200).json({ user })
@@ -219,6 +219,22 @@ const ChangeRole = async (req, res, next) => {
     }
 }
 
+
+const DeleteUser = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const user = await User.findByIdAndDelete(id);
+
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        res.status(200).json({ message: "User deleted successfully" });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
 
 // ################################## routes    ############################
 
@@ -230,6 +246,9 @@ authRouter.get("/google", GoogleLogin);
 authRouter.post("/fb-register", requireAuth, FirebaseRegister);
 authRouter.get("/users", requireAuth, requireAdmin, FetchUsers);
 authRouter.post("/change-role", requireAuth, requireAdmin, ChangeRole)
+authRouter.delete("/user/:id", requireAuth, requireAdmin, DeleteUser)
+
+
 
 // authRouter.get( "/init", requireAuthJWT, Init );
 // authRouter.get( "/profile", requireAuthJWT, Profile );
