@@ -19,12 +19,15 @@ context -> hook -> page -> main
     
 
 Admin 
-    email abcd.1234@email.com
-    password Abcd-1234
+    1. email abcd.1234@email.com, password Abcd-1234
+    2. shoaibtasrif326
     
 Moderator
-    email efgh.1234@email.com
-    password Efgh-1234
+    1. email efgh.1234@email.com password Efgh-1234
+    2. 
+
+Student
+    1. shoaibtasrif221
 
     
 

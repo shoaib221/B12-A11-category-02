@@ -2,17 +2,14 @@ import React from 'react';
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaLinkedin, FaFacebook } from "react-icons/fa";
 import { TbBrandStocktwits } from "react-icons/tb";
-
+import { Logo } from './Nav';
 
 export const Footer = () => {
 
     return (
         <div id='footer' className='px-8' >
             <div style={{ display: 'flex', justifyContent: 'space-between' }} >
-                <div className='h-[3rem]   flex gap-2' >
-                    <TbBrandStocktwits className='h-full text-2xl' />
-                    <div className='cen-ver font-bold' >JobSphere</div>
-                </div>
+                <Logo />
 
                 <div>
                     <div>Social Links</div>

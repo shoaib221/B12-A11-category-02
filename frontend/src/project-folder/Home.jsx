@@ -9,6 +9,7 @@ import { InfiniteSlider } from '../Swiper/slide1.jsx';
 import { ScrollProduct } from '../Slide/HorizontalScroll.jsx';
 import { Timeline } from '../daisyUi/Timeline.jsx';
 import { Chart } from '../Charts/charts.jsx';
+import { FAQs } from "../miscel/FAQs.jsx"
 
 
 
@@ -39,11 +40,16 @@ export const Home = () => {
             <div className='text-center text-2xl font-bold' > <span className='text-[var(--color4)]' >Top</span>  Scholarships</div>
             <InfiniteSlider />
             <br /><br />
+            <div className='text-center text-2xl font-bold' > Frequently Asked <span className='text-[var(--color4)]' >Questions</span></div>
+            <br />
+            <FAQs />
+
+            <br /><br />
             <div className='text-center text-2xl font-bold' > <span className='text-[var(--color4)]' >Succes</span>  Stories</div>
+            <br/>
             <ScrollProduct />
 
-            <br /> <br/>
-            <div className='text-center text-2xl font-bold' > <span className='text-[var(--color4)]' >FAQs</span></div>
+            
         </div>
     );
 };

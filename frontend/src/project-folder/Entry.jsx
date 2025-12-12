@@ -35,7 +35,7 @@ export const Entry = () => {
             </div>
             <Footer />
 
-            <div onClick={ scrollToTop } className='fixed bottom-4 right-4 z-5' >Back To Top</div>
+            {/* <div onClick={ scrollToTop } className='fixed bottom-4 right-4 z-5' >Back To Top</div> */}
         </>
     );
 };

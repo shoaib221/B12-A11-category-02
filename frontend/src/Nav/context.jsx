@@ -24,15 +24,10 @@ export const DownWindowProvider = ({ children }) => {
     useEffect( () => {
         //console.log("Location change")
         let path = location.pathname.toLowerCase();
-        if( path.includes("add-job") ) selectNavi("add-job");
-        else if( path.includes("all-jobs") ) selectNavi("all-jobs");
-        else if( path.includes("my-jobs") ) selectNavi("my-jobs");
-        else if( path.includes("my-task") ) selectNavi("my-task");
-        else if( path.includes("job-detail") || path.includes("auth") ) selectNavi("");
+        if( path.includes("all-scholarships") ) selectNavi("all-scholarships");
+        else if( path.includes("dashboard") ) selectNavi("dashboard");
+        else if( path.includes("detail") ) selectNavi("details");
         else selectNavi("home");
-
-
-
     }, [location?.pathname] )
 
 
@@ -54,16 +49,16 @@ export const DownWindowProvider = ({ children }) => {
             
             <div className={`${down1 ? "hidden" : "flex" } absolute z-2 h-[100%] w-[100%] bg-[var(--color1)]  flex-col items-center top-0 left-0 p-4 gap-4`} id="down-1" >
                 <div onClick={() => DownWindow( true, "/")} className={ `class-1 ${navi === "home" && "active-navi" }` }  >Home</div>
-                <div onClick={() => DownWindow( true, "/all-scholarships")} className={ `class-1 ${navi === "all-jobs" && "active-navi" }` } >All Scholarships</div>                
+                <div onClick={() => DownWindow( true, "/all-scholarships")} className={ `class-1 ${navi === "all-scholarships" && "active-navi" }` } >All Scholarships</div>                
             </div>
         )
     }
 
     const LargeScreenTag = () => {
         return (
-            <div className='hidden lg:flex text-[.7rem]' >
+            <div className='hidden lg:flex text-[0.9rem]' >
                 <div onClick={() => DownWindow( true, "/")} className={ `class-1 ${navi === "home" && "active-navi" }` }  >Home</div>
-                <div onClick={() => DownWindow( true, "/all-scholarships")} className={ `class-1 ${navi === "all-jobs" && "active-navi" }` } >All Scholarships</div>                
+                <div onClick={() => DownWindow( true, "/all-scholarships")} className={ `class-1 ${navi === "all-scholarships" && "active-navi" }` } >All Scholarships</div>                
             </div>
         )
     }

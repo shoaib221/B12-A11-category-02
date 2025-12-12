@@ -164,7 +164,7 @@ export const PrivateRoute = ({ children }) => {
     else return children;
 }
 
-// #todo
+
 export const AdminRoute = ({ children }) => {
     const { user, loading } = useAuthContext();
     const location = useLocation();

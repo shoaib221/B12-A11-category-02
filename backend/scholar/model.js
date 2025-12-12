@@ -111,6 +111,11 @@ const ApplicationSchema= mongoose.Schema({
         required: true,
         default: "unpaid"
     },
+    paymentAmount : {
+        type: Number,
+        required: true,
+        default: 0
+    },
     transId : {
         type: String
     },

@@ -1,4 +1,4 @@
-import express from "express"
+import express, { application } from "express"
 import { Scholarship, Application, Review } from "./model.js"
 import { requireAdmin, requireAuth, requireModerator } from "../auth/middlewire.js";
 import Stripe from "stripe";
@@ -8,9 +8,12 @@ import crypto from "crypto";
 import { User } from "../auth/model.js";
 import { match } from "assert";
 import { Types } from "mongoose";
-
+import { count } from "console";
+import { FeesDistribution, fetchScholarships } from "./method.js"
 
 export const scholarshipRouter = express.Router();
+
+
 
 
 const AddScholarship = async (req, res, next) => {
@@ -32,17 +35,17 @@ const DeleteScholarship = async (req, res, next) => {
     try {
         const { id } = req.params;
         let response = await Scholarship.findByIdAndDelete(id);
-        res.status(200).json( { scholarship: response } );
-    } catch(err) {
+        res.status(200).json({ scholarship: response });
+    } catch (err) {
         console.dir(err)
-        res.status(400).json( { error: err.message } )
+        res.status(400).json({ error: err.message })
     }
 }
 
 const UpdateScholarship = async (req, res, next) => {
     try {
         let { id } = req.params
-        let updation = {...req.body};
+        let updation = { ...req.body };
 
         let scholarship = await Scholarship.findByIdAndUpdate(
             id,
@@ -51,43 +54,21 @@ const UpdateScholarship = async (req, res, next) => {
         )
 
         res.status(200).json({ scholarship })
-    } catch(err)  {
-        res.status(400).json( { error: err.message } )
+    } catch (err) {
+        res.status(400).json({ error: err.message })
     }
 }
 
 const FetchScholarships = async (req, res, next) => {
-    let { sort, order, limit } = req.query;
+    
     //console.log(sort, order, count);
 
     try {
-        let pipeline = [];
+        let val = await fetchScholarships(req.query)
+        // console.log(scholarships);
+        console.log(val)
 
-        if (sort) {
-            pipeline.push({
-                $sort: { [sort]: order === "asc" ? 1 : -1 }
-            });
-        }
-
-        if (limit) {
-            pipeline.push({
-                $limit: parseInt(limit, 10)
-            });
-        }
-
-        let scholarships;
-        if( pipeline.length === 0 ) 
-        {
-            scholarships = await Scholarship.find({})
-        }
-        else 
-        {
-            scholarships = await Scholarship.aggregate(pipeline); 
-        }
-         
-        console.log(scholarships);
-
-        res.status(200).json({ scholarships });
+        res.status(200).json(val);
     } catch (err) {
         console.dir(err)
         res.status(400).json({ error: err.message });
@@ -113,6 +94,7 @@ const Apply = async (req, res, next) => {
         let application = null;
 
         let paymentInfo = req.body;
+        let paymentAmount = 0;
 
         if (paymentInfo.applicationId) {
             application = await Application.findOne({ _id: paymentInfo.applicationId });
@@ -125,6 +107,8 @@ const Apply = async (req, res, next) => {
             let applicant = await User.findOne({ username: req.user_email });
             if (!applicant) throw Error("No such user");
 
+            paymentAmount = parseInt(scholarship.applicationFees) + parseInt(scholarship.serviceCharge);
+
             application = {
                 scholarshipId: scholarship._id,
                 applicantId: applicant._id,
@@ -132,11 +116,16 @@ const Apply = async (req, res, next) => {
                 applicantEmail: applicant.username,
                 applicationDate: new Date(),
                 feedback: "",
-                ...paymentInfo
+                ...paymentInfo,
+                paymentAmount
             }
 
             application = Application(application);
             await application.save();
+        }
+
+        if (application.paymentStatus === 'paid') {
+            return res.status(200).json({ url: `${YOUR_DOMAIN}/payment_success` });
         }
 
         let pipeline = [
@@ -165,12 +154,13 @@ const Apply = async (req, res, next) => {
         application = application[0];
 
 
+
         const session = await stripe.checkout.sessions.create({
             line_items: [
                 {
                     price_data: {
                         currency: 'USD',
-                        unit_amount: application.scholarshipDetails.applicationFees + application.scholarshipDetails.serviceCharge,
+                        unit_amount: paymentAmount * 100,
                         product_data: {
                             name: application.scholarshipDetails.scholarshipName,
                         }
@@ -181,6 +171,7 @@ const Apply = async (req, res, next) => {
             customer_email: application.applicantEmail,
             metadata: {
                 applicationId: application._id.toString(),
+                paymentAmount: application.paymentAmount
             },
             mode: 'payment',
             success_url: `${YOUR_DOMAIN}/payment_success?session_id={CHECKOUT_SESSION_ID}`,
@@ -206,20 +197,45 @@ const PaymentSuccess = async (req, res, next) => {
         const { session_id } = req.body;
         const session = await stripe.checkout.sessions.retrieve(session_id)
 
+        const applicationId = session.metadata.applicationId;
+        const paymentAmount = session.metadata.paymentAmount;
+
+        let application = await Application.findOne({ _id: applicationId })
+
+        let pipeline = [
+            { $match: { _id: new Types.ObjectId(applicationId) } },
+            {
+                $lookup: {
+                    from: "scholarships",
+                    localField: "scholarshipId",
+                    foreignField: "_id",
+                    as: "scholarshipDetails"
+                }
+            },
+            { $unwind: "$scholarshipDetails" },
+
+        ];
+
+        application = await Application.aggregate(pipeline);
+        //console.log(application)
+        application = application[0];
+
+        if (application.paymentStatus === 'paid') {
+            return res.status(200).json({ application })
+        }
+
         if (session.payment_status === "paid") {
-            const applicationId = session.metadata.applicationId;
+
             const updation = {
                 paymentStatus: "paid",
                 transId: session.payment_intent,
-                applicationDate: new Date()
+                paymentAmount
             }
 
-
-
             const updatedApplication = await Application.findByIdAndUpdate(
-                new Types.ObjectId(applicationId),
+                applicationId,
                 {
-                    $set: { ...updation }
+                    $set: updation
                 },
                 {
                     new: true,
@@ -227,13 +243,34 @@ const PaymentSuccess = async (req, res, next) => {
                 }
             );
 
+            console.log(updatedApplication)
 
-            res.status(200).json({ application: updatedApplication })
+            let pipeline = [
+                { $match: { _id: new Types.ObjectId(applicationId) } },
+                {
+                    $lookup: {
+                        from: "scholarships",
+                        localField: "scholarshipId",
+                        foreignField: "_id",
+                        as: "scholarshipDetails"
+                    }
+                },
+                { $unwind: "$scholarshipDetails" },
+
+            ];
+
+            let application = await Application.aggregate(pipeline)
+            console.log(application)
+            application = application[0]
+            return res.status(200).json({ application })
         }
-        else res.status(200).json({
-            status: session.status
+
+
+        res.status(200).json({
+            status: session.status,
+            application
         })
-        next()
+
     } catch (err) {
         console.dir(err.message)
         res.status(400).json({ error: err.message })
@@ -310,7 +347,13 @@ const FetchApplicationsByModerator = async (req, res, next) => {
 const FetchReviews = async (req, res, next) => {
 
     try {
-        let pipeline = [
+        const { scholarshipName } = req.query;
+        console.log(req.query.scholarshipName)
+        let pipeline = []
+
+        
+
+        pipeline.push(
 
             {
                 $lookup: {
@@ -322,7 +365,14 @@ const FetchReviews = async (req, res, next) => {
             },
             { $unwind: "$scholarshipDetails" },
             { $sort: { date: -1 } }
-        ];
+        );
+
+        if(scholarshipName) pipeline.push(
+            { $match: { "scholarshipDetails.scholarshipName" : scholarshipName } },
+            { $limit: 5 }
+        )
+
+        
 
         let reviews = await Review.aggregate(pipeline);
         res.status(200).json({ reviews });
@@ -423,6 +473,7 @@ const ModeratorDecisionOnApplication = async (req, res, next) => {
 }
 
 
+
 const ModeratorFeedback = async (req, res, next) => {
     try {
         let { applicationId, feedback } = req.body;
@@ -435,6 +486,8 @@ const ModeratorFeedback = async (req, res, next) => {
         res.status(400).json({ error: err.message });
     }
 }
+
+
 
 const DeleteApplication = async (req, res, next) => {
     try {
@@ -451,6 +504,7 @@ const DeleteApplication = async (req, res, next) => {
         res.status(400).json({ error: err.message });
     }
 }
+
 
 
 const UpdateApplication = async (req, res, next) => {
@@ -472,17 +526,92 @@ const UpdateApplication = async (req, res, next) => {
 
 
 
+const Analytics = async (rq, res, next) => {
+    try {
+        const totalUsers = await User.countDocuments();
+
+        const totalScholarships = await Scholarship.countDocuments();
+
+        const appPerScholarshipCat = await Scholarship.aggregate([
+            {
+                $lookup: {
+                    from: "applications",
+                    localField: "_id",
+                    foreignField: "scholarshipId",
+                    as: "apps"
+                }
+            },
+            {
+                $unwind: "$apps"
+            },
+            {
+                $group: {
+                    _id: "$scholarshipCategory",
+                    count: { $sum: 1 }
+                }
+            }
+        ])
+
+        const appPerUniversity = await Scholarship.aggregate([
+            {
+                $lookup: {
+                    from: "applications",
+                    localField: "_id",
+                    foreignField: "scholarshipId",
+                    as: "apps"
+                }
+            },
+            {
+                $unwind: "$apps"
+            },
+            {
+                $group: {
+                    _id: "$universityName",
+                    count: { $sum: 1 }
+                }
+            }
+        ])
+
+        const usersByCategory = await User.aggregate([
+            {
+                $group: {
+                    _id: "$role",          // group by role field
+                    count: { $sum: 1 }     // count number of users in each role
+                }
+            }
+        ]);
+
+        
+
+        let  { totalApplicationFees, totalServiceCharge }  = await FeesDistribution()
+        let feesDistribution = [
+            { _id: "Application Fees", count: totalApplicationFees },
+            { _id: "Service Charge", count: totalServiceCharge }
+        ]
+        
 
 
+        res.status(200).json({
+            totalUsers, usersByCategory,  appPerUniversity,
+            totalScholarships, appPerScholarshipCat,  feesDistribution
+        })
+    } catch (err) {
+        res.status(400).json({ error: err.message })
+    }
+}
+
+
+
+scholarshipRouter.get("/analytics", requireAuth, requireAdmin, Analytics);
 scholarshipRouter.post("/add", requireAuth, requireAdmin, AddScholarship);
 scholarshipRouter.get("/all", FetchScholarships);
 scholarshipRouter.get("/fetch/:id", requireAuth, FetchScholarshipById);
 scholarshipRouter.post("/apply", requireAuth, Apply);
 scholarshipRouter.patch("/application", requireAuth, UpdateApplication);
-scholarshipRouter.delete("/application/:id", requireAuth, DeleteApplication)
+scholarshipRouter.delete("/application/:id", requireAuth, DeleteApplication);
 scholarshipRouter.get("/my-applications", requireAuth, FetchApplicationsByUser);
 scholarshipRouter.get("/applications", requireAuth, requireModerator, FetchApplicationsByModerator);
-scholarshipRouter.get("/reviews", requireAuth, requireModerator, FetchReviews);
+scholarshipRouter.get("/reviews", requireAuth, FetchReviews);
 scholarshipRouter.get("/my-reviews", requireAuth, MyReviews);
 scholarshipRouter.post("/add-review", requireAuth, AddReview);
 scholarshipRouter.post("/update-review", requireAuth, UpdateReview);
@@ -490,5 +619,7 @@ scholarshipRouter.post("/remove-review", requireAuth, RemoveReview);
 scholarshipRouter.post("/decision", requireAuth, requireModerator, ModeratorDecisionOnApplication);
 scholarshipRouter.post("/feedback", requireAuth, requireModerator, ModeratorFeedback);
 scholarshipRouter.post("/payment-success", requireAuth, PaymentSuccess);
-scholarshipRouter.delete("/:id", requireAuth, requireAdmin, DeleteScholarship)
-scholarshipRouter.put("/:id", requireAuth, requireAdmin, UpdateScholarship)
+scholarshipRouter.delete("/:id", requireAuth, requireAdmin, DeleteScholarship);
+scholarshipRouter.put("/:id", requireAuth, requireAdmin, UpdateScholarship);
+
+

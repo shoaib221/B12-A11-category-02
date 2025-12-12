@@ -80,7 +80,7 @@ export const useDetail = () => {
                     <div> <span className="font-bold"> Application Status:</span>
                         <select value={status} onChange={ (e) => setStatus(e.target.value) } >
                             <option value="pending"  >Pending</option>
-                            <option value="completed"  >Approved</option>
+                            <option value="approved"  >Approved</option>
                             <option value="processing"  >Processing</option>
                             <option value="rejected"  >Rejected</option>
                         </select>

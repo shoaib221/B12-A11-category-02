@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useAuthContext } from "../../auth/context";
+import { toast } from "react-toastify";
 
 
 let UpdateTag = ({ isOpen, scholarship, show }) => {
@@ -15,6 +17,7 @@ let UpdateTag = ({ isOpen, scholarship, show }) => {
     const [applicationFees, setApplicationFees] = useState(null)
     const [serviceCharge, setServiceCharge] = useState(null)
     const [deadline, setDeadline] = useState(null)
+    const { axiosInstance } = useAuthContext()
 
     useEffect(() => {
         if (!scholarship) return;
@@ -31,8 +34,35 @@ let UpdateTag = ({ isOpen, scholarship, show }) => {
         setApplicationFees(scholarship.applicationFees)
         setServiceCharge(scholarship.serviceCharge)
         setDeadline(scholarship.deadline)
-
+        console.log(scholarship)
     }, [scholarship])
+
+    async function DeleteScholarship() {
+        try {
+            let res = await axiosInstance.delete( `/scholarship/${scholarship._id}` )
+            toast.info("Successfully Deleted");
+        } catch(err) {
+            console.error(err);
+        }
+    }
+
+
+    async function UpdateScholarship() {
+        let info = {
+            ...scholarship,
+            scholarshipName, universityName, image,
+            country, city, worldRank, subjectCategory, scholarshipCategory,
+            degree, tuitionFees, applicationFees, serviceCharge, deadline
+        }
+
+        try {
+            let res = await axiosInstance.put(`/scholarship/${scholarship._id}`, info)
+            toast.success( "Updated Successfully" );
+            show(null, false)
+        } catch(err) {
+            console.error(err.response.data.error)
+        }
+    }
 
     return (
 
@@ -53,7 +83,7 @@ let UpdateTag = ({ isOpen, scholarship, show }) => {
                 </div>
                 <br />
 
-                <div className="font-bold mt-4 text-center text-xl" >Edit scholarship data </div>
+                <div className="font-bold mt-4 text-center text-xl" >{scholarship?.scholarshipName}</div>
                 <br />
 
                 <label>
@@ -82,6 +112,14 @@ let UpdateTag = ({ isOpen, scholarship, show }) => {
                     <input className="w-full my-4"
                         value={universityName} onChange={(e) => setUniversityName(e.target.value)} ></input>
                 </label>
+
+                <br />
+                <label>
+                    <span className="font-bold" >Image</span> <br />
+                    <input className="w-full my-4"
+                        value={image} onChange={(e) => setImage(e.target.value)} ></input>
+                </label>
+
                 <br />
                 <label>
                     <span className="font-bold" >City</span> <br />
@@ -93,14 +131,14 @@ let UpdateTag = ({ isOpen, scholarship, show }) => {
                 <label>
                     <span className="font-bold" >Country</span> <br />
                     <input className="w-full my-4"
-                        value={city} onChange={(e) => setCountry(e.target.value)} ></input>
+                        value={country} onChange={(e) => setCountry(e.target.value)} ></input>
                 </label>
 
                 <br />
                 <label>
                     <span className="font-bold" >World Rank</span> <br />
                     <input className="w-full my-4"
-                        type="number" value={city} onChange={(e) => setWorldRank(e.target.value)} ></input>
+                        type="number" value={worldRank} onChange={(e) => setWorldRank(e.target.value)} ></input>
                 </label>
 
 
@@ -137,15 +175,15 @@ let UpdateTag = ({ isOpen, scholarship, show }) => {
                 <label>
                     <span className="font-bold" >Deadline</span> <br />
                     <input className="w-full my-4"
-                        type="number" value={deadline} onChange={(e) => setDeadline(e.target.value)} ></input>
+                         value={deadline} onChange={(e) => setDeadline(e.target.value)} ></input>
                 </label>
 
                 <br />
                 <br />
 
                 <div className="flex gap-4 justify-center" >
-                    <button className="bg-green-800 text-white py-2 px-4 rounded-xl" >Update</button>
-                    <button className="bg-red-800 text-white py-2 px-4 rounded-xl" >Delete</button>
+                    <button onClick={ UpdateScholarship } className="bg-[var(--color4)] text-white py-2 px-4 rounded-xl" >Update</button>
+                    <button onClick={DeleteScholarship} className="bg-red-800 text-white py-2 px-4 rounded-xl" >Delete</button>
                 </div>
 
             </div>

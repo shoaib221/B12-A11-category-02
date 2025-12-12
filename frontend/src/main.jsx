@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import './index.css';
+import "./Buttons/button.css"
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';

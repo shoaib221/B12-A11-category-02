@@ -179,8 +179,8 @@ export const useReviewDetail = () => {
 
                 </div>
                 <div className="flex justify-center gap-4 mt-4" >
-                    <button className="bg-black text-white" onClick={() => setIsOpen(false)} >Close</button>
-                    <button className="bg-red-800 text-white" onClick={DeleteReview} >Delete</button>
+                    <button className="bg-black rounded-xl text-white px-4 py-2" onClick={() => setIsOpen(false)} >Close</button>
+                    <button className="bg-red-800 rounded-xl text-white px-4 py-2" onClick={DeleteReview} >Delete</button>
                 </div>
             </div>}
         </div>

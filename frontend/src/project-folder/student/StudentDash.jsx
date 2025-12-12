@@ -12,12 +12,12 @@ export const StudentDash = () => {
 
 
     return (
-        <div className='flex gap-8' >
+        <div className='flex flex-col lg:flex-row gap-8' >
             <title> ScholarStrem | Dashboard</title>
-            <div className='flex flex-col min-w-12' >
-                <div onClick={ () => setCur('profile') } > My Profile</div>
-                <div onClick={ () => setCur('my-apps') } > My Applications</div>
-                <div onClick={ () => setCur('reviews') } >My Reviews</div>
+            <div className='flex flex-row lg:flex-col min-w-12 gap-2' >
+                <div className={`${ cur === 'profile'? 'button-1234': ""  } box-1212`}  onClick={ () => setCur('profile') } > My Profile</div>
+                <div className={`${ cur === 'my-apps'? 'button-1234': ""  } box-1212`} onClick={ () => setCur('my-apps') } > My Applications</div>
+                <div className={`${ cur === 'reviews'? 'button-1234': ""  } box-1212`} onClick={ () => setCur('reviews') } >My Reviews</div>
             </div>
 
             <div className='flex-1' >

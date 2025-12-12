@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
+import { toast } from "react-toastify";
 
 const EditTag = ({ isOpen, application, show }) => {
     const [ education, setEducation ] = useState(null)
@@ -19,6 +20,7 @@ const EditTag = ({ isOpen, application, show }) => {
     async function Update () {
         try {
             let res = await axiosInstance.patch( "/scholarship/application", { ...application, education, extras, message } )
+            toast.success("Updated Successfully")
             show(null, false)
             console.log(res.data)
         } catch(err) {
@@ -48,7 +50,8 @@ const EditTag = ({ isOpen, application, show }) => {
                     <textarea
                         type="text" value={education} onChange={(e)=> setEducation(e.target.value)}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
-                        placeholder="i.g. Fullbright Scholarship"
+                        placeholder="Write your hobbies"
+                        rows={3}
                     />
                     
                 </label>
@@ -58,7 +61,8 @@ const EditTag = ({ isOpen, application, show }) => {
                     <textarea
                         type="text" value={extras} onChange={(e)=> setExtras(e.target.value)}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
-                        placeholder="i.g. Fullbright Scholarship"
+                        placeholder="Write your hobbies"
+                        rows={3}
                     />
                     
                 </label>
@@ -68,14 +72,15 @@ const EditTag = ({ isOpen, application, show }) => {
                     <textarea
                         type="text" value={message} onChange={(e)=> setMessage(e.target.value)}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
-                        placeholder="i.g. Fullbright Scholarship"
+                        placeholder="Want to add any message?"
+                        rows={3}
                     />
                     
                 </label>
 
                 <div className="flex justify-center gap-4" >
-                    { application.applicationStatus === 'pending' && <button onClick={ Update  } >Update</button>}
-                    <button onClick={() => show(null, false)} >Close</button>
+                    { application.applicationStatus === 'pending' && <button  className="bg-[var(--color4)] text-[var(--color1)] p-2 rounded-lg" onClick={ Update  } >Update</button>}
+                    <button className="rounded-lg p-2 bg-[var(--color2)] text-[var(--color1)]" onClick={() => show(null, false)} >Close</button>
                 </div>
             </div>}
         </div>)

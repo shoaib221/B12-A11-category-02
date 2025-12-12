@@ -38,22 +38,23 @@ export const RoleChange = ({ user, refetch }) => {
     }
 
     return (
-        <>
-            <div  >
-                <div>{user.name}</div>
-                <div> {user.username} </div>
+        <  >
+            <div className="box-1212" >
+                <div className="font-bold" >{user.name}</div>
+                <div className="text-[var(--color3)]" > {user.username} </div>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex gap-2 font-bold box-1212">
                 <select value={role} onChange={(e) => setRole( e.target.value )} >
                     <option value="admin" >Admin</option>
                     <option value="moderator" >Moderator</option>
                     <option value="student" >Student</option>
                 </select>
+            </div>
 
-                <button onClick={Update} >Save</button>
-
-                <button onClick={DeleteUser} >Delete</button>
+            <div className="flex gap-2 box-1212" >
+                <button  className="button-1234" onClick={Update} >Save</button>
+                <button  className="button-1234" onClick={DeleteUser} >Delete</button>
             </div>
         </>
     )
@@ -63,13 +64,14 @@ export const RoleChange = ({ user, refetch }) => {
 
 export const ManageUsers = () => {
     const { axiosInstance, user } = useAuthContext();
+    const [ role, setRole ] = useState("all")
 
 
 
     const { data: users = [], isLoading, isError, error, refetch } = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
-            const res = await axiosInstance.get("/auth/users");
+            const res = await axiosInstance.get(`/auth/users?filter=${role}`);
             console.log("refetched")
             return res.data.users;
         },
@@ -78,8 +80,9 @@ export const ManageUsers = () => {
     });
 
 
-    async function ChangeRole(user, role) {
-
+    async function SelectRole(role) {
+        setRole(role)
+        refetch();
     }
 
 
@@ -88,18 +91,21 @@ export const ManageUsers = () => {
         <AdminRoute>
 
             <div className="flex justify-between" >
-                <div>Manage Users</div>
-                <select>
-                    <option value="all" >All</option>
+                <div className="text-2xl font-bold" >Manage Users</div>
+                <select value={role} onChange={ (e) => SelectRole( e.target.value ) } >
+                    <option value="all" >Filter Users</option>
                     <option value="admin" >Admin</option>
-                    <option value="user" >User</option>
-
+                    <option value="student" >User</option>
+                    <option value="moderator" >Moderator</option>
                 </select>
             </div>
-            <div className="flex-grow grid grid-cols-[1fr_1fr] gap-2" >
-                <div>User</div>
+            <br/>
+            <div className="flex-grow grid grid-cols-[1fr_1fr_1fr] gap-6" >
+                <div className="font-bold pl-6" >User</div>
 
-                <div>Role</div>
+                <div className="font-bold pl-6" >Role</div>
+
+                <div className="font-bold pl-6" >Actions</div>
 
 
                 {users.map((elem) => <RoleChange refetch={refetch} user={elem} /> )}

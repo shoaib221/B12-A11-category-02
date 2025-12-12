@@ -3,7 +3,7 @@ import { useAuthContext } from '../../auth/context';
 import { useDetailApplication } from './useDetailApplication';
 import { useEditApplication } from './useEditApplication';
 import { useAddReview } from './useReview';
-
+import "./student.css"
 
 export const MyApplications = () => {
     const [ applications, setApplications ] = React.useState([]);
@@ -39,17 +39,20 @@ export const MyApplications = () => {
                     <div key={application._id} className='justify-between border p-4 rounded-lg flex' >
 
                         <div>
-                            <div className='font-semibold text-lg' >Scholarship: { application.scholarshipDetails.scholarshipName }</div>
+                            <div className='font-semibold text-lg' >{ application.scholarshipDetails.scholarshipName }</div>
                             <div className='text-sm text-gray-600' >Status: { application.applicationStatus }</div>
                         </div>
 
                         <div className='flex gap-2' >
-                            <div onClick={ () => showDetail( application, true) } >Detail</div>
-                            { application.applicationStatus === 'completed' && <div>Review</div> }
-                            { application.applicationStatus === 'pending' ? 
-                                <div onClick={ () => showEdit( application, true) } >Edit</div>
-                                :
-                                <div className='text-gray-400' onClick={ () => showReview(application, true) } >Review</div>
+                            <button 
+                                className='btn-123'
+                                onClick={ () => showDetail( application, true) } >Detail</button>
+                            { application.applicationStatus === 'approved' &&  <button onClick={ () => showReview( application, true ) }  className='btn-123'>Review</button> }
+                            { application.applicationStatus === 'pending' &&
+                                <button 
+                                className='btn-123'
+                                onClick={ () => showEdit( application, true) } >Edit</button>
+                            
                             }
                         </div>
                         

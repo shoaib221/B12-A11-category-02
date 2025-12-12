@@ -1,0 +1,17 @@
+.btn-123 {
+    background-color: var(--color4);
+    color: var(--color1);
+    border-radius: .5rem;
+    width: 4rem;
+    padding: .5rem;
+}
+
+
+.text-outline-123 {
+  color: white;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}

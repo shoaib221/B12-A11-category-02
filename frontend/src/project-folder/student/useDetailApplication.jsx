@@ -70,6 +70,11 @@ export const useDetailApplication = () => {
                     { application.scholarshipDetails.subjectCategory }
                 </div>
 
+                <div>
+                    <span className="font-bold" >Degree </span> 
+                    { application.scholarshipDetails.degree }
+                </div>
+
                 <br/>
 
                 <div>

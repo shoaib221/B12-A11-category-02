@@ -38,9 +38,9 @@ export const Review = () => {
                             <div className='mt-2' > { review.scholarshipDetails.scholarshipName } </div>                            
                         </div>
 
-                        <div>
-                            <button onClick={ () => showEdit( review, true ) } >Edit</button>
-                            <button onClick={ () => showReviewDetail( review, true ) } >Detail</button>
+                        <div className='flex gap-2' >
+                            <button className='button-1234' onClick={ () => showEdit( review, true ) } >Edit</button>
+                            <button className='button-1234' onClick={ () => showReviewDetail( review, true ) } >Detail</button>
                         </div>
                         
                     </div>
