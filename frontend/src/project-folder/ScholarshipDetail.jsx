@@ -4,6 +4,8 @@ import { useAuthContext } from '../auth/context';
 import { Review } from './student/Review';
 import { PrivateRoute } from '../auth/auth';
 import { Breaker } from '../miscel/Breaker';
+import { toast } from 'react-toastify';
+import { TimeDate } from '../miscel/TimeDate';
 
 
 
@@ -47,6 +49,11 @@ export const ScholarshipDetail = () => {
 
     const Apply = async () => {
 
+        if(!education || !extras || !message ) {
+            toast.error("Fill up all the fields");
+            return;
+        }
+
         let cost = parseInt(scholarship.applicationFees) + parseInt(scholarship.serviceCharge)
         let info = {
             scholarshipId: id,
@@ -76,10 +83,10 @@ export const ScholarshipDetail = () => {
                     </div>
                     <br />
 
-                    <div className='font-bold text-xl' >{scholarship.scholarshipName}</div>
-                    <div>{scholarship.degree} in {scholarship.subjectCategory}</div>
+                    <div className='text-2xl text-[var(--color4)] font-bold' >{scholarship.scholarshipName}</div>
+                    <div className='font-bold' >{scholarship.degree} in {scholarship.subjectCategory}</div>
                     <div className='text-[var(--color3)]' > {scholarship.scholarshipCategory} </div>
-                    <div className='text-[var(--color3)]' > Deadline {scholarship.deadline} </div>
+                    <div className='text-[var(--color3)]' > Deadline <TimeDate date={scholarship?.deadline} /> </div>
 
                     <br />
                     <div className='font-bold text-xl' >University</div>
@@ -109,13 +116,13 @@ export const ScholarshipDetail = () => {
                     <br />
 
                     {user.role === 'student' && <>
-                        <Breaker className="text-2xl font-bold" message={"Apply Now"} />
-
+                        <div className="text-2xl text-[var(--color4)] font-bold"  >Apply Now</div>
+                        <br/>
                         <div className='font-bold text-xl' >Education</div>
                         <textarea
                             value={education} onChange={(e) => setEducation(e.target.value)}
                             placeholder='Write your educational qualifications'
-                            className='resize-none block w-full'
+                            className='resize-none block w-full max-w-[600px]'
                             rows={3}
                             required
                         ></textarea>
@@ -124,7 +131,7 @@ export const ScholarshipDetail = () => {
                         <textarea
                             value={extras} onChange={(e) => setExtras(e.target.value)}
                             placeholder='Write your hobbies'
-                            className='resize-none block w-full'
+                            className='resize-none block w-full max-w-[600px]'
                             rows={3}
                         ></textarea>
 
@@ -133,22 +140,24 @@ export const ScholarshipDetail = () => {
                         <textarea
                             value={message} onChange={(e) => setMessage(e.target.value)}
                             placeholder='Want to add any message?'
-                            className='resize-none block w-full'
+                            className='resize-none block w-full max-w-[600px]'
                             rows={3}
                         ></textarea>
+
+                        <button
+                        onClick={Apply}
+                        className='mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg' >Submit</button>
 
                     </>}
 
 
 
 
-                    <button
-                        onClick={Apply}
-                        className='mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg' >Submit</button>
+                    
 
-                    <br /><br />
+                    <br/><br/><br/>
 
-                    <Breaker message={"Top Reviews"} />
+                    <div className='text-2xl font-bold text-[var(--color4)]' >Top Reviews</div>
 
                     { reviews && reviews.map( (review) => (
                     <div key={review._id} className='box-1212 p-4 mb-4 rounded-lg flex justify-between' >

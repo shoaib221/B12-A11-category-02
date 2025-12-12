@@ -112,7 +112,7 @@ export const UpdateProfile = () => {
                         <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" />
                     </div>
                     <br />
-                    <button onClick={Update} className="button-1"  >Update</button>
+                    <button onClick={Update} className="button-1234"  >Update</button>
                 </div>
 
                 <DownWindowTag />

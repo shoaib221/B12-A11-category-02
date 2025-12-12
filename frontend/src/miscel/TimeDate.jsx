@@ -5,11 +5,10 @@ import { format } from "date-fns";
 
 
 
-export const TimeDate = () => {
+export const TimeDate = ({date}) => {
     return (
-        <div>
-            <p>{format(new Date() , "EEEE, MMMM do, yyyy 'at' h:mm a")}</p>
-        </div>
+        // <span>{format( new Date(date) , "EEEE, MMMM do, yyyy 'at' h:mm a")}</span>
+        <span>{format( new Date(date) , "MMMM do, yyyy")}</span>
     );
 };
 

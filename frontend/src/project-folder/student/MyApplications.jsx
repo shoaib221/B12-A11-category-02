@@ -33,10 +33,10 @@ export const MyApplications = () => {
             <DetailTag  />
             <EditTag  />
             <ReviewTag  />
-            <div className='text-2xl' >My Applications</div>
+            
             <div className='mt-4 flex flex-col gap-4' >
                 { applications && applications.map( (application) => (
-                    <div key={application._id} className='justify-between border p-4 rounded-lg flex' >
+                    <div key={application._id} className='justify-between p-4 rounded-lg flex box-1212' >
 
                         <div>
                             <div className='font-semibold text-lg' >{ application.scholarshipDetails.scholarshipName }</div>
@@ -45,12 +45,12 @@ export const MyApplications = () => {
 
                         <div className='flex gap-2' >
                             <button 
-                                className='btn-123'
+                                className='button-1234'
                                 onClick={ () => showDetail( application, true) } >Detail</button>
-                            { application.applicationStatus === 'approved' &&  <button onClick={ () => showReview( application, true ) }  className='btn-123'>Review</button> }
+                            { application.applicationStatus === 'approved' &&  <button onClick={ () => showReview( application, true ) }  className='button-1234'>Review</button> }
                             { application.applicationStatus === 'pending' &&
                                 <button 
-                                className='btn-123'
+                                className='button-1234'
                                 onClick={ () => showEdit( application, true) } >Edit</button>
                             
                             }

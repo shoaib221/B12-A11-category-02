@@ -74,7 +74,7 @@ export const EmailLogin = () => {
 
     return (
         <div className='flex flex-col justify-center items-center gap-4 w-full' >
-            <div className='text-3xl font-bold text-center' >Log In </div>
+            <div className='text-3xl font-bold text-center text-[var(--color4)]' >Log In </div>
 
             <div className='grid grid-cols-[1fr_2fr] gap-4 w-full' >
                 <label className='flex justify-end items-center' >Email</label>
@@ -88,7 +88,7 @@ export const EmailLogin = () => {
                 </div>
             </div>
 
-            <button className='button-1' onClick={Login}  >Login</button>
+            <button className='button-1234 w-full cen-hor' onClick={Login}  >Login</button>
 
         </div>
     )
@@ -151,7 +151,7 @@ export const EmailRegister = () => {
 
     return (
         <div className='w-full' >
-            <div className='text-3xl font-bold text-center' >Register</div>
+            <div className='text-3xl font-bold text-center text-[var(--color4)]' >Register</div>
             <br />
 
             <div className='grid grid-cols-[1fr_2fr] gap-4' >
@@ -175,7 +175,7 @@ export const EmailRegister = () => {
 
             </div>
             <br />
-            <button className='button-1 w-full cen-hor' onClick={Register} >Register</button>
+            <button className='button-1234 w-full cen-hor' onClick={Register} >Register</button>
 
 
         </div>

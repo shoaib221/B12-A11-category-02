@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { toast } from "react-toastify";
+import { TimeDate } from "../../miscel/TimeDate";
 
 
 
@@ -48,14 +49,14 @@ export const useDetail = () => {
             `}
         >
             {application && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
-                Application Details
+                
                 <div className="flex flex-col gap-2 mt-4" >
                     <div>
-                        <div className="font-bold" >Scholarship: </div>
-                        <div>{application.scholarshipDetails.scholarshipName}</div>
+                        
+                        <div className="font-bold" >{application.scholarshipDetails.scholarshipName}</div>
                         <div> { application.scholarshipDetails.universityName } </div>
                         <div>{application.scholarshipDetails.scholarshipCategory}</div>
-                        <div>{application.scholarshipDetails.subjectCategory}</div>
+                        <div>{application.scholarshipDetails.degree} in {application.scholarshipDetails.subjectCategory}</div>
                     </div>
 
                     <div>
@@ -68,7 +69,7 @@ export const useDetail = () => {
                         <span className="font-bold" > Payment Status: </span> {application.paymentStatus}
                         
                     </div>
-                    <div>Submitted On: {application.applicationDate}</div>
+                    <div> <span className="font-bold" >Submitted On:</span> <TimeDate date={application.applicationDate} /> </div>
                     
                     
                     <div> 
@@ -90,8 +91,8 @@ export const useDetail = () => {
 
                 </div>
                 <div className="flex justify-center gap-4 mt-4" >
-                    <button onClick={Decision} >Update</button>
-                    <button onClick={() => setIsOpen(false)} >Close</button>
+                    <button className="button-1234" onClick={Decision} >Update</button>
+                    <button className="button-1234" style={{ backgroundColor: 'black' }} onClick={() => setIsOpen(false)} >Close</button>
                 </div>
             </div>}
         </div>

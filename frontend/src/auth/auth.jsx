@@ -144,12 +144,24 @@ export const Auth = () => {
     if (loading) return <Loading />
 
     return (
-        <div className='flex justify-center items-center flex-grow relative' >
+        <div className='flex flex-col justify-end items-center w-full h-full bg-cover bg-center'  >
+
+            
+
+            
+
+            
             {login === "login" && <LogIn toggle={setLogin} />}
             {login === "register" && <Register toggle={setLogin} />}
             {login === "forgot" && <ForgotPassword toggle={setLogin} />}
+
+
+
+
+
             <DownWindowTag />
         </div>
+
     )
 };
 

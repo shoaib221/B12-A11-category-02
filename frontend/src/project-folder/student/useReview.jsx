@@ -3,6 +3,7 @@ import { useAuthContext } from "../../auth/context";
 import { set } from "react-hook-form";
 import { StarRating } from "../utils/StarRating";
 import { toast } from "react-toastify";
+import { TimeDate } from "../../miscel/TimeDate";
 
 const ReviewTag = ({ open, app, show }) => {
     const [comment, setComment] = useState("");
@@ -172,7 +173,7 @@ export const useReviewDetail = () => {
 
                     <div>
                         <span>Date: </span>
-                        <span>{new Date(review.date).toLocaleDateString()}</span>
+                        <TimeDate date={review.date} />
                     </div>
 
 
