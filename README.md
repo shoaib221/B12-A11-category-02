@@ -62,12 +62,13 @@ A full-stack  web app for hunting scholarships around the world.
 git clone https://github.com/shoaib221/B12-A11-category-02.git
 
 # Navigate into the project
-cd B12-A11-category-02
+cd B12-A11-category-02/backend
+cd B12-A11-category-02/frontend
 
 # Install dependencies
 npm install
 
 # Run the development server
 npm run dev
-# B12-A11-category-02
+
 
