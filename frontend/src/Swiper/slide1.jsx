@@ -11,18 +11,25 @@ import { useNavigate } from "react-router-dom";
 import "swiper/css/free-mode";
 
 export function InfiniteSlider() {
-    const { axiosInstance, user } = useAuthContext();
+    const { axiosInstance } = useAuthContext();
     const [scholarships, setScholarships] = useState([]);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!user) return;
+    async function FetchScholarships () {
+        try {
+            let response = await axiosInstance.get("/scholarship/all?sortBy=tuitionFees&sortOrder=asc&count=6")
+            setScholarships( response.data.scholarships )
+        } catch(err) {
+            console.error(err);
+        }
+    }
 
-        axiosInstance
-            .get("/scholarship/all?sortBy=tuitionFees&sortOrder=asc&count=6")
-            .then((res) => setScholarships(res.data.scholarships))
-            .catch(console.error);
-    }, [user]);
+    useEffect(() => {
+        
+
+        FetchScholarships();
+        
+    }, []);
 
     return (
         <div className="w-full p-4 h-60">

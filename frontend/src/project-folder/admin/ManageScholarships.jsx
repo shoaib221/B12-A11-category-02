@@ -75,7 +75,7 @@ export const ManageScholarships = () => {
 
                 <div className='mt-4 flex flex-col gap-4' >
                     {scholarships && scholarships.map((scholarship) => (
-                        <div key={scholarship._id} className='border p-4 rounded-lg flex justify-between items-center' >
+                        <div key={scholarship._id} className='box-1212 p-4 rounded-lg flex justify-between items-center' >
                             <div>
                                 <div className='font-semibold text-lg' >{scholarship.scholarshipName}</div>
                                 <div className='text-sm text-gray-600' >{scholarship.universityName}</div>

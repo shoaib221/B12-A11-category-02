@@ -8,10 +8,10 @@ import { ForbiddenAccess } from '../auth/RestrictedRoutes';
 
 export const Dashboard = () => {
     const { user } = useAuthContext()
-    if (user?.role === 'admin') return <AdminDash />
-    if( user?.role === 'moderator' ) return <ModeratorDash />
-    if(user) return <StudentDash />
-    return <ForbiddenAccess />
+    return <AdminDash />
+    // if( user?.role === 'moderator' ) return <ModeratorDash />
+    // if(user) return <StudentDash />
+    // return <ForbiddenAccess />
 };
 
 

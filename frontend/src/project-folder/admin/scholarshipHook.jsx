@@ -175,7 +175,7 @@ let UpdateTag = ({ isOpen, scholarship, show }) => {
                 <label>
                     <span className="font-bold" >Deadline</span> <br />
                     <input className="w-full my-4"
-                         value={deadline} onChange={(e) => setDeadline(e.target.value)} ></input>
+                        value={ new Date(deadline).toLocaleDateString() } onChange={(e) => setDeadline(e.target.value)} ></input>
                 </label>
 
                 <br />

@@ -5,12 +5,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { SignOut } from '../auth/auth';
 import { AuthContext } from '../auth/context';
 import './Nav.css';
-import { Theme } from '../Theme/Theme.jsx';
-import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { DownWindowContext } from './context.jsx';
-import { TbBrandStocktwits } from "react-icons/tb";
 import { Breaker } from '../miscel/Breaker.jsx';
-import { Flashlight } from 'lucide-react';
 import { FaGraduationCap } from "react-icons/fa6";
 
 

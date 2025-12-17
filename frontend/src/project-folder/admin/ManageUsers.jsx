@@ -3,6 +3,7 @@ import { useAuthContext } from "../../auth/context";
 import { useQuery } from "@tanstack/react-query";
 import { AdminRoute } from "../../auth/auth";
 import { toast } from "react-toastify";
+import axios from "axios";
 
 
 
@@ -53,8 +54,8 @@ export const RoleChange = ({ user, refetch }) => {
             </div>
 
             <div className="flex gap-2 box-1212" >
-                <button  className="button-1234" onClick={Update} >Save</button>
-                <button  className="button-1234" onClick={DeleteUser} >Delete</button>
+                <button  className="button-1234" onClick={Update} >Update</button>
+                <button  className="button-1234" style={{ backgroundColor: 'var(--color5)' }} onClick={DeleteUser} >Delete</button>
             </div>
         </>
     )
@@ -64,26 +65,40 @@ export const RoleChange = ({ user, refetch }) => {
 
 export const ManageUsers = () => {
     const { axiosInstance, user } = useAuthContext();
-    const [ role, setRole ] = useState("all")
+    const [ filter, setFilter ] = useState("")
+    const [ users, setUsers ] = useState([])
 
 
 
-    const { data: users = [], isLoading, isError, error, refetch } = useQuery({
-        queryKey: ["users"],
-        queryFn: async () => {
-            const res = await axiosInstance.get(`/auth/users?filter=${role}`);
-            console.log("refetched")
-            return res.data.users;
-        },
-        enabled: !!user,
-        staleTime: 1000 * 60, // 1 minute
-    });
+    // const { data: users = [], isLoading, isError, error, refetch } = useQuery({
+    //     queryKey: ["users"],
+    //     queryFn: async () => {
+    //         const res = await axiosInstance.get(`/auth/users?filter=${role}`);
+    //         console.log("refetched");
+    //         return res.data.users;
+    //     },
+    //     enabled: !!user,
+    //     staleTime: 1000 * 60, // 1 minute
+    // });
 
+    async function fetchUsers() {
+        try {
+            const res = await axiosInstance.get(`/auth/users?filter=${filter}`);
+            console.log("refetched");
+            setUsers(res.data.users)
 
-    async function SelectRole(role) {
-        setRole(role)
-        refetch();
+        } catch(err) {
+            console.error(err);
+        }
+    
     }
+
+    
+
+    useEffect(() => {
+        fetchUsers();
+    }, [filter])
+
 
 
 
@@ -92,10 +107,10 @@ export const ManageUsers = () => {
 
             <div className="flex justify-between" >
                 <div className="text-2xl font-bold" >Manage Users</div>
-                <select value={role} onChange={ (e) => SelectRole( e.target.value ) } >
-                    <option value="all" >Filter Users</option>
+                <select value={filter} onChange={ (e) => setFilter( e.target.value ) } >
+                    <option value="" >Filter Users</option>
                     <option value="admin" >Admin</option>
-                    <option value="student" >User</option>
+                    <option value="student" >Student</option>
                     <option value="moderator" >Moderator</option>
                 </select>
             </div>
@@ -108,7 +123,7 @@ export const ManageUsers = () => {
                 <div className="font-bold pl-6" >Actions</div>
 
 
-                {users.map((elem) => <RoleChange refetch={refetch} user={elem} /> )}
+                {users.map((elem) => <RoleChange refetch={fetchUsers} user={elem} /> )}
 
             </div>
         </AdminRoute>

@@ -78,12 +78,12 @@ export const AddScholarship = () => {
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Image</span>
+                    <span className="text-sm font-medium">Image URL</span>
                     <input
                         type="text"
                         {...register("image", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                        placeholder="i.g. Oxford University"
+                        placeholder="i.g. https://example.com/avatar.jpg"
                     />
                     {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
                 </label>
@@ -155,45 +155,45 @@ export const AddScholarship = () => {
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Tuition Fees</span>
+                    <span className="text-sm font-medium">Tuition Fees (USD)</span>
                     <input
                         type="number"
                         {...register("tuitionFees", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                        placeholder="i.g. $1000"
+                        placeholder="i.g. 1000"
                     />
                     {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Application Fees</span>
+                    <span className="text-sm font-medium">Application Fees (USD)</span>
                     <input
                         type="number"
                         {...register("applicationFees", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                        placeholder="i.g. $20"
+                        placeholder="i.g. 20"
                     />
                     {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Service Charge</span>
+                    <span className="text-sm font-medium">Service Charge (USD)</span>
                     <input
                         type="number"
                         {...register("serviceCharge", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                        placeholder="i.g. $20"
+                        placeholder="i.g. 20"
                     />
                     {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Deadline</span>
+                    <span className="text-sm font-medium">Deadline (YYYY/MM/DD) </span>
                     <input
                         type="text"
                         {...register("deadline", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                        placeholder="i.g. Oxford University"
+                        placeholder="i.g. 2026/12/31"
                     />
                     {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
                 </label>
