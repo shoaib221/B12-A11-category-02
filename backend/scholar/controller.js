@@ -9,7 +9,8 @@ import { User } from "../auth/model.js";
 import { match } from "assert";
 import { Types } from "mongoose";
 import { count } from "console";
-import { FeesDistribution, fetchScholarships } from "./method.js"
+import { FeesDistribution, fetchScholarships, ApplicationAnalytics, UserAnalytics, ScholarshipAnalytics } from "./method.js"
+
 
 export const scholarshipRouter = express.Router();
 
@@ -528,73 +529,25 @@ const UpdateApplication = async (req, res, next) => {
 
 const Analytics = async (rq, res, next) => {
     try {
-        const totalUsers = await User.countDocuments();
-
-        const totalScholarships = await Scholarship.countDocuments();
-
-        const appPerScholarshipCat = await Scholarship.aggregate([
-            {
-                $lookup: {
-                    from: "applications",
-                    localField: "_id",
-                    foreignField: "scholarshipId",
-                    as: "apps"
-                }
-            },
-            {
-                $unwind: "$apps"
-            },
-            {
-                $group: {
-                    _id: "$scholarshipCategory",
-                    count: { $sum: 1 }
-                }
-            }
-        ])
-
-        const appPerUniversity = await Scholarship.aggregate([
-            {
-                $lookup: {
-                    from: "applications",
-                    localField: "_id",
-                    foreignField: "scholarshipId",
-                    as: "apps"
-                }
-            },
-            {
-                $unwind: "$apps"
-            },
-            {
-                $group: {
-                    _id: "$universityName",
-                    count: { $sum: 1 }
-                }
-            }
-        ])
-
-        const usersByCategory = await User.aggregate([
-            {
-                $group: {
-                    _id: "$role",          // group by role field
-                    count: { $sum: 1 }     // count number of users in each role
-                }
-            }
-        ]);
-
         
 
-        let  { totalApplicationFees, totalServiceCharge }  = await FeesDistribution()
-        let feesDistribution = [
-            { _id: "Application Fees", count: totalApplicationFees },
-            { _id: "Service Charge", count: totalServiceCharge }
-        ]
+        let scholarshipdata = await ScholarshipAnalytics()
+
+        const appdata = await ApplicationAnalytics(  );
+
+        let userdata = await UserAnalytics();
+
+        let  feesData  = await FeesDistribution()
         
-
-
+        
+        
         res.status(200).json({
-            totalUsers, usersByCategory,  appPerUniversity,
-            totalScholarships, appPerScholarshipCat,  feesDistribution
+            ...userdata,
+            ...scholarshipdata, ...feesData,
+            ...appdata
         })
+
+
     } catch (err) {
         res.status(400).json({ error: err.message })
     }
