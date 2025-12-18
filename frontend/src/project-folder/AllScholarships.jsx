@@ -42,36 +42,27 @@ export const AllScholarships = () => {
             <div className='text-2xl font-bold flex-1' >All Scholarships</div>
             <br />
 
-            <div className='flex justify-between' >
-                <div className='flex gap-2' >
-                    {page > 1 && <div className='button-1234' onClick={() => setPage(x => x - 1)} > Previuos </div>}
-                    {totalPages && [...Array(totalPages).keys()].map(i => (
-                        <div key={i} className={`p-1 cursor-pointer cen-hor ${i + 1 === page && 'button-1234'}`} onClick={() => setPage(i + 1)} >
-                            {i + 1}
-                        </div>
-                    ))}
 
 
 
-                    {page < totalPages && <div className='button-1234' onClick={() => setPage(x => x + 1)} >Next</div>}
-                </div>
+            <div className='flex gap-2 items-center' >
+                <FaSearch onClick={SearchScholarships} className='text-2xl text-[var(--color4)]' />
 
-                <div className='flex gap-2 items-center' >
-                    <FaSearch onClick={SearchScholarships} className='text-2xl text-[var(--color4)]' />
+                <input className='max-w-30 lg:max-w-50' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
 
-                    <input placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
-
-                    <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} >
-                        <option value="" >Search By</option>
-                        <option value="scholarshipName" >Scholarhip Name</option>
-                        <option value="universityName" >University Name</option>
-                        <option value="degree" >Degree</option>
-                        <option value="scholarshipCategory" >Scholarship Category</option>
-                        <option value="subjectCategory" >Subject Category</option>
-                        <option value="location" >Location</option>
-                    </select>
-                </div>
+                <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} >
+                    <option value="" >Search By</option>
+                    <option value="scholarshipName" >Scholarhip Name</option>
+                    <option value="universityName" >University Name</option>
+                    <option value="degree" >Degree</option>
+                    <option value="scholarshipCategory" >Scholarship Category</option>
+                    <option value="subjectCategory" >Subject Category</option>
+                    <option value="location" >Location</option>
+                </select>
             </div>
+
+
+
 
 
 
@@ -80,8 +71,8 @@ export const AllScholarships = () => {
             <div className='mt-4 flex flex-col gap-4' >
                 {scholarships && scholarships.map((scholarship) => (
                     <div
-                        
-                        key={scholarship._id} className='box-1212 p-4 rounded-lg flex justify-between items-center' >
+
+                        key={scholarship._id} className='box-1212 p-4 rounded-lg flex justify-between items-center gap-1' >
                         <div>
                             <div className='font-semibold text-lg' >{scholarship.scholarshipName}</div>
                             <div className='text-sm text-gray-600' >{scholarship.universityName}</div>
@@ -91,6 +82,21 @@ export const AllScholarships = () => {
                         </div>
                     </div>
                 ))}
+            </div>
+
+            <br />
+
+            <div className='flex gap-2' >
+                {page > 1 && <div className='button-1234' onClick={() => setPage(x => x - 1)} > Previuos </div>}
+                {totalPages && [...Array(totalPages).keys()].map(i => (
+                    <div key={i} className={`p-1 cursor-pointer cen-hor ${i + 1 === page && 'button-1234'}`} onClick={() => setPage(i + 1)} >
+                        {i + 1}
+                    </div>
+                ))}
+
+
+
+                {page < totalPages && <div className='button-1234' onClick={() => setPage(x => x + 1)} >Next</div>}
             </div>
         </div>
     );

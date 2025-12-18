@@ -8,56 +8,55 @@ import axios from "axios";
 
 
 export const RoleChange = ({ user, refetch }) => {
-    const [ role, setRole ] = useState(null)
+    const [role, setRole] = useState(null)
     const { axiosInstance } = useAuthContext()
 
-    useEffect( () => {
-        if(user)
-        {
+    useEffect(() => {
+        if (user) {
             setRole(user.role)
         }
-    }, [user] )
+    }, [user])
 
     async function Update() {
         try {
-            let res= await axiosInstance.post("/auth/change-role", { ...user, role } )
+            let res = await axiosInstance.post("/auth/change-role", { ...user, role })
             toast.success("Role changed")
-        } catch(err) {
+        } catch (err) {
             console.error(err.response)
         }
-        
+
     }
 
     async function DeleteUser() {
         try {
-            let res= await axiosInstance.delete(`/auth/user/${user._id}` )
+            let res = await axiosInstance.delete(`/auth/user/${user._id}`)
             refetch()
             toast.success("Deleted Successfully")
-        } catch(err) {
+        } catch (err) {
             console.error(err.response)
         }
     }
 
     return (
-        <  >
-            <div className="box-1212" >
+        < div className="box-1212 gap-4 grid grid-cols-[1fr] md:grid-cols-[1fr_1fr_1fr] mb-2" >
+            <div className="cen-ver gap-1" >
                 <div className="font-bold" >{user.name}</div>
                 <div className="text-[var(--color3)]" > {user.username} </div>
             </div>
 
-            <div className="flex gap-2 font-bold box-1212">
-                <select value={role} onChange={(e) => setRole( e.target.value )} >
+            <div className="gap-1 font-bold cen-ver">
+                <select value={role} onChange={(e) => setRole(e.target.value)} >
                     <option value="admin" >Admin</option>
                     <option value="moderator" >Moderator</option>
                     <option value="student" >Student</option>
                 </select>
             </div>
 
-            <div className="flex gap-2 box-1212" >
-                <button  className="button-1234" onClick={Update} >Update</button>
-                <button  className="button-1234" style={{ backgroundColor: 'var(--color5)' }} onClick={DeleteUser} >Delete</button>
+            <div className="cen-ver gap-1" >
+                <button className="button-1234" onClick={Update} >Update</button>
+                <button className="button-1234" style={{ backgroundColor: 'var(--color5)' }} onClick={DeleteUser} >Delete</button>
             </div>
-        </>
+        </div>
     )
 }
 
@@ -65,8 +64,8 @@ export const RoleChange = ({ user, refetch }) => {
 
 export const ManageUsers = () => {
     const { axiosInstance, user } = useAuthContext();
-    const [ filter, setFilter ] = useState("")
-    const [ users, setUsers ] = useState([])
+    const [filter, setFilter] = useState("")
+    const [users, setUsers] = useState([])
 
 
 
@@ -87,13 +86,13 @@ export const ManageUsers = () => {
             console.log("refetched");
             setUsers(res.data.users)
 
-        } catch(err) {
+        } catch (err) {
             console.error(err);
         }
-    
+
     }
 
-    
+
 
     useEffect(() => {
         fetchUsers();
@@ -107,23 +106,26 @@ export const ManageUsers = () => {
 
             <div className="flex justify-between" >
                 <div className="text-2xl font-bold" >Manage Users</div>
-                <select value={filter} onChange={ (e) => setFilter( e.target.value ) } >
+                <select value={filter} onChange={(e) => setFilter(e.target.value)} >
                     <option value="" >Filter Users</option>
                     <option value="admin" >Admin</option>
                     <option value="student" >Student</option>
                     <option value="moderator" >Moderator</option>
                 </select>
             </div>
-            <br/>
-            <div className="flex-grow grid grid-cols-[1fr_1fr_1fr] gap-6" >
-                <div className="font-bold pl-6" >User</div>
+            <br />
+            <div className="w-full block" >
+                <div className="box-1212 gap-2 grid grid-cols-[1fr] md:grid-cols-[1fr_1fr_1fr] mb-2" >
+                    <div className="font-bold pl-6 text-center" >Users</div>
 
-                <div className="font-bold pl-6" >Role</div>
+                    <div className="font-bold pl-6 hidden md:block text-center" >Role</div>
 
-                <div className="font-bold pl-6" >Actions</div>
+                    <div className="font-bold pl-6 hidden md:block text-center" >Actions</div>
+                </div>
 
 
-                {users.map((elem) => <RoleChange refetch={fetchUsers} user={elem} /> )}
+
+                {users.map((elem) => <RoleChange refetch={fetchUsers} user={elem} />)}
 
             </div>
         </AdminRoute>
