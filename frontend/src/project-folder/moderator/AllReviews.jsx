@@ -24,7 +24,7 @@ export const AllReviews = () => {
             
             <div className='mt-4 flex flex-col gap-4' >
                 { reviews && reviews.map( (review) => (
-                    <div key={review._id} className='justify-between box-1212 p-4 rounded-lg flex' >
+                    <div key={review._id} className='gap-2 justify-between box-1212 p-4 rounded-lg flex-col md:flex-row flex' >
                         <div>
                             <div className='font-semibold text-lg' > { review.scholarshipDetails.scholarshipName }</div>
                             <div className='text-sm text-gray-600' >Reviewer: { review.reviewerName }</div>

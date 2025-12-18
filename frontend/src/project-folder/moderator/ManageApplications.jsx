@@ -26,9 +26,9 @@ export const ManageApplications = () => {
             <DetailTag />
             <FeedbackTag />
             
-            <div className='mt-4 flex flex-col gap-4' >
+            <div className='mt-4 flex  flex-col gap-4' >
                 { applications && applications.map( (application) => (
-                    <div key={application._id} className='justify-between box-1212 p-4 rounded-lg flex' >
+                    <div key={application._id} className='gap-2 justify-between box-1212 p-4 rounded-lg flex-col md:flex-row flex' >
                         <div>
                             <div className='font-semibold text-lg' > { application.scholarshipDetails.scholarshipName }</div>
                             <div className='text-sm text-gray-600' >Applicant: { application.applicantName }</div>      
