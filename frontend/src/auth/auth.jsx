@@ -123,7 +123,7 @@ const ForgotPassword = ({ toggle }) => {
             <br />
 
             <div onClick={() => toggle('login')} className='cursor-pointer underline text-(--color4)' >Login Instead?</div>
-            <div>Already Have An Account? <span className='cursor-pointer underline text-(--color4)' onClick={() => toggle('register')} >Register</span> </div>
+            <div>Do not have an account? <span className='cursor-pointer underline text-(--color4)' onClick={() => toggle('register')} >Register</span> </div>
         </div>
     )
 }
@@ -144,7 +144,7 @@ export const Auth = () => {
     if (loading) return <Loading />
 
     return (
-        <div className='flex flex-col h-full  bg-cover bg-center justify-center items-center' style={{ backgroundImage: 'url(/convocation.webp)' }} >
+        <div className='flex-1 flex flex-col h-full  bg-cover bg-center justify-center items-center' style={{ backgroundImage: 'url(/convocation.webp)' }} >
 
             {login === "login" && <LogIn toggle={setLogin} />}
             {login === "register" && <Register toggle={setLogin} />}

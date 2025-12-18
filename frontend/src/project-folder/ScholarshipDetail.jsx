@@ -75,7 +75,7 @@ export const ScholarshipDetail = () => {
 
     return (
         <PrivateRoute>
-            <div className='max-w-[700px] mx-auto' >
+            <div className='max-w-[700px] mx-auto flex-1 w-full' >
                 {scholarship && <>
 
                     <div className='h-32 md:h-48 w-full bg-contain bg-left bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} >
@@ -86,7 +86,7 @@ export const ScholarshipDetail = () => {
                     <div className='text-2xl text-[var(--color4)] font-bold' >{scholarship.scholarshipName}</div>
                     <div className='font-bold' >{scholarship.degree} in {scholarship.subjectCategory}</div>
                     <div className='text-[var(--color3)]' > {scholarship.scholarshipCategory} </div>
-                    <div className='text-[var(--color3)]' > Deadline <TimeDate date={scholarship?.deadline} /> </div>
+                    <div className='text-[var(--color3)]' > Deadline: <TimeDate date={scholarship?.deadline} /> </div>
 
                     <br />
                     <div className='font-bold text-xl' >University</div>

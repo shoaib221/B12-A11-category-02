@@ -33,7 +33,7 @@ export const Home = () => {
     
 
     return (
-        <div className='block flex-grow relative' >
+        <div className='block flex-grow relative flex-1 w-full' >
             
             <Banner2 />
             <br /><br />

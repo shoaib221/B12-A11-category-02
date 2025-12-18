@@ -12,7 +12,7 @@ export const StudentDash = () => {
 
 
     return (
-        <div className='flex flex-col lg:flex-row gap-8' >
+        <div className='flex flex-col lg:flex-row gap-8 flex-1' >
             <title> ScholarStrem | Dashboard</title>
             <div className='flex flex-row lg:flex-col min-w-12 gap-2' >
                 <div className={`${ cur === 'profile'? 'button-1234': ""  } box-1212 cursor-pointer`}  onClick={ () => setCur('profile') } > My Profile</div>

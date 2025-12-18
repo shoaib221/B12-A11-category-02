@@ -21,6 +21,7 @@
     padding-right: 1rem;
     border-radius: .7rem;
     cursor: pointer;
+    min-width: 6rem;
 }
 
 .button-1234:hover {

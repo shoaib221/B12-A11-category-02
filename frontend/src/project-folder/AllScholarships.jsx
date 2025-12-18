@@ -38,8 +38,8 @@ export const AllScholarships = () => {
 
 
     return (
-        <div>
-            <div className='text-2xl font-bold' >All Scholarships</div>
+        <div className='block' >
+            <div className='text-2xl font-bold flex-1' >All Scholarships</div>
             <br />
 
             <div className='flex justify-between' >
