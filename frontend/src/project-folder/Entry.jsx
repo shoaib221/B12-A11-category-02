@@ -12,9 +12,9 @@ import { SwiperDemo }  from '../Swiper/swiper.jsx';
 
 
 export const Entry = () => {
-    const navigate = useNavigate();
-    const { navi, DownWindowTag } = useContext(DownWindowContext);
-    const { user, axiosInstance } = useContext(AuthContext);
+    
+    const {  DownWindowTag } = useContext(DownWindowContext);
+    
 
     // useEffect(() => {
     //     axiosInstance.post("/auth/count", { name: "pfh" })
@@ -22,14 +22,14 @@ export const Entry = () => {
     //         .catch(err => console.dir(err))
     // }, [])
 
-    function scrollToTop() {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    // function scrollToTop() {
+    //     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // }
 
     return (
         <>
             <Nav />
-            <div className='flex-grow relative overflow-hidden p-4' >
+            <div className='flex-1 relative overflow-hidden p-4' >
                 <DownWindowTag />
                 <Outlet />
             </div>

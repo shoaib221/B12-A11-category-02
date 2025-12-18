@@ -31,24 +31,29 @@ const DetailTag = ({ application, isOpen, showDetail }) => {
         }
     }
 
+    if(!isOpen) return null;
+
     return (
         <div
             className={`
-                ${isOpen ? "block" : "hidden"}
+                block overflow-auto
                 top-0 left-0
                 fixed items-center justify-center
                 z-10 w-full h-full
-                bg-black/40 overflow-auto
+                bg-black/40 
             `}
         >
-            {application && <div className="relative w-full max-w-200 bg-white p-4 pl-8 rounded-lg shadow mx-auto mt-4">
+            {application && <div className="relative w-full max-w-200 bg-white p-4 m-4 mx-auto rounded-lg shadow border-2 border-(--color4)">
 
-                <button className="cursor-pointer absolute top-2 right-4" onClick={() => showDetail(null, false)} >X</button>
+                <button className="cursor-pointer absolute top-2 right-4 px-4 py-2 rounded-full hover:bg-gray-300" onClick={() => showDetail(null, false)} >X</button>
+
+                <div className="text-center font-bold text-(--color4) text-2xl" >
+                    Application details
+                </div>
 
                 <div className="flex flex-col gap-2 mt-4" >
                     <div>
-
-                        <span className="font-bold text-xl" >{application.scholarshipDetails.scholarshipName}, </span>
+                        <span className="font-bold" >{application.scholarshipDetails.scholarshipName}, </span>
                             
                             <span className="text-(--color3)" >{application.scholarshipDetails.scholarshipCategory}</span>
                         <div> {application.scholarshipDetails.universityName} </div>
@@ -68,21 +73,21 @@ const DetailTag = ({ application, isOpen, showDetail }) => {
                     <br/>
 
                     <div className="font-bold" >Applicant's Educational Qualification</div>
-                    <div> { application.education } </div>
+                    <div> { application.education ? application.education: "No data available" } </div>
 
-                    <br/>
+                    
 
                     <div className="font-bold" > Applicant's Extracurriculars </div>
-                    <div> { application.extras } </div>
+                    <div> { application.extras ? application.extras: "No data Available" } </div>
 
-                    <br/>
+                    
 
                     <div className="font-bold" >
                         Applicant's Message
                     </div>
 
                     <div>
-                        { application.message }
+                        { application.message? application.message : "No message" }
                     </div>
 
                     <br/>
@@ -182,23 +187,31 @@ const FeedbackTag = ({ isOpen, show, app }) => {
     if (!isOpen) return null;
 
     
-
+    console.log( app )
 
     return (
         <div
             className={`
-                flex
+                block overflow-auto
                 top-0 left-0
                 fixed items-center justify-center
                 z-10 w-full h-full
                 bg-black/40
             `}
         >
-            <div className="relative w-full max-w-150 bg-white p-4 rounded-lg shadow">
+            <div className="relative w-full max-w-150 bg-white p-6 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
 
-                <div className="absolute top-2 right-2 cursor-pointer" onClick={() => show(null, false)} > X </div>
+                <div className="absolute top-2 right-2 cursor-pointer hover:bg-gray-300 py-2 px-4 rounded-full" onClick={() => show(null, false)} > X </div>
 
-                <div className="text-xl text-center font-bold">Write Your Feedback</div>
+                <div className="text-2xl text-center font-bold text-(--color4)">Write Your Feedback</div>
+
+                <br/>
+
+                <div className="font-bold" >{ app.scholarshipDetails.scholarshipName }</div>
+
+                <div>Applicant: { app.applicantName } </div>
+
+                <br/>
 
                 <label className="block mb-3">
                     

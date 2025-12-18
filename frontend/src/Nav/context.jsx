@@ -47,7 +47,7 @@ export const DownWindowProvider = ({ children }) => {
         
         return (
             
-            <div className={`${down1 ? "hidden" : "flex" } absolute z-2 h-[100%] w-[100%] bg-[var(--color1)]  flex-col items-center top-0 left-0 p-4 gap-4`} id="down-1" >
+            <div className={`${down1 ? "hidden" : "flex" } absolute z-2 h-[100%] w-[100%] bg-[var(--color1)]  flex-col items-center top-0 left-0 p-4 gap-4`}  >
                 <div onClick={() => DownWindow( true, "/")} className={ `class-1 ${navi === "home" && "active-navi" }` }  >Home</div>
                 <div onClick={() => DownWindow( true, "/all-scholarships")} className={ `class-1 ${navi === "all-scholarships" && "active-navi" }` } >All Scholarships</div>                
             </div>

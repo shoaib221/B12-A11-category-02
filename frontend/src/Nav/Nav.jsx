@@ -56,7 +56,7 @@ export const Nav = () => {
 
             {user ?
                 <div className='cursor-pointer h-[3rem] w-[3rem] rounded-full relative bg-cover bg-center z-3' title={user.email} onClick={Opener1} style={{ backgroundImage: `url(${user.photoURL})`, border: '.1rem solid var(--color2)' }}  >
-                    <div id='opener-1' className={`box-shadow-1 bg-[var(--color4)] text-[var(--color1)] absolute flex-col p-2 rounded-xl w-[10rem] right-[0%] top-[105%] z-4 bg-[var(--color1)] ${opener1 ? "flex" : "hidden"}`} style={{ border: '1px solid var(--color2)' }} >
+                    <div id='opener-1' className={`box-shadow-1 bg-(--color4) text-[var(--color1)] absolute flex-col p-2 rounded-xl w-[10rem] right-[0%] top-[105%] z-4 ${opener1 ? "flex" : "hidden"}`} style={{ border: '1px solid var(--color2)' }} >
                         {/* <div onClick={ ()=> navigate('/profile')} className='p-1 text-center w-full'  >Profile</div>
                         <Breaker />
                         <Theme /> */}
@@ -68,7 +68,7 @@ export const Nav = () => {
                     </div>
                 </div>
                 :
-                <button onClick={() => navigate("/auth")} className='button-2' >
+                <button onClick={() => navigate("/auth")} className='button-1234' >
                     Login
                 </button>
             }

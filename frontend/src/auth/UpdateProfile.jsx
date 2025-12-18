@@ -21,7 +21,6 @@ export const UpdateProfile = () => {
     const [imageFile, setImageFile] = useState(null);
     const [number, setNumber] = useState("");
     const [email, setEmail] = useState("");
-    const { DownWindow, DownWindowTag } = useContext(DownWindowContext);
     const { axiosInstance } = useContext(AuthContext);
 
 
@@ -115,7 +114,7 @@ export const UpdateProfile = () => {
                     <button onClick={Update} className="button-1234"  >Update</button>
                 </div>
 
-                <DownWindowTag />
+                
 
             </div>
         </PrivateRoute>

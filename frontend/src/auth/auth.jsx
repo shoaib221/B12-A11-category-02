@@ -45,7 +45,7 @@ const LogIn = ({ toggle }) => {
 
 
     return (
-        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px]' >
+        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px] bg-white/80' >
             <EmailLogin />
 
             <Breaker message={'or'} />
@@ -56,10 +56,10 @@ const LogIn = ({ toggle }) => {
             <br />
 
             <div>
-                Do not have an account? <span onClick={() => toggle('register')} className='link-1' >Register</span>
+                Do not have an account? <span onClick={() => toggle('register')} className='link-1 text-(--color4)' >Register</span>
             </div>
 
-            <div className='underline cursor-pointer' onClick={() => toggle("forgot")}  >
+            <div className='underline cursor-pointer text-(--color4)' onClick={() => toggle("forgot")}  >
                 Forgot Password?
             </div>
         </div>
@@ -71,7 +71,7 @@ const LogIn = ({ toggle }) => {
 const Register = ({ toggle }) => {
 
     return (
-        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px]' >
+        <div className='flex flex-col justify-center items-center box-1 p-4 w-full max-w-[500px] bg-white/80' >
             <EmailRegister />
 
             <Breaker message={'or'} />
@@ -82,10 +82,10 @@ const Register = ({ toggle }) => {
             <br />
 
             <div>
-                Already Have an account? <span onClick={() => toggle('login')} className='link-1' >Log In</span>
+                Already Have an account? <span onClick={() => toggle('login')} className='link-1 text-(--color4)' >Log In</span>
             </div>
 
-            <div className='underline cursor-pointer' onClick={() => toggle("forgot")}  >
+            <div className='underline cursor-pointer text-(--color4)' onClick={() => toggle("forgot")}  >
                 Forgot Password?
             </div>
         </div>
@@ -113,17 +113,17 @@ const ForgotPassword = ({ toggle }) => {
     }
 
     return (
-        <div className='box-1 flex flex-col justify-center items-center gap-4 w-full max-w-[500px]' >
-            <div className='text-3xl text-center font-bold' > Reset Password </div>
+        <div className='box-1 flex flex-col justify-center items-center gap-4 w-full max-w-[500px] bg-white/80' >
+            <div className='text-3xl text-center font-bold text-(--color4)' > Reset Password </div>
             <input type='email' placeholder='Type Your Email' value={email}
                 onChange={(e) => setEmail(e.target.value)} className='w-full' />
 
-            <button className='button-1' onClick={ResetPassword} >Submit</button>
+            <button className='button-1234' onClick={ResetPassword} >Submit</button>
 
             <br />
 
-            <div onClick={() => toggle('login')} className='cursor-pointer underline' >Login Instead?</div>
-            <div>Already Have An Account? <span className='cursor-pointer underline' onClick={() => toggle('register')} >Register</span> </div>
+            <div onClick={() => toggle('login')} className='cursor-pointer underline text-(--color4)' >Login Instead?</div>
+            <div>Already Have An Account? <span className='cursor-pointer underline text-(--color4)' onClick={() => toggle('register')} >Register</span> </div>
         </div>
     )
 }
@@ -131,7 +131,7 @@ const ForgotPassword = ({ toggle }) => {
 export const Auth = () => {
     const [login, setLogin] = useState("login");
     const { user, loading } = useContext(AuthContext);
-    const { DownWindowTag } = useContext(DownWindowContext)
+    
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -144,22 +144,13 @@ export const Auth = () => {
     if (loading) return <Loading />
 
     return (
-        <div className='flex flex-col justify-end items-center w-full h-full bg-cover bg-center'  >
+        <div className='flex flex-col h-full  bg-cover bg-center justify-center items-center' style={{ backgroundImage: 'url(/convocation.webp)' }} >
 
-            
-
-            
-
-            
             {login === "login" && <LogIn toggle={setLogin} />}
             {login === "register" && <Register toggle={setLogin} />}
             {login === "forgot" && <ForgotPassword toggle={setLogin} />}
 
-
-
-
-
-            <DownWindowTag />
+            
         </div>
 
     )
