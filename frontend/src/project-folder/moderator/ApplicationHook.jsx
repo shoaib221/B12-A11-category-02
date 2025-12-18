@@ -4,22 +4,17 @@ import { toast } from "react-toastify";
 import { TimeDate } from "../../miscel/TimeDate";
 
 
-
-export const useDetail = () => {
-    const [ isOpen, setIsOpen ] = useState(false)
-    const [ application, setApplication ] = useState(null)
-    const { axiosInstance } = useAuthContext();
-    const [ status, setStatus ] = useState(null)
+const DetailTag = ({ application, isOpen, showDetail }) => {
+    const [status, setStatus] = useState(null)
+    const { axiosInstance } = useAuthContext()
 
     useEffect(() => {
 
-        if( application && isOpen )
-        {
+        if (application && isOpen) {
             setStatus(application.applicationStatus)
         }
 
     }, [application, isOpen])
-
 
     let Decision = async () => {
         const info = {
@@ -30,56 +25,86 @@ export const useDetail = () => {
         try {
             let response = await axiosInstance.post('/scholarship/decision', info);
             console.log("Decision response:", response);
-            setIsOpen(false);
+            showDetail(null, false)
         } catch (err) {
             console.error("Decision error:", err);
         }
     }
 
-
-
-    let DetailTag = () => (
+    return (
         <div
             className={`
-                ${isOpen ? "flex" : "hidden"}
+                ${isOpen ? "block" : "hidden"}
                 top-0 left-0
                 fixed items-center justify-center
                 z-10 w-full h-full
-                bg-black/40
+                bg-black/40 overflow-auto
             `}
         >
-            {application && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
-                
+            {application && <div className="relative w-full max-w-200 bg-white p-4 pl-8 rounded-lg shadow mx-auto mt-4">
+
+                <button className="cursor-pointer absolute top-2 right-4" onClick={() => showDetail(null, false)} >X</button>
+
                 <div className="flex flex-col gap-2 mt-4" >
                     <div>
+
+                        <span className="font-bold text-xl" >{application.scholarshipDetails.scholarshipName}, </span>
+                            
+                            <span className="text-(--color3)" >{application.scholarshipDetails.scholarshipCategory}</span>
+                        <div> {application.scholarshipDetails.universityName} </div>
                         
-                        <div className="font-bold" >{application.scholarshipDetails.scholarshipName}</div>
-                        <div> { application.scholarshipDetails.universityName } </div>
-                        <div>{application.scholarshipDetails.scholarshipCategory}</div>
                         <div>{application.scholarshipDetails.degree} in {application.scholarshipDetails.subjectCategory}</div>
                     </div>
 
+                    <br/>
+
                     <div>
-                        <div className="font-bold" > Applicant Name: </div>
+                        <div className="font-bold" > Applicant: </div>
                         <div> {application.applicantName} </div>
-                        <div> {application.applicantEmail} </div>
+                        <div> { application.applicantEmail } </div>
+                        
                     </div>
+
+                    <br/>
+
+                    <div className="font-bold" >Applicant's Educational Qualification</div>
+                    <div> { application.education } </div>
+
+                    <br/>
+
+                    <div className="font-bold" > Applicant's Extracurriculars </div>
+                    <div> { application.extras } </div>
+
+                    <br/>
+
+                    <div className="font-bold" >
+                        Applicant's Message
+                    </div>
+
+                    <div>
+                        { application.message }
+                    </div>
+
+                    <br/>
+
 
                     <div>
                         <span className="font-bold" > Payment Status: </span> {application.paymentStatus}
-                        
-                    </div>
-                    <div> <span className="font-bold" >Submitted On:</span> <TimeDate date={application.applicationDate} /> </div>
-                    
-                    
-                    <div> 
-                        <div className="font-bold" >Feedback </div>
-                        <div>{application.feedback ? application.feedback  : "No feedback yet"}</div>
 
                     </div>
-                    
+                    <div> <span className="font-bold" >Submitted On:</span> <TimeDate date={application.applicationDate} /> </div>
+
+
+                    <div>
+                        <div className="font-bold" >Feedback </div>
+                        <div>{application.feedback ? application.feedback : "No feedback yet"}</div>
+
+                    </div>
+
+                    <br/>
+
                     <div> <span className="font-bold"> Application Status:</span>
-                        <select value={status} onChange={ (e) => setStatus(e.target.value) } >
+                        <select value={status} onChange={(e) => setStatus(e.target.value)} >
                             <option value="pending"  >Pending</option>
                             <option value="approved"  >Approved</option>
                             <option value="processing"  >Processing</option>
@@ -87,16 +112,23 @@ export const useDetail = () => {
                         </select>
                     </div>
 
-                    
+
 
                 </div>
+                <br/>
                 <div className="flex justify-center gap-4 mt-4" >
                     <button className="button-1234" onClick={Decision} >Update</button>
-                    <button className="button-1234" style={{ backgroundColor: 'black' }} onClick={() => setIsOpen(false)} >Close</button>
+                    
                 </div>
             </div>}
         </div>
     );
+}
+
+
+export const useDetail = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const [application, setApplication] = useState(null)
 
 
     let showDetail = (item, flag) => {
@@ -104,68 +136,85 @@ export const useDetail = () => {
         if (item) setApplication(item);
         setIsOpen(flag);
     }
-    return { DetailTag, showDetail };
+
+
+    const Tag = () => {
+        return <DetailTag isOpen={isOpen} showDetail={showDetail} application={application} />
+    }
+
+
+    return { DetailTag: Tag, showDetail };
 }
 
 
 
 
-let FeedbackTag = ({ isOpen, show, app }) => {
+const FeedbackTag = ({ isOpen, show, app }) => {
     const [feedback, setFeedback] = useState(null)
     const { axiosInstance } = useAuthContext()
 
     useEffect(() => {
-        if( app && isOpen ) 
-        {
-            setFeedback( app.feedback )
+        if (app && isOpen) {
+            setFeedback(app.feedback)
         }
 
 
     }, [app, isOpen])
 
-    if (!isOpen) return null;
 
     async function SendFeedback() {
-        let info ={
+        let info = {
             ...app, feedback
         }
 
         try {
-            let res= await axiosInstance.patch( "/scholarship/application", info )
+            let res = await axiosInstance.patch("/scholarship/application", info)
             toast.success("Feedback updated")
             show(null, false)
         } catch (err) {
-            console.error( err.response.data.error )
+            console.error(err.response.data.error)
         }
 
     }
 
 
+
+    if (!isOpen) return null;
+
+    
+
+
     return (
         <div
             className={`
-                ${isOpen ? "flex" : "hidden"}
+                flex
                 top-0 left-0
                 fixed items-center justify-center
                 z-10 w-full h-full
                 bg-black/40
             `}
         >
-            <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
+            <div className="relative w-full max-w-150 bg-white p-4 rounded-lg shadow">
+
+                <div className="absolute top-2 right-2 cursor-pointer" onClick={() => show(null, false)} > X </div>
+
+                <div className="text-xl text-center font-bold">Write Your Feedback</div>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Write Your Feedback</span>
+                    
                     <textarea
                         type="text" value={feedback} onChange={(e) => setFeedback(e.target.value)}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
                         placeholder="Leave your thoughts..."
+                        rows={5}
+                        required={true}
                     />
 
                 </label>
 
                 <div className="flex justify-center gap-4" >
-                    <button onClick={SendFeedback} >Update</button>
-                    <button onClick={() => show(null, false)} >Close</button>
+                    <button onClick={SendFeedback} className="button-1234" >Update</button>
+                    
                 </div>
             </div>
         </div>)

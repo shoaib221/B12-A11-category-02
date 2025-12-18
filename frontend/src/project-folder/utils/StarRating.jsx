@@ -5,7 +5,7 @@ export const StarRating = ({ value = 0, onChange }) => {
 
 
     return (
-        <div style={{ display: "flex", gap: "6px" }}>
+        <span className="gap-1 p-2 ">
             {[1, 2, 3, 4, 5].map((star) => (
                 <span
                     key={star}
@@ -22,6 +22,6 @@ export const StarRating = ({ value = 0, onChange }) => {
                     ★
                 </span>
             ))}
-        </div>
+        </span>
     );
 };

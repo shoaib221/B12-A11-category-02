@@ -1,8 +1,8 @@
 
-import { Application, Scholarship, Review } from './model.js'
+import { Application, Scholarship, Review } from './model.js';
+import { User } from '../auth/model.js';
+import { application } from 'express';
 
-import { User } from '../auth/model.js'
-import { application } from 'express'
 
 export const FeesDistribution = async () => {
     let pipeline = [
@@ -66,6 +66,7 @@ export const FeesDistribution = async () => {
     return { feesDistribution, totalReceivedMoney }
 
 }
+
 
 export const fetchScholarships = async (query) => {
     console.log("fetch m")

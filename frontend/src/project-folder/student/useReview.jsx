@@ -12,7 +12,7 @@ const ReviewTag = ({ open, app, show }) => {
     const textareaRef = useRef(null);
 
     // ✅ sync state ONLY when modal opens or review changes
-    
+
 
     useEffect(() => {
         if (open) textareaRef.current?.focus();
@@ -32,7 +32,7 @@ const ReviewTag = ({ open, app, show }) => {
         try {
             let res = await axiosInstance.post("/scholarship/add-review", info);
             toast.success("Review Added")
-            show( null, false )
+            show(null, false)
         } catch (err) {
             console.error(err);
         }
@@ -40,12 +40,25 @@ const ReviewTag = ({ open, app, show }) => {
 
     if (!open || !app) return null;
 
-    
+
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-            <div className="w-full max-w-lg rounded-lg bg-white p-4 shadow-lg">
-                <h2 className="mb-2 text-lg font-semibold">Add review</h2>
+        <div className="fixed inset-0 z-50 block items-center justify-center bg-black/40">
+            <div className="relative w-full max-w-lg rounded-lg bg-white p-4 shadow-lg mt-8 mx-auto border-2 border-(--color4)">
+                <button
+                    onClick={() => show(null, false)}
+                    className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300"
+                >
+                    X
+                </button>
+                <div className="mb-2 text-xl font-bold text-center text-(--color4)">Add review</div>
+                
+
+                <div className="font-bold" > { app.scholarshipDetails.scholarshipName } </div>
+                <span className="font-bold" > Application ID #</span>
+                <span> { app._id } </span>
+
+                <br/><br/>
 
                 <textarea
                     ref={textareaRef}
@@ -55,22 +68,18 @@ const ReviewTag = ({ open, app, show }) => {
                     placeholder="Write your review..."
                 />
 
-                <div className="mt-4">Rating</div>
+                <span className="font-bold">Rating</span>
                 <StarRating value={rating} onChange={setRating} />
 
-                <div className="mt-4 flex justify-end gap-3">
-                    <button
-                        onClick={() => show(null, false)}
-                        className="rounded bg-gray-200 px-4 py-2"
-                    >
-                        Cancel
-                    </button>
+
+                <div className="mt-4 flex justify-center gap-3">
+
 
                     <button
                         onClick={AddReview}
-                        className="rounded bg-blue-600 px-4 py-2 text-white"
+                        className="button-1234"
                     >
-                        Update
+                        Submit
                     </button>
                 </div>
             </div>
@@ -82,7 +91,7 @@ const ReviewTag = ({ open, app, show }) => {
 export const useAddReview = () => {
     const [isOpen, setIsOpen] = React.useState(false);
     const [applicationData, setApplicationData] = React.useState(null);
-    
+
 
     const showReview = (app, flag) => {
         setIsOpen(flag);
@@ -102,90 +111,134 @@ export const useAddReview = () => {
 
 
 
-export const useReviewDetail = () => {
-    const [isOpen, setIsOpen] = React.useState(false);
-    const [review, setReview] = React.useState(null);
-    const { axiosInstance } = useAuthContext();
+let ReviewDetailTag = ({ review, isOpen, showReviewDetail }) => {
+    const { axiosInstance } = useAuthContext()
+
+    useEffect(() => {
+        if (!review) return;
+
+    }, [review])
+
 
     const DeleteReview = async () => {
         try {
             let res = await axiosInstance.post(`/scholarship/remove-review`, review);
             console.log("Review deleted:", res.data);
-            setIsOpen(false);
+            showReviewDetail(null, false);
         } catch (error) {
             console.error("Error deleting review:", error);
         }
     }
+    console.log(review)
 
-    let ReviewDetailTag = () => (
+    if( !isOpen ) return null;
+
+    return (
         <div
             className={`
-                ${isOpen ? "flex" : "hidden"}
+                block overflow-auto
                 top-0 left-0
                 fixed items-center justify-center
                 z-10 w-full h-full 
                 bg-black/40
             `}
         >
-            {review && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
-                <div className="flex flex-col gap-2 mt-4" >
-                    <div>
-                        <span className="font-bold" >Scholarship: </span>
-                        <span>{review.scholarshipDetails.scholarshipName} </span>
-                    </div>
-                    <div>
-                        <span className="font-bold" >University: </span>
-                        <span>{review.scholarshipDetails.universityName}</span>
-                    </div>
+            {review && <div className="relative w-full max-w-200 bg-white p-4 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
 
-                    <div>
-                        <div className="font-bold" >Applicant's Name</div>
-                        <div> {review.reviewerName} </div>
-                    </div>
+                <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300" onClick={() => showReviewDetail(null, false)} >X</button>
 
+                <div className="text-center font-bold text-(--color4) text-2xl" >
+                    Review Detail
+                </div>
+                <br/>
+                
+                <span className="font-bold" >
 
+                    {review.scholarshipDetails.scholarshipName} ,
 
-                    <div>
-                        <div className="font-bold" >Comment: </div>
-                        <div>{review.comment}</div>
-                    </div>
+                </span>
+                <span className="text-(--color3)" > {review.scholarshipDetails.scholarshipCategory} </span>
 
-                    <div>
-                        <span>Rating: </span>
-                        <span>
-                            {[1, 2, 3, 4, 5].map((star) => (
-                                <span
-                                    key={star}
-                                    style={{
-                                        cursor: "pointer",
-                                        fontSize: "28px",
-                                        color: (review.rating) >= star ? "#facc15" : "#d1d5db",
-                                        transition: "color 0.2s",
-                                    }}
+                <br />
 
-                                >
-                                    ★
-                                </span>
-                            ))}
+                <div>
+                    {review.scholarshipDetails.degree} in {review.scholarshipDetails.subjectCategory}
+                </div>
 
-                        </span>
-                    </div>
+                
 
-                    <div>
-                        <span>Date: </span>
-                        <TimeDate date={review.date} />
-                    </div>
-
-
+                <div >
+                    {review.scholarshipDetails.universityName}
 
                 </div>
+
+                <div>
+                    {review.scholarshipDetails.city}, {review.scholarshipDetails.country}
+                </div>
+
+
+
+                <br/>
+                <div>
+                    <span className="font-bold" >Applicant</span>
+                    <span> {review.reviewerName} </span>
+                </div>
+
+                <div>
+                    <span className="font-bold" >Application ID # </span>
+                    <span> {review.applicationId} </span>
+                </div>
+
+                <br/>
+
+                <div>
+                    <div className="font-bold" >Comment: </div>
+                    <div>{review.comment}</div>
+                </div>
+
+                <div>
+                    <span className="font-bold" >Rating: </span>
+                    <span>
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <span
+                                key={star}
+                                style={{
+                                    cursor: "pointer",
+                                    fontSize: "28px",
+                                    color: (review.rating) >= star ? "#facc15" : "#d1d5db",
+                                    transition: "color 0.2s",
+                                }}
+
+                            >
+                                ★
+                            </span>
+                        ))}
+
+                    </span>
+                </div>
+
+                <div>
+                    <span className="font-bold" >Reviewed at: </span>
+                    <TimeDate date={review.date} />
+                </div>
+
+
+
+
                 <div className="flex justify-center gap-4 mt-4" >
-                    <button className="bg-black rounded-xl text-white px-4 py-2" onClick={() => setIsOpen(false)} >Close</button>
-                    <button className="bg-red-800 rounded-xl text-white px-4 py-2" onClick={DeleteReview} >Delete</button>
+
+                    <button className="button-1234" style={{ backgroundColor: 'var(--color5)' }} onClick={DeleteReview} >Delete</button>
                 </div>
             </div>}
         </div>
     )
+
+}
+
+
+export const useReviewDetail = () => {
+    const [isOpen, setIsOpen] = React.useState(false);
+    const [review, setReview] = React.useState(null);
 
 
     let showReviewDetail = (rev, flag) => {
@@ -194,5 +247,9 @@ export const useReviewDetail = () => {
         setIsOpen(flag)
     }
 
-    return { ReviewDetailTag, showReviewDetail };
+    const Tag = () => {
+        return <ReviewDetailTag isOpen={isOpen} review={review} showReviewDetail={showReviewDetail} />
+    }
+
+    return { ReviewDetailTag: Tag, showReviewDetail };
 }

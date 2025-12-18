@@ -190,12 +190,12 @@ export const AddScholarship = () => {
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Deadline (YYYY/MM/DD) </span>
+                    <span className="text-sm font-medium">Deadline (DD/MM/YYYY) </span>
                     <input
                         type="text"
                         {...register("deadline", { required: "Deadline is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
-                        placeholder="i.g. 2026/12/31"
+                        placeholder="i.g. 31/12/2026"
                     />
                     {errors.deadline && <p className="text-red-600 text-sm mt-1">{errors.deadline.message}</p>}
                 </label>
@@ -203,7 +203,7 @@ export const AddScholarship = () => {
 
 
                 {/* Submit button */}
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-center">
                     <button
                         type="submit"
                         disabled={isSubmitting}
@@ -212,13 +212,7 @@ export const AddScholarship = () => {
                         {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
 
-                    <button
-                        type="button"
-                        onClick={() => reset()}
-                        className="px-3 py-2 rounded-lg border ml-3"
-                    >
-                        Reset
-                    </button>
+                    
                 </div>
             </form>
 

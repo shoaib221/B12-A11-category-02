@@ -78,7 +78,7 @@ export const ScholarshipDetail = () => {
             <div className='max-w-[700px] mx-auto' >
                 {scholarship && <>
 
-                    <div className='h-64 bg-contain bg-left bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} >
+                    <div className='h-32 md:h-48 w-full bg-contain bg-left bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} >
 
                     </div>
                     <br />
@@ -94,11 +94,7 @@ export const ScholarshipDetail = () => {
                     <div >{scholarship.universityName} <span className='text-[var(--color3)]' >({scholarship.worldRank})</span> </div>
                     <div className='text-[var(--color3)]' > {scholarship.city} , {scholarship.country} </div>
 
-
                     <br />
-
-
-
 
                     <div className='font-bold text-xl' > Expenses </div>
                     <div> Application Fees: {scholarship.applicationFees} </div>
@@ -144,16 +140,12 @@ export const ScholarshipDetail = () => {
                             rows={3}
                         ></textarea>
 
+                        <br />
                         <button
                         onClick={Apply}
                         className='button-1234' >Submit</button>
 
                     </>}
-
-
-
-
-                    
 
                     <br/><br/><br/>
 

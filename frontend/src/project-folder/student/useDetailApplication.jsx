@@ -1,20 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { set } from "react-hook-form";
+import { toast } from "react-toastify";
 
 
-export const useDetailApplication = () => {
-    // Hook logic here
-
-    const [show, setShow] = React.useState(false);
-    const [application, setApplication] = React.useState(null);
-    const { axiosInstance } = useAuthContext();
+let DetailTag = ( { application, show, showDetail, refetch } ) => {
+    const { axiosInstance } = useAuthContext()
 
     async function DeleteAopplication() {
         try {
-            let res= await axiosInstance.delete(`/scholarship/application/${application._id}`);
-            console.log("Application deleted:", res.data);
-            setShow(false);
+            let res = await axiosInstance.delete(`/scholarship/application/${application._id}`);
+            toast.info("Deleted Succesfully")
+            
+            // await refetch()
+            showDetail(null, false)
         } catch (error) {
             console.error("Error deleting application:", error);
         }
@@ -30,133 +29,157 @@ export const useDetailApplication = () => {
 
         try {
             let response = await axiosInstance.post('/scholarship/apply', info);
-            setShow(false);
+            showDetail(null, false);
             window.location.href = response.data.url;
         } catch (err) {
             console.error("Checkout error:", err);
         }
     }
 
-    let DetailTag = (  ) => (
+    if(!show) return null;
+
+    return (
         <div
             className={`
-                ${show ? "flex" : "hidden"}
+                block
                 top-0 left-0
                 fixed items-center justify-center
                 z-10 w-full h-full 
-                bg-black/40
+                bg-black/40 overflow-auto
             `}
         >
-            {application && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
+            {application && <div className={`relative w-full max-w-200 bg-white p-4 rounded-lg shadow 
+                border-2 border-(--color4) m-4 mx-auto mx-auto`}>
 
-                <div className="font-bold text-2xl mb-4"     >
-                       
-                    { application.scholarshipDetails.scholarshipName } 
-                    <span className="text-sm font-normal ml-2" >( { application.scholarshipDetails.scholarshipCategory } )</span>
+                <button onClick={() => showDetail(null, false)} className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300" >X</button>
+
+                <div className="text-2xl text-(--color4) text-center font-bold" >Application Detail</div>
+                <br/>
+
+                <div className="font-bold"     >
+
+                    {application.scholarshipDetails.scholarshipName}
+                    <span className="text-sm font-normal ml-2" >( {application.scholarshipDetails.scholarshipCategory} )</span>
+
+                </div>
+
+                <div>
+                    <span className="font-bold" >{application.scholarshipDetails.degree}</span> in 
+                    <span className="font-bold" > {application.scholarshipDetails.subjectCategory} </span>
+                </div>
+
+                <div>
+                    <span className="font-bold" >{application.scholarshipDetails.universityName}</span>
                     
                 </div>
-
                 <div>
-                    <span className="font-bold" >University Name: </span>
-                    {application.scholarshipDetails.universityName}
+                    
+                    {application.scholarshipDetails.city},  {application.scholarshipDetails.country}
                 </div>
-                <div>
-                    <span className="font-bold" >University Address: </span>  
-                    {application.scholarshipDetails.city}, {application.scholarshipDetails.state}, {application.scholarshipDetails.country}
-                </div>
-
-                <div>
-                    <span className="font-bold" >Subject Category </span> 
-                    { application.scholarshipDetails.subjectCategory }
-                </div>
-
-                <div>
-                    <span className="font-bold" >Degree </span> 
-                    { application.scholarshipDetails.degree }
-                </div>
-
-                <br/>
-
-                <div>
-                    <div className="font-bold" >Applicant's Education: </div>  
-                    <div>
-                        {application.education}
-                    </div>
-                </div>
-
-                <div>
-                    <div className="font-bold" >Applicant's Extracurriculars: </div>  
-                    <div>
-                        {application.extras}
-                    </div>
-                </div>
-
-
-                <div>
-                    <div className="font-bold" >Applicant's Message: </div>  
-                    <div>
-                        {application.message}
-                    </div>
-                </div>
-
-                <br/>
 
                 
+
+                
+
+                <br />
+
+                <div className="font-bold" >Applicant</div>
+                <div>
+                    { application.applicantName }
+                </div>
+
+                <div>
+                    <div className="font-bold" >Applicant's Education: </div>
+                    <div>
+                        {application.education ? application.education: "No data available"}
+                    </div>
+                </div>
+
+                <div>
+                    <div className="font-bold" >Applicant's Extracurriculars: </div>
+                    <div>
+                        {application.extras? application.extras: "No data available" }
+                    </div>
+                </div>
+
+
+                <div>
+                    <div className="font-bold" >Applicant's Message: </div>
+                    <div>
+                        {application.message ? application.message: "No message available" }
+                    </div>
+                </div>
+
+                <br />
+
+
                 <div>
                     <span className="font-bold" >Tuition Fees:  </span>
-                    { application.scholarshipDetails.tuitionFees }
+                    {application.scholarshipDetails.tuitionFees}
                 </div>
-                
-                
+
+
                 <div>
                     <span className="font-bold" >Application Fees: </span>
-                    { application.scholarshipDetails.applicationFees }  
+                    {application.scholarshipDetails.applicationFees}
                 </div>
 
                 <div>
                     <span className="font-bold" > Service Charge: </span>
-                    { application.scholarshipDetails.applicationFees }  
+                    {application.scholarshipDetails.applicationFees}
                 </div>
 
-                <br/>
+                <br />
 
                 <div>
                     <span className="font-bold" >Application Status: </span>
-                    { application.applicationStatus } 
+                    {application.applicationStatus}
                 </div>
 
                 <div>
                     <span className="font-bold" >Payment Status: </span>
-                    { application.paymentStatus }
+                    {application.paymentStatus}
                 </div>
-                <br/>
+                <br />
 
                 <div className="font-bold" >Feedback</div>
                 <div>
-                    { application.feedback ? application.feedback : "No feedback yet" }
+                    {application.feedback ? application.feedback : "No feedback yet"}
                 </div>
 
-                <br/>
+                <br />
 
                 <div className="flex justify-center gap-4" >
-                    { application.paymentStatus === 'unpaid' && <button onClick={Pay} className="bg-blue-600 text-white p-2 rounded-xl min-w-24 cursor-pointer" >Pay</button> }
-                    { application.applicationStatus === 'pending' && <button  onClick={DeleteAopplication} className="bg-red-800 text-white p-2 rounded-xl min-w-24 cursor-pointer" >Delete</button> }
-                    <button onClick={() => showDetail(false)} className="bg-black text-white p-2 rounded-xl min-w-24 cursor-pointer" >Close</button>
+                    {application.paymentStatus === 'unpaid' && <button onClick={Pay} className="bg-blue-600 text-white p-2 rounded-xl min-w-24 cursor-pointer" >Pay</button>}
+                    {application.applicationStatus === 'pending' && <button onClick={DeleteAopplication} className="bg-red-800 text-white p-2 rounded-xl min-w-24 cursor-pointer" >Delete</button>}
+
 
                 </div>
-                
-            </div>}
-        </div>
-    )
 
-    let showDetail = (app, flag) => {
-        if( app ) setApplication( app );
+            </div>}
+        </div>)
+}
+
+
+export const useDetailApplication = () => {
+    // Hook logic here
+
+    const [show, setShow] = React.useState(false);
+    const [application, setApplication] = React.useState(null);
+    const [ refetch, setRefetch ] = useState(null)
+    
+
+    let showDetail = (app, flag, refetch) => {
+        if (app) setApplication(app);
         console.log(app)
         setShow(flag)
+        setRefetch(refetch)
+    }
+
+    const Tag = () => {
+        return <DetailTag show={show} showDetail={showDetail} application={application} refetch={refetch} />
     }
 
 
-
-
-    return { DetailTag, showDetail };
+    return { DetailTag: Tag, showDetail };
 }

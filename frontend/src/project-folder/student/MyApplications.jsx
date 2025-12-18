@@ -46,7 +46,7 @@ export const MyApplications = () => {
                         <div className='flex gap-2' >
                             <button 
                                 className='button-1234'
-                                onClick={ () => showDetail( application, true) } >Detail</button>
+                                onClick={ () => showDetail( application, true, fetchApplications) } >Detail</button>
                             { application.applicationStatus === 'approved' &&  <button onClick={ () => showReview( application, true ) }  className='button-1234'>Review</button> }
                             { application.applicationStatus === 'pending' &&
                                 <button 

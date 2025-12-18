@@ -18,6 +18,12 @@ const EditTag = ({ isOpen, application, show }) => {
     }, [application, isOpen])
 
     async function Update () {
+        if( !education || !extras )
+        {
+            toast.info("Fill education & extracurriculars")
+            return
+        }
+
         try {
             let res = await axiosInstance.patch( "/scholarship/application", { ...application, education, extras, message } )
             toast.success("Updated Successfully")
@@ -29,24 +35,35 @@ const EditTag = ({ isOpen, application, show }) => {
 
     }
 
-
+    console.log(application)
 
     if (!isOpen) return null;
 
     return (
         <div
             className={`
-                ${isOpen ? "flex" : "hidden"}
+                block overflow-auto
                 top-0 left-0
                 fixed items-center justify-center
                 z-10 w-full h-full
                 bg-black/40
             `}
         >
-            {application && <div className="w-full max-w-200 bg-white p-4 rounded-lg shadow">
+            {application && <div className="relative w-full max-w-200 bg-white p-4 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
+
+                <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300" onClick={() => show(null, false)} >X</button>
                 
-                <label className="block mb-3">
-                    <span className="text-sm font-medium">Eduaction</span>
+                <div className="text-(--color4) font-bold text-center" > Edit Application </div>
+                <br/>
+
+                <div className="font-bold" > { application.scholarshipDetails.scholarshipName } </div> 
+
+                
+                <span className="font-bold" >Application Id:  </span>
+                <span> { application._id } </span>
+
+                <label className="block mb-3 mt-2">
+                    <span className="text-sm font-bold">Eduaction</span>
                     <textarea
                         type="text" value={education} onChange={(e)=> setEducation(e.target.value)}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
@@ -57,7 +74,7 @@ const EditTag = ({ isOpen, application, show }) => {
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Extra Curriculars</span>
+                    <span className="text-sm font-bold">Extra Curriculars</span>
                     <textarea
                         type="text" value={extras} onChange={(e)=> setExtras(e.target.value)}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
@@ -68,7 +85,7 @@ const EditTag = ({ isOpen, application, show }) => {
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Message</span>
+                    <span className="text-sm font-bold">Message</span>
                     <textarea
                         type="text" value={message} onChange={(e)=> setMessage(e.target.value)}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none`}
@@ -79,8 +96,8 @@ const EditTag = ({ isOpen, application, show }) => {
                 </label>
 
                 <div className="flex justify-center gap-4" >
-                    { application.applicationStatus === 'pending' && <button  className="bg-[var(--color4)] text-[var(--color1)] p-2 rounded-lg" onClick={ Update  } >Update</button>}
-                    <button className="rounded-lg p-2 bg-[var(--color2)] text-[var(--color1)]" onClick={() => show(null, false)} >Close</button>
+                    { application.applicationStatus === 'pending' && <button  className="button-1234" onClick={ Update  } >Update</button>}
+                    
                 </div>
             </div>}
         </div>)
