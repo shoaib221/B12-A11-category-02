@@ -144,7 +144,7 @@ export const Auth = () => {
     if (loading) return <Loading />
 
     return (
-        <div className='flex-1 flex flex-col h-full  bg-cover bg-center justify-center items-center' style={{ backgroundImage: 'url(/convocation.webp)' }} >
+        <div className='p-2 flex-1 flex flex-col h-full  bg-cover bg-center justify-center items-center' style={{ backgroundImage: 'url(/convocation.webp)' }} >
 
             {login === "login" && <LogIn toggle={setLogin} />}
             {login === "register" && <Register toggle={setLogin} />}
