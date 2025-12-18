@@ -56,7 +56,7 @@ export const ManageScholarships = () => {
                     </div>
 
                     <div className='flex gap-2 items-center' >
-                        <FaSearch onClick={SearchScholarships} />
+                        <FaSearch onClick={SearchScholarships} className="text-(--color4) cursor-pointer" />
 
                         <input placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
 
@@ -81,7 +81,7 @@ export const ManageScholarships = () => {
                                 <div className='text-sm text-gray-600' >{scholarship.universityName}</div>
                             </div>
                             <div className="flex gap-2" >
-                                <button className='bg-[var(--color4)] text-white px-4 py-2 rounded-lg' onClick={() => showUpdate(scholarship, true)} >Manage</button>
+                                <button className='button-1234' onClick={() => showUpdate(scholarship, true)} >Manage</button>
                             </div>
                         </div>
                     ))}

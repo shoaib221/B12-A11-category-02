@@ -1,6 +1,8 @@
 import { useForm, Controller } from "react-hook-form";
 import { useAuthContext } from "../../auth/context";
 
+
+
 export const AddScholarship = () => {
     const { axiosInstance } = useAuthContext();
 
@@ -46,11 +48,11 @@ export const AddScholarship = () => {
     };
 
     // watch fields if you want to react to changes
-    const watchHobbies = watch("hobbies");
+    // const watchHobbies = watch("hobbies");
 
     return (
         <div className="max-w-xl p-6 bg-white rounded-2xl shadow-md">
-            <h2 className="text-2xl font-semibold mb-4">Add a scholarship</h2>
+            
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 {/* Name */}
@@ -58,11 +60,11 @@ export const AddScholarship = () => {
                     <span className="text-sm font-medium">Scholarship Name</span>
                     <input
                         type="text"
-                        {...register("scholarshipName", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("scholarshipName", { required: "Scholarship name is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. Fullbright Scholarship"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.scholarshipName && <p className="text-red-600 text-sm mt-1">{errors.scholarshipName?.message}</p>}
                 </label>
 
 
@@ -70,132 +72,132 @@ export const AddScholarship = () => {
                     <span className="text-sm font-medium">University Name</span>
                     <input
                         type="text"
-                        {...register("universityName", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("universityName", { required: "University name is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. Oxford University"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.universityName && <p className="text-red-600 text-sm mt-1">{errors.universityName.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Image URL</span>
                     <input
                         type="text"
-                        {...register("image", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("image", { required: "Image URL is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. https://example.com/avatar.jpg"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.image && <p className="text-red-600 text-sm mt-1">{errors.image.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Country</span>
                     <input
                         type="text"
-                        {...register("country", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("country", { required: "Country is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. Argentina"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.country && <p className="text-red-600 text-sm mt-1">{errors.country.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">City</span>
                     <input
                         type="text"
-                        {...register("city", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("city", { required: "City is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. Buens Aires"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.city && <p className="text-red-600 text-sm mt-1">{errors.city.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">World Rank</span>
                     <input
                         type="text"
-                        {...register("worldRank", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("worldRank", { required: "World Rank is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. 128"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.worldRank && <p className="text-red-600 text-sm mt-1">{errors.worldRank.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Subject Category</span>
                     <input
                         type="text"
-                        {...register("subjectCategory", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("subjectCategory", { required: "Subject Category is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. Mathematics"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.subjectCategory && <p className="text-red-600 text-sm mt-1">{errors.subjectCategory.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Scholarship Category</span>
                     <input
                         type="text"
-                        {...register("scholarshipCategory", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("scholarshipCategory", { required: "Scholarship category is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. Full-funded"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.scholarshipCategory && <p className="text-red-600 text-sm mt-1">{errors.scholarshipCategory.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Degree</span>
                     <input
                         type="text"
-                        {...register("degree", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("degree", { required: "Degree is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. Bachelor's"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.degree && <p className="text-red-600 text-sm mt-1">{errors.degree.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Tuition Fees (USD)</span>
                     <input
                         type="number"
-                        {...register("tuitionFees", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("tuitionFees", { required: "Tuition fees is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. 1000"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.tuitionFees && <p className="text-red-600 text-sm mt-1">{errors.tuitionFees.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Application Fees (USD)</span>
                     <input
                         type="number"
-                        {...register("applicationFees", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("applicationFees", { required: "Application fees is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. 20"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.applicationFees && <p className="text-red-600 text-sm mt-1">{errors.applicationFees.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Service Charge (USD)</span>
                     <input
                         type="number"
-                        {...register("serviceCharge", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("serviceCharge", { required: "Service charge is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. 20"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.serviceCharge && <p className="text-red-600 text-sm mt-1">{errors.serviceCharge.message}</p>}
                 </label>
 
                 <label className="block mb-3">
                     <span className="text-sm font-medium">Deadline (YYYY/MM/DD) </span>
                     <input
                         type="text"
-                        {...register("deadline", { required: "Name is required", minLength: { value: 2, message: "Too short" } })}
+                        {...register("deadline", { required: "Deadline is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. 2026/12/31"
                     />
-                    {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+                    {errors.deadline && <p className="text-red-600 text-sm mt-1">{errors.deadline.message}</p>}
                 </label>
 
 
@@ -205,7 +207,7 @@ export const AddScholarship = () => {
                     <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="px-4 py-2 rounded-lg bg-indigo-600 text-white hover:bg-indigo-700 disabled:opacity-60"
+                        className="button-1234 hover:opacity-90 disabled:opacity-60"
                     >
                         {isSubmitting ? "Submitting..." : "Submit"}
                     </button>

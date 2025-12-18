@@ -75,7 +75,7 @@ export const ScholarshipDetail = () => {
 
     return (
         <PrivateRoute>
-            <div className='max-w-[1000px] mx-auto' >
+            <div className='max-w-[700px] mx-auto' >
                 {scholarship && <>
 
                     <div className='h-64 bg-contain bg-left bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} >
@@ -146,7 +146,7 @@ export const ScholarshipDetail = () => {
 
                         <button
                         onClick={Apply}
-                        className='mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg' >Submit</button>
+                        className='button-1234' >Submit</button>
 
                     </>}
 
