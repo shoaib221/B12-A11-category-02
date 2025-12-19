@@ -47,12 +47,10 @@ export const ManageScholarships = () => {
 
 
 
-                <div className='flex gap-2 items-center' >
-                    <FaSearch onClick={SearchScholarships} className="text-(--color4) cursor-pointer" />
+                <div className='flex gap-2 items-center px-2 justify-between' >
+                    
 
-                    <input className="max-w-35 lg:max-w-50" placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
-
-                    <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} >
+                    <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} className='min-w-24 max-w-32' >
                         <option value="" >Search By</option>
                         <option value="scholarshipName" >Scholarhip Name</option>
                         <option value="universityName" >University Name</option>
@@ -61,6 +59,12 @@ export const ManageScholarships = () => {
                         <option value="subjectCategory" >Subject Category</option>
                         <option value="location" >Location</option>
                     </select>
+
+                
+                    <input className='flex-1 min-w-24' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
+
+                    <FaSearch title="Submit" onClick={SearchScholarships} className='text-2xl text-[var(--color4)] cursor-pointer min-w-8' />
+
                 </div>
 
 
@@ -80,10 +84,10 @@ export const ManageScholarships = () => {
                 </div>
 
                 <br/>
-                <div className='flex gap-2' >
+                <div className='flex gap-2 flex-wrap' >
                     {page > 1 && <div className='button-1234' onClick={() => setPage(x => x - 1)} > Previuos </div>}
                     {totalPages && [...Array(totalPages).keys()].map(i => (
-                        <div key={i} className={`p-1 cursor-pointer cen-hor ${i + 1 === page && 'button-1234'}`} onClick={() => setPage(i + 1)} >
+                        <div key={i} className={`p-1 min-w-12 cursor-pointer cen-hor ${i + 1 === page && 'button-1234'}`} onClick={() => setPage(i + 1)} >
                             {i + 1}
                         </div>
                     ))}

@@ -52,7 +52,7 @@ export const RoleChange = ({ user, refetch }) => {
                 </select>
             </div>
 
-            <div className="cen-ver gap-1" >
+            <div className="cen-hor gap-1" >
                 <button className="button-1234" onClick={Update} >Update</button>
                 <button className="button-1234" style={{ backgroundColor: 'var(--color5)' }} onClick={DeleteUser} >Delete</button>
             </div>
@@ -104,15 +104,15 @@ export const ManageUsers = () => {
     return (
         <AdminRoute>
 
-            <div className="flex justify-between" >
-                <div className="text-2xl font-bold" >Manage Users</div>
-                <select value={filter} onChange={(e) => setFilter(e.target.value)} >
-                    <option value="" >Filter Users</option>
-                    <option value="admin" >Admin</option>
-                    <option value="student" >Student</option>
-                    <option value="moderator" >Moderator</option>
-                </select>
-            </div>
+
+
+            <select value={filter} onChange={(e) => setFilter(e.target.value)} >
+                <option value="" >Filter Users</option>
+                <option value="admin" >Admin</option>
+                <option value="student" >Student</option>
+                <option value="moderator" >Moderator</option>
+            </select>
+
             <br />
             <div className="w-full block" >
                 <div className="box-1212 gap-2 grid grid-cols-[1fr] md:grid-cols-[1fr_1fr_1fr] mb-2" >

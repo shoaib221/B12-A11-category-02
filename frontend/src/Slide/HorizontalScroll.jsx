@@ -6,7 +6,7 @@ const Story = ({ story }) => {
         <div className='flex flex-col justify-between px-2 min-w-80 bg-cover bg-center 
                         bg-[var(--color4)] hover:bg-[var(--color4)]/80 text-white p-2'  >
 
-            <div className="flex-1" >
+            <div className="flex-1 text-justify" >
                 {story.comment}
             </div>
 

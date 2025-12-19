@@ -39,18 +39,16 @@ export const AllScholarships = () => {
 
     return (
         <div className='block' >
-            <div className='text-2xl font-bold flex-1' >All Scholarships</div>
+            <div className='text-2xl font-bold flex-1 text-center text-(--color4)' >All Scholarships</div>
             <br />
 
 
 
 
-            <div className='flex gap-2 items-center' >
-                <FaSearch onClick={SearchScholarships} className='text-2xl text-[var(--color4)]' />
+            <div className='flex gap-2 items-center px-2 justify-between' >
+                
 
-                <input className='max-w-30 lg:max-w-50' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
-
-                <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} >
+                <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} className='min-w-24 max-w-32' >
                     <option value="" >Search By</option>
                     <option value="scholarshipName" >Scholarhip Name</option>
                     <option value="universityName" >University Name</option>
@@ -59,6 +57,12 @@ export const AllScholarships = () => {
                     <option value="subjectCategory" >Subject Category</option>
                     <option value="location" >Location</option>
                 </select>
+
+                
+
+                <input className='flex-1 min-w-24' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
+
+                <FaSearch title='Submit' onClick={SearchScholarships} className='text-2xl text-[var(--color4)] cursor-pointer min-w-8' />
             </div>
 
 
@@ -86,10 +90,10 @@ export const AllScholarships = () => {
 
             <br />
 
-            <div className='flex gap-2' >
+            <div className='flex gap-2 flex-wrap' >
                 {page > 1 && <div className='button-1234' onClick={() => setPage(x => x - 1)} > Previuos </div>}
                 {totalPages && [...Array(totalPages).keys()].map(i => (
-                    <div key={i} className={`p-1 cursor-pointer cen-hor ${i + 1 === page && 'button-1234'}`} onClick={() => setPage(i + 1)} >
+                    <div key={i} className={`p-1 cursor-pointer min-w-12 cen-hor ${i + 1 === page && 'button-1234'}`} onClick={() => setPage(i + 1)} >
                         {i + 1}
                     </div>
                 ))}

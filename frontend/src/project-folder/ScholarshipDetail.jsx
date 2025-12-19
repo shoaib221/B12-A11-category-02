@@ -78,7 +78,7 @@ export const ScholarshipDetail = () => {
             <div className='max-w-[700px] mx-auto flex-1 w-full' >
                 {scholarship && <>
 
-                    <div className='h-32 md:h-48 w-full bg-contain bg-left bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} >
+                    <div className='h-48 lg:h-60 w-full bg-cover bg-left bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} >
 
                     </div>
                     <br />
