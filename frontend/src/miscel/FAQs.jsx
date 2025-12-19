@@ -36,11 +36,11 @@ export const FAQs = () => {
     }
 
     return (
-        <div className="w-full max-w-[800px] mx-auto flex flex-col gap-4 text-xl" >
+        <div className="w-full max-w-[800px] mx-auto flex flex-col gap-4" >
             { qas && qas.map( (elem, index) => (
-                <div key={index} onClick={ () => ToggleFunction(index) } >
-                    <div className="flex justify-between gap-4" >  
-                        <span className="font-bold text-justify" > {elem.question} </span>
+                <div key={index} onClick={ () => ToggleFunction(index) }  >
+                    <div className="flex justify-between gap-4 cursor-pointer" >  
+                        <span className="text-justify" > {elem.question} </span>
                         <button > { index === ques ? "-": "+" } </button>
                     </div>
                     { ques === index && 

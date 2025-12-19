@@ -3,15 +3,15 @@
 const Story = ({ story }) => {
 
     return (
-        <div className='flex flex-col justify-between px-2 min-w-80 bg-cover bg-center 
-                        bg-[var(--color4)] hover:bg-[var(--color4)]/80 text-white p-2'  >
+        <div className='flex flex-col justify-between px-2 min-w-80 
+                        bg-(--color4) hover:bg-(--color4)/80 text-white p-2'  >
 
             <div className="flex-1 text-justify" >
                 {story.comment}
             </div>
 
             <div className="flex gap-2 items-end" >
-                <div  className={`w-18 h-18 rounded-full  bg-cover bg-center`} style={{ backgroundImage: `url(${story.image})` }} />
+                <div  className={`w-18 h-18 rounded-full  bg-cover bg-top`} style={{ backgroundImage: `url(${story.image})` }} />
                 <div className="text-sm" >
                     {story.name} <br />
                     {story.scholarship} <br />

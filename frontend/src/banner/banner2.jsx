@@ -34,7 +34,7 @@ export const Banner2 = () => {
 
     return (
         < div className='w-full' >
-            <div id={ids[index]} className='relative h-[10rem] lg:h-[20rem]  bg-contain bg-center bg-no-repeat'   >
+            <div id={ids[index]} className='relative h-[15rem] lg:h-[20rem]  bg-contain bg-center bg-no-repeat'   >
                 {/* <button onClick={leftSlide} className="absolute top-[10%] left-4 w-12 h-[80%] bg-white/50 text-5xl"  >
                     <MdKeyboardArrowLeft />
                 </button>
