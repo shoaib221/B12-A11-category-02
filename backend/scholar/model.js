@@ -62,6 +62,10 @@ const ScholarshipSchema = new mongoose.Schema({
     postedBy: {
         type: String,
         required: true
+    },
+    description: {
+        type: String,
+        
     }
 
 

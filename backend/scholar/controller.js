@@ -21,6 +21,8 @@ const AddScholarship = async (req, res, next) => {
     try {
         console.log(req.body);
         let scholarship = { ...req.body }
+        
+        scholarship.deadline = new Date( req.body.deadline ) // dd/mm/yyyy
         scholarship.postedBy = req.user_email;
         scholarship.postedAt = new Date();
         scholarship = Scholarship(scholarship);
