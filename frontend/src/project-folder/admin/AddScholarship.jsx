@@ -40,11 +40,7 @@ export const AddScholarship = () => {
         } catch (err) {
             console.error(err);
         }
-
-
-
         // reset the form after submit
-
     };
 
     // watch fields if you want to react to changes
@@ -52,7 +48,7 @@ export const AddScholarship = () => {
 
     return (
         <div className="max-w-xl p-6 bg-white rounded-2xl shadow-md">
-            
+
 
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
                 {/* Name */}
@@ -115,7 +111,7 @@ export const AddScholarship = () => {
                 <label className="block mb-3">
                     <span className="text-sm font-medium">World Rank</span>
                     <input
-                        type="text"
+                        type="number"
                         {...register("worldRank", { required: "World Rank is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. 128"
@@ -190,12 +186,24 @@ export const AddScholarship = () => {
                 </label>
 
                 <label className="block mb-3">
-                    <span className="text-sm font-medium">Deadline (DD/MM/YYYY) </span>
+                    <span className="text-sm font-bold">Deadline (DD/MM/YYYY) </span>
                     <input
                         type="text"
                         {...register("deadline", { required: "Deadline is required", minLength: { value: 2, message: "Too short" } })}
                         className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                         placeholder="i.g. 31/12/2026"
+                    />
+                    {errors.deadline && <p className="text-red-600 text-sm mt-1">{errors.deadline.message}</p>}
+                </label>
+
+                <label className="block mb-3">
+                    <span className="text-sm font-bold">Description</span>
+                    <textarea
+                        type="text"
+                        {...register("description")}
+                        className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                        placeholder="Write about it..."
+                        rows={5}
                     />
                     {errors.deadline && <p className="text-red-600 text-sm mt-1">{errors.deadline.message}</p>}
                 </label>
@@ -212,7 +220,7 @@ export const AddScholarship = () => {
                         {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
 
-                    
+
                 </div>
             </form>
 

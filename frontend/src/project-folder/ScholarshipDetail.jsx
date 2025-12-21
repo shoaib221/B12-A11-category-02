@@ -97,10 +97,16 @@ export const ScholarshipDetail = () => {
                     <br />
 
                     <div className='font-bold text-xl' > Expenses </div>
-                    <div> Application Fees: {scholarship.applicationFees} </div>
-                    <div> Service Charge: {scholarship.serviceCharge} </div>
-                    <div> Tuition Fees: {scholarship.tuitionFees} </div>
-                    
+                    <div> Application Fees: {scholarship.applicationFees} USD </div>
+                    <div> Service Charge: {scholarship.serviceCharge} USD </div>
+                    <div> Tuition Fees: {scholarship.tuitionFees} USD </div>
+                    <div> Net payable: { scholarship.applicationFees + scholarship.serviceCharge } USD </div>
+
+                    <br/>
+
+                    { scholarship.description && <> <div className='font-bold text-xl' >Description</div>
+
+                    <div> { scholarship.description}  </div> </>}
 
                     <br />
                     <div className='font-bold text-xl' ></div>

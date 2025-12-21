@@ -32,7 +32,7 @@ export const ManageScholarships = () => {
             setScholarships(response.data.scholarships);
             setTotalPages(response.data.totalPages);
             console.log(response.data)
-            toast.success("Successfully fetched")
+            console.log("Successfully fetched")
         } catch (err) {
             console.error(err)
         }
@@ -42,7 +42,7 @@ export const ManageScholarships = () => {
         <AdminRoute>
             <div>
 
-                <UpdateTag />
+                <UpdateTag refetch={SearchScholarships}  />
 
 
 
@@ -77,7 +77,7 @@ export const ManageScholarships = () => {
                                 <div className='text-sm text-gray-600' >{scholarship.universityName}</div>
                             </div>
                             <div className="flex gap-2" >
-                                <button className='button-1234' onClick={() => showUpdate(scholarship, true)} >Manage</button>
+                                <button className='button-1234' onClick={() => showUpdate(scholarship, true, SearchScholarships)} >Manage</button>
                             </div>
                         </div>
                     ))}

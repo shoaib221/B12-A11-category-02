@@ -20,6 +20,7 @@ export const RoleChange = ({ user, refetch }) => {
     async function Update() {
         try {
             let res = await axiosInstance.post("/auth/change-role", { ...user, role })
+            await refetch();
             toast.success("Role changed")
         } catch (err) {
             console.error(err.response)
@@ -30,15 +31,15 @@ export const RoleChange = ({ user, refetch }) => {
     async function DeleteUser() {
         try {
             let res = await axiosInstance.delete(`/auth/user/${user._id}`)
-            refetch()
-            toast.success("Deleted Successfully")
+            await refetch();
+            toast.info("Deleted Successfully")
         } catch (err) {
             console.error(err.response)
         }
     }
 
     return (
-        < div className="box-1212 gap-4 grid grid-cols-[1fr] md:grid-cols-[1fr_1fr_1fr] mb-2" >
+        <div className="box-1212 gap-4 grid grid-cols-[1fr] md:grid-cols-[1fr_1fr_1fr] mb-2" >
             <div className="cen-ver gap-1" >
                 <div className="font-bold" >{user.name}</div>
                 <div className="text-[var(--color3)]" > {user.username} </div>

@@ -30,10 +30,12 @@ export const SuccesfulPayment = () => {
     if(!application) return <Loading />
 
     return (
-        <div>
+        <div className="w-full max-w-[600px] mx-auto" >
+            <img src="/green-tick.webp" className="h-32" />
             <div className="text-green-800 text-2xl font-bold" >Payment Successful</div>
-            <div> Paid Amount: { application.paymentAmount }  </div>
-            <div>Transaction Reference: { application.transId }</div>
+            <div> Paid Amount: <span className="font-bold" > { application.paymentAmount } </span>  USD  </div>
+            <div>Transaction Reference: <span className="font-bold" > { application.transId } </span> </div>
+            <div> Application ID: <span className="font-bold" > { application._id } </span> </div>
             <br/>
             <div className="font-bold text-lg" >Scholarship</div>
             <div> { application.scholarshipDetails.scholarshipName } </div>
@@ -43,10 +45,10 @@ export const SuccesfulPayment = () => {
             <br/>
             <div className="font-bold text-lg" >Applicant</div>
             <div> { application.applicantName } </div>
-            <div> { application.applicantEmail } </div>
+            <div className="text-gray-600" > { application.applicantEmail } </div>
             <br/>
 
-            <button className="button-2" onClick={ () => navigate( "/dashboard?board=my-applications" ) } >My Applications</button>
+            <button className="button-2" onClick={ () => navigate( "/dashboard?board=my-apps" ) } >My Applications</button>
         </div>
     )
 }
@@ -79,10 +81,13 @@ export const FailedPayment = () => {
     if(!application) return <Loading />
 
     return (
-        <div>
+        <div className="w-full max-w-[600px] mx-auto" >
+            <img src="/red-cross.jpg" className="h-32" />
             <div className="text-red-800 font-bold text-2xl" >Payment Failed</div> 
-            <div> Payable Amount: { application.paymentAmount }  </div>
-            <div>Status: { status }</div>
+            {/* <div>Status: { status }</div> */}
+            <div> Payable Amount: <span className="font-bold" > { application.paymentAmount } </span> USD  </div>
+            <div> Application ID: <span className="font-bold" > { application._id } </span> </div>
+            
 
             <br/>
             <div className="font-bold text-lg" >Scholarship</div>
@@ -93,7 +98,7 @@ export const FailedPayment = () => {
             <br/>
             <div className="font-bold text-lg" >Applicant</div>
             <div> { application.applicantName } </div>
-            <div> { application.applicantEmail } </div>
+            <div className="text-gray-600" > { application.applicantEmail } </div>
             <br/>
 
             <button className="button-2" onClick={( ) => navigate("/dashboard") } >Dashboard</button>
