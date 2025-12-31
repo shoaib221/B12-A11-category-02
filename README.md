@@ -59,7 +59,7 @@ A full-stack  web app for hunting scholarships around the world.
 
 ```bash
 # Clone the repository
-git clone https://github.com/shoaib221/B12-A11-category-02.git
+git clone https://github.com/shoaib221/ScholarStream.git
 
 # Navigate into the project
 cd backend
