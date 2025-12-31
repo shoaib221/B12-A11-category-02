@@ -2,23 +2,15 @@
 
 A full-stack  web app for hunting scholarships around the world.
 
----
-
-## 🌐 Live Link
-
 👉 **[Live Demo](https://scholarstream-shoaib221.netlify.app/)**
 
 ---
 
 ## ✨ Features
-
-- 🔐 User authentication (Login, Signup, JWT / Firebase Auth)
-- 🧠 Role-based access (Admin / Student / Moderator)
-- 📦 CRUD operations (Create, Read, Update, Delete)
-- ⚡ Real-time data updates
-- 🎨 Responsive UI with modern design
-- 🔎 Search, filter, and sort functionality
-- ☁️ Deployed with  Vercel & Netlify
+- ⚡ Admins can create and update scholarship announcements
+- ⚡ Applicants can search for scholarships according to location, time, subject preference, and scholarship amount
+- ⚡ Applicants can pay fees through stripe payment gateway
+- ⚡ Moderators are responsible for assessing applications and giving feedback
 
 ---
 
@@ -26,9 +18,7 @@ A full-stack  web app for hunting scholarships around the world.
 
 **Frontend:**
 - React.js  
-- Tailwind CSS  
-- Axios  
-- React Router DOM  
+- Tailwind CSS  & Daisy UI
 
 **Backend:**
 - Node.js  
@@ -45,33 +35,19 @@ A full-stack  web app for hunting scholarships around the world.
 ---
 
 ## 📦 Packages Used
+- swiper
+- react-toastify
+- framer motion
 
-### Frontend
-- `framer motion
-- `swiper.js  
-
-### Backend
-- `mongoose`  
-
----
 
 ## 🧑‍💻 Setup Instructions
 
-
-### Clone the repository
 ```bash
+
 git clone https://github.com/shoaib221/ScholarStream.git
-
-
-### Navigate into the project
 cd backend
 cd frontend
-
-
-### Install dependencies
 npm install
-
-### Run the development server
 npm run dev
 
 
