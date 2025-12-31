@@ -58,20 +58,20 @@ A full-stack  web app for hunting scholarships around the world.
 ## 🧑‍💻 Setup Instructions
 
 
-# Clone the repository
+### Clone the repository
 ```bash
 git clone https://github.com/shoaib221/ScholarStream.git
 
 
-# Navigate into the project
+### Navigate into the project
 cd backend
 cd frontend
 
 
-# Install dependencies
+### Install dependencies
 npm install
 
-# Run the development server
+### Run the development server
 npm run dev
 
 
