@@ -1,7 +1,7 @@
 <p align="center">
-  <img src="images/banner1.jpg" height="700" style="display: inline-block;" alt="Demo Image" />
-  <img src="images/banner2.jpg" height="700" style="display: inline-block;" alt="Demo Image" />
-  <img src="images/banner3.jpg" height="700" style="display: inline-block;" alt="Demo Image" />
+  <img src="images/banner1.jpg" width="30%" style="display: inline-block;" alt="Demo Image" />
+  <img src="images/banner2.jpg" width="30%" style="display: inline-block;" alt="Demo Image" />
+  <img src="images/banner3.jpg" width="30%" style="display: inline-block;" alt="Demo Image" />
 </p>
 
 
