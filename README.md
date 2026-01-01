@@ -1,9 +1,9 @@
-<p align="center">
+
   
-    <img src="images/banner2.jpg" height="300"  alt="Demo Image" />
-    <img src="images/banner3.jpg" height="300"   alt="Demo Image" /> 
+    <img src="images/banner2.jpg"   alt="Demo Image" />
+    
   
-</p>
+
 
 
 ---
