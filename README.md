@@ -1,10 +1,7 @@
 <p align="center">
-  <p align="center" style="width: 50%; display: inline-block;" >
-    <img src="images/banner2.jpg" height="250" width="100%" style="display: block;" alt="Demo Image" />
-    <br/>
-    <img src="images/banner3.jpg" height="250" width="100%" style="display: block;" alt="Demo Image" />  
-  </p>
-  <img src="images/banner1.jpg" height="500" width="50%" style="display: inline-block;" alt="Demo Image" />
+  
+    <img src="images/banner2.jpg" height="300" width="100%"  alt="Demo Image" />
+    <img src="images/banner3.jpg" height="300" width="100%"  alt="Demo Image" /> 
   
 </p>
 
