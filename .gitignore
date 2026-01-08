@@ -1,0 +1,54 @@
+####################################
+# Global
+####################################
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.env
+.env.local
+.env.*.local
+
+####################################
+# OS & Editor
+####################################
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp
+*.swo
+
+####################################
+# Backend (Express.js)
+####################################
+backend/node_modules/
+backend/dist/
+backend/build/
+backend/logs/
+backend/*.log
+
+####################################
+# Frontend (React.js)
+####################################
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+frontend/.cache/
+frontend/.vite/
+frontend/coverage/
+
+####################################
+# Testing
+####################################
+coverage/
+*.lcov
+
+####################################
+# Misc
+####################################
+*.tgz
+*.pid
+*.seed
+*.pid.lock
