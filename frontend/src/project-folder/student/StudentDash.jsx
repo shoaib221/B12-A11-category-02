@@ -20,7 +20,7 @@ export const StudentDash = () => {
     return (
         <div className='flex flex-col lg:flex-row gap-8 flex-1' >
             <title> ScholarStrem | Dashboard</title>
-            <div className='flex flex-row lg:flex-col min-w-12 gap-2' >
+            <div className='flex flex-row lg:flex-col lg:min-w-52  gap-2 px-2' >
                 <div className={`${ cur === 'profile'? 'button-1234': ""  } box-1212 cursor-pointer`}  onClick={ () => navigate('/dashboard?board=profile') } > My Profile</div>
                 <div className={`${ cur === 'my-apps'? 'button-1234': ""  } box-1212 cursor-pointer`} onClick={ () => navigate('/dashboard?board=my-apps') } > My Applications</div>
                 <div className={`${ cur === 'reviews'? 'button-1234': ""  } box-1212 cursor-pointer`} onClick={ () => navigate("/dashboard?board=reviews") } >My Reviews</div>

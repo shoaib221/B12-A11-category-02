@@ -55,11 +55,11 @@ const LogIn = ({ toggle }) => {
 
             <br />
 
-            <div>
-                Do not have an account? <span onClick={() => toggle('register')} className='link-1 text-(--color4)' >Register</span>
+            <div className='text-black' >
+                Do not have an account? <span onClick={() => toggle('register')} className='link-1 text-(--color-c4) font-bold' >Register</span>
             </div>
 
-            <div className='underline cursor-pointer text-(--color4)' onClick={() => toggle("forgot")}  >
+            <div className='underline cursor-pointer text-(--color-c4) font-bold' onClick={() => toggle("forgot")}  >
                 Forgot Password?
             </div>
         </div>
@@ -81,11 +81,11 @@ const Register = ({ toggle }) => {
 
             <br />
 
-            <div>
-                Already Have an account? <span onClick={() => toggle('login')} className='link-1 text-(--color4)' >Log In</span>
+            <div className='text-black' >
+                Already Have an account? <span onClick={() => toggle('login')} className='link-1 text-(--color-c4) font-bold' >Log In</span>
             </div>
 
-            <div className='underline cursor-pointer text-(--color4)' onClick={() => toggle("forgot")}  >
+            <div className='underline cursor-pointer text-(--color-c4) font-bold' onClick={() => toggle("forgot")}  >
                 Forgot Password?
             </div>
         </div>
@@ -114,16 +114,16 @@ const ForgotPassword = ({ toggle }) => {
 
     return (
         <div className='box-1 flex flex-col justify-center items-center gap-4 w-full max-w-[500px] bg-white/80' >
-            <div className='text-3xl text-center font-bold text-(--color4)' > Reset Password </div>
-            <input type='email' placeholder='Type Your Email' value={email}
-                onChange={(e) => setEmail(e.target.value)} className='w-full' />
+            <div className='text-3xl text-center text-(--color-c4) font-bold' > Reset Password </div>
+            <input type='email' placeholder='Type Your Email' value={email} 
+                onChange={(e) => setEmail(e.target.value)} className='w-full bg-white text-black' />
 
             <button className='button-1234' onClick={ResetPassword} >Submit</button>
 
             <br />
 
-            <div onClick={() => toggle('login')} className='cursor-pointer underline text-(--color4)' >Login Instead?</div>
-            <div>Do not have an account? <span className='cursor-pointer underline text-(--color4)' onClick={() => toggle('register')} >Register</span> </div>
+            <div onClick={() => toggle('login')} className='cursor-pointer underline text-(--color-c4) font-bold' >Login Instead?</div>
+            <div className='text-black' >Do not have an account? <span className='cursor-pointer underline text-(--color-c4) font-bold' onClick={() => toggle('register')} >Register</span> </div>
         </div>
     )
 }

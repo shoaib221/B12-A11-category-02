@@ -83,16 +83,15 @@ export const ScholarshipDetail = () => {
                     </div>
                     <br />
 
-                    <div className='text-2xl text-[var(--color4)] font-bold' >{scholarship.scholarshipName}</div>
+                    <div className='text-2xl text-[var(--color4)] font-bold' >
+                        {scholarship.scholarshipName}
+                        <span className='text-(--color2) text-sm' > {scholarship.scholarshipCategory} </span>
+                    </div>
                     <div className='font-bold' >{scholarship.degree} in {scholarship.subjectCategory}</div>
-                    <div className='text-[var(--color3)]' > {scholarship.scholarshipCategory} </div>
-                    <div className='text-[var(--color3)]' > Deadline: <TimeDate date={scholarship?.deadline} /> </div>
-
-                    <br />
-                    <div className='font-bold text-xl' >University</div>
-
-                    <div >{scholarship.universityName} <span className='text-[var(--color3)]' >({scholarship.worldRank})</span> </div>
-                    <div className='text-[var(--color3)]' > {scholarship.city} , {scholarship.country} </div>
+                    
+                    <div >{scholarship.universityName} <span  >({scholarship.worldRank})</span> </div>
+                    <div  > {scholarship.city} , {scholarship.country} </div>
+                    <div className='text-(--color2)' > Deadline: <TimeDate date={scholarship?.deadline} /> </div>
 
                     <br />
 
@@ -106,9 +105,9 @@ export const ScholarshipDetail = () => {
 
                     { scholarship.description && <> <div className='font-bold text-xl' >Description</div>
 
-                    <div> { scholarship.description}  </div> </>}
+                    <div> { scholarship.description}  </div> <br /> </>}
 
-                    <br />
+                    
                     <div className='font-bold text-xl' ></div>
 
                     {/* <div>

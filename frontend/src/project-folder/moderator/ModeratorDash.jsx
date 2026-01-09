@@ -10,10 +10,10 @@ export const ModeratorDash = () => {
     return (
         <div className='flex flex-col lg:flex-row gap-4 flex-1' >
             
-            <div className='flex flex-row  lg:flex-col min-w-12 gap-2 p-2' >
-                <div className={`${ cur === 'profile'? 'button-1234': ""  } box-1212 cursor-pointer`}  onClick={ () => setCur('profile') }   >My Profile</div>
-                <div className={`${ cur === 'manage-apps'? 'button-1234': ""  } box-1212 cursor-pointer`}  onClick={ () => setCur('manage-apps') } > Manage Applications </div>
-                <div className={`${ cur === 'reviews'? 'button-1234': ""  } box-1212 cursor-pointer`}  onClick={ () => setCur('reviews') } > All Reviews </div>
+            <div className='flex flex-row  lg:flex-col lg:w-60 lg:min-w-60 gap-2 p-2' >
+                <div className={`${ cur === 'profile'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => setCur('profile') }   >My Profile</div>
+                <div className={`${ cur === 'manage-apps'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => setCur('manage-apps') } > Manage Applications </div>
+                <div className={`${ cur === 'reviews'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer`}  onClick={ () => setCur('reviews') } > All Reviews </div>
                 
             </div>
 

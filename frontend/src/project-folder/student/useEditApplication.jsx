@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { toast } from "react-toastify";
+import { ImCross } from "react-icons/im";
 
 const EditTag = ({ isOpen, application, show }) => {
     const [ education, setEducation ] = useState(null)
@@ -49,18 +50,21 @@ const EditTag = ({ isOpen, application, show }) => {
                 bg-black/40
             `}
         >
-            {application && <div className="relative w-full max-w-200 bg-white p-4 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
+            {application && <div className="relative w-full max-w-xl bg-(--color4) text-(--color1a) p-4 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
 
-                <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300" onClick={() => show(null, false)} >X</button>
-                
-                <div className="text-(--color4) font-bold text-center" > Edit Application </div>
+                <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80" onClick={() => show(null, false)} >
+                    <ImCross />
+                </button>
+
+                <br/>
+                <div className="font-bold text-(--color1) text-center" >Application ID # { application._id } </div>
                 <br/>
 
                 <div className="font-bold" > { application.scholarshipDetails.scholarshipName } </div> 
 
                 
-                <span className="font-bold" >Application Id:  </span>
-                <span> { application._id } </span>
+                
+                
 
                 <label className="block mb-3 mt-2">
                     <span className="text-sm font-bold">Eduaction</span>

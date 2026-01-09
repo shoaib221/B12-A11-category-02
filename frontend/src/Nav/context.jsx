@@ -32,7 +32,6 @@ export const DownWindowProvider = ({ children }) => {
 
 
     function handleResize() {
-    
         if( window.innerWidth > 768 ) {
             setDown1(true)
         }

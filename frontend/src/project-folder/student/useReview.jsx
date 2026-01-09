@@ -4,6 +4,7 @@ import { set } from "react-hook-form";
 import { StarRating } from "../utils/StarRating";
 import { toast } from "react-toastify";
 import { TimeDate } from "../../miscel/TimeDate";
+import { ImCross } from "react-icons/im";
 
 const ReviewTag = ({ open, app, show }) => {
     const [comment, setComment] = useState("");
@@ -44,21 +45,23 @@ const ReviewTag = ({ open, app, show }) => {
 
     return (
         <div className="fixed inset-0 z-50 block items-center justify-center bg-black/40">
-            <div className="relative w-full max-w-lg rounded-lg bg-white p-4 shadow-lg mt-8 mx-auto border-2 border-(--color4)">
+            <div className="bg-(--color4) text-(--color1a) relative w-full max-w-xl rounded-lg  p-4 shadow-lg mt-8 mx-auto border-2 border-(--color4)">
                 <button
                     onClick={() => show(null, false)}
-                    className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300"
+                    className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80"
                 >
-                    X
+                    <ImCross />
                 </button>
-                <div className="mb-2 text-xl font-bold text-center text-(--color4)">Add review</div>
+
+                <br/>
+                <div className="mb-2 text-lg font-bold text-center text-(--color1)"> Application ID # { app._id } </div>
                 
 
                 <div className="font-bold" > { app.scholarshipDetails.scholarshipName } </div>
-                <span className="font-bold" > Application ID #</span>
-                <span> { app._id } </span>
+                
+                
 
-                <br/><br/>
+                <br/>
 
                 <textarea
                     ref={textareaRef}
@@ -79,7 +82,7 @@ const ReviewTag = ({ open, app, show }) => {
                         onClick={AddReview}
                         className="button-1234"
                     >
-                        Submit
+                        Add Review
                     </button>
                 </div>
             </div>
@@ -110,6 +113,7 @@ export const useAddReview = () => {
 };
 
 
+// review detail
 
 let ReviewDetailTag = ({ review, isOpen, showReviewDetail }) => {
     const { axiosInstance } = useAuthContext()
@@ -143,11 +147,14 @@ let ReviewDetailTag = ({ review, isOpen, showReviewDetail }) => {
                 bg-black/40
             `}
         >
-            {review && <div className="relative w-full max-w-200 bg-white p-4 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
+            {review && <div className="relative w-full max-w-lg bg-(--color4) text-(--color1a) p-4 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
 
-                <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300" onClick={() => showReviewDetail(null, false)} >X</button>
+                <button className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80" onClick={() => showReviewDetail(null, false)} >
+                    <ImCross />
+                </button>
+                <br/>
 
-                <div className="text-center font-bold text-(--color4) text-2xl" >
+                <div className="text-center font-bold text-(--color1) text-xl" >
                     Review Detail
                 </div>
                 <br/>

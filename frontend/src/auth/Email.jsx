@@ -74,14 +74,14 @@ export const EmailLogin = () => {
 
     return (
         <div className='flex flex-col justify-center items-center gap-4 w-full' >
-            <div className='text-3xl font-bold text-center text-[var(--color4)]' >Log In </div>
+            <div className='text-3xl font-bold text-center text-(--color-c4)' >Log In </div>
 
             <div className='grid grid-cols-[1fr_2fr] gap-4 w-full' >
-                <label className='flex justify-end items-center' >Email</label>
-                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
-                <label className='flex justify-end items-center' >Password</label>
+                <label className='flex justify-end items-center text-(--color-c4) font-bold' >Email</label>
+                <input type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' className='bg-white text-black' />
+                <label className='flex justify-end items-center text-(--color-c4) font-bold' >Password</label>
                 <div className='relative flex flex-col justify-center items-center' >
-                    <input className='w-full' type={eye ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
+                    <input className='w-full bg-white text-black' type={eye ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
                     <button className='absolute right-0' onClick={EyeToggle}  >
                         {eye ? <FaEye /> : <FaEyeSlash />}
                     </button>
@@ -151,23 +151,23 @@ export const EmailRegister = () => {
 
     return (
         <div className='w-full' >
-            <div className='text-3xl font-bold text-center text-[var(--color4)]' >Register</div>
+            <div className='text-3xl  text-center text-(--color-c4) font-bold' >Register</div>
             <br />
 
             <div className='grid grid-cols-[1fr_2fr] gap-4' >
 
-                <label className='flex items-center justify-end' >Name</label>
-                <input type='text' required value={name} onChange={(e) => setName(e.target.value)} placeholder='Your Name' />
+                <label className='flex items-center justify-end text-(--color-c4) font-bold' >Name</label>
+                <input type='text' className='bg-white text-black' required value={name} onChange={(e) => setName(e.target.value)} placeholder='Your Name' />
 
-                <label className='flex items-center justify-end' >Photo URL</label>
-                <input type='text' value={photo} onChange={(e) => setPhoto(e.target.value)} placeholder='Photo URL' />
+                <label className='flex items-center justify-end text-(--color-c4) font-bold' >Photo URL</label>
+                <input type='text' className='bg-white text-black' value={photo} onChange={(e) => setPhoto(e.target.value)} placeholder='Photo URL' />
 
-                <label className='flex items-center justify-end' >Email</label>
-                <input type='email' required value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
+                <label className='flex items-center justify-end text-(--color-c4) font-bold' >Email</label>
+                <input type='email' className='bg-white text-black' required value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
 
-                <label className='flex items-center justify-end' >Password</label>
+                <label className='flex items-center justify-end text-(--color-c4) font-bold' >Password</label>
                 <div className='relative flex flex-col justify-center items-center' >
-                    <input required className='w-full' type={eye ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
+                    <input required className='w-full bg-white text-black' type={eye ? 'text' : 'password'} value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Password' />
                     <button className='absolute right-0' onClick={() => setEye(!eye)}  >
                         {eye ? <FaEye /> : <FaEyeSlash />}
                     </button>

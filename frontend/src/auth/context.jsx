@@ -23,10 +23,10 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
-    // Store interceptor references
+    
     const interceptors = useRef({ req: null, res: null });
 
-    // 🔥 Logout function
+    
     const LogOut = () => {
         signOut(auth)
             .then(() => {
@@ -90,8 +90,8 @@ export const AuthProvider = ({ children }) => {
             const res = await axiosInstance.post("/auth/fb-register", firebaseUser);
 
             const fullUser = {
-                ...firebaseUser,
-                role: res.data.user.role, // attach role
+                ...firebaseUser, ...res.data.user
+                
             };
 
             //console.log("Logged in user:", fullUser);

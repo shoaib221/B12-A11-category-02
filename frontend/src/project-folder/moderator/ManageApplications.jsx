@@ -12,7 +12,6 @@ export const ManageApplications = () => {
     async function fetchApplications() {
         let res = await axiosInstance.get('/scholarship/applications');
         setApplications(res.data.applications);
-
     }
 
     useEffect( () => {

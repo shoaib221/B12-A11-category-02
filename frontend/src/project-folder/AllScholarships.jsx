@@ -3,7 +3,8 @@ import { useAuthContext } from '../auth/context';
 import { useNavigate } from 'react-router-dom';
 import { FaSearch } from "react-icons/fa";
 import { toast } from 'react-toastify';
-import './project.css'
+import './project.css';
+import { Button2 } from '../react-library/Buttons/button';
 
 
 export const AllScholarships = () => {
@@ -42,12 +43,8 @@ export const AllScholarships = () => {
             <div className='text-2xl font-bold flex-1 text-center text-(--color4)' >All Scholarships</div>
             <br />
 
-
-
-
             <div className='flex gap-2 items-center px-2 justify-between' >
                 
-
                 <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} className='min-w-24 max-w-32' >
                     <option value="" >Search By</option>
                     <option value="scholarshipName" >Scholarhip Name</option>
@@ -58,17 +55,10 @@ export const AllScholarships = () => {
                     <option value="location" >Location</option>
                 </select>
 
-                
-
                 <input className='flex-1 min-w-24' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
 
                 <FaSearch title='Submit' onClick={SearchScholarships} className='text-2xl text-[var(--color4)] cursor-pointer min-w-8' />
             </div>
-
-
-
-
-
 
 
 
@@ -78,11 +68,13 @@ export const AllScholarships = () => {
 
                         key={scholarship._id} className='box-1212 p-4 rounded-lg flex justify-between items-center gap-1' >
                         <div>
-                            <div className='font-semibold text-lg' >{scholarship.scholarshipName}</div>
-                            <div className='text-sm text-gray-600' >{scholarship.universityName}</div>
+                            <div className='font-semibold text-lg text-(--color4)' >{scholarship.scholarshipName}</div>
+                            <div className='text-sm text-(--color2)' >{scholarship.universityName}</div>
                         </div>
                         <div>
-                            <button className='bg-[var(--color4)] text-white px-4 py-2 rounded-lg' onClick={() => navigate(`/scholarship-detail/${scholarship._id}`)} >Detail</button>
+                            <Button2 onClick={() => navigate(`/scholarship-detail/${scholarship._id}`)} >
+                                View Details
+                            </Button2>
                         </div>
                     </div>
                 ))}

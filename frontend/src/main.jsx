@@ -17,8 +17,7 @@ import { UpdateProfile } from './auth/UpdateProfile.jsx';
 import { Home } from './project-folder/Home.jsx';
 import { Entry } from './project-folder/Entry.jsx';
 import { DownWindowProvider } from './Nav/context.jsx';
-import { Theme } from './Theme/Theme.jsx';
-import { Pagination } from './pagination/pagination.jsx';
+import { ThemeProvider } from './react-library/Theme/Theme.jsx';
 
 import { ManageUsers } from './auth/ManageUsers.jsx';
 import { AllScholarships } from "./project-folder/AllScholarships.jsx"
@@ -35,8 +34,9 @@ const App = () => {
     return (
         <QueryClientProvider client={queryClient} >
         <BrowserRouter>
+            <ThemeProvider>
             <AuthProvider>
-                <DownWindowProvider>
+            <DownWindowProvider>
                     <ToastContainer />
                     <Routes>
                         <Route path='/' element={<Entry />} >
@@ -54,8 +54,9 @@ const App = () => {
                             <Route path="*" element={<NotFound />} />
                         </Route>
                     </Routes>
-                </DownWindowProvider>
+            </DownWindowProvider>
             </AuthProvider>
+            </ThemeProvider>
         </BrowserRouter>
         </QueryClientProvider>
     )

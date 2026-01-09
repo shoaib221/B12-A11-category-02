@@ -1,7 +1,10 @@
+
+
 import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { toast } from "react-toastify";
 import { TimeDate } from "../../miscel/TimeDate";
+import { ImCrop, ImCross } from "react-icons/im";
 
 
 const DetailTag = ({ application, isOpen, showDetail }) => {
@@ -43,17 +46,21 @@ const DetailTag = ({ application, isOpen, showDetail }) => {
                 bg-black/40 
             `}
         >
-            {application && <div className="relative w-full max-w-200 bg-white p-4 m-4 mx-auto rounded-lg shadow border-2 border-(--color4)">
+            {application && <div className="relative w-full max-w-xl bg-(--color4) text-(--color1a) p-4 m-4 mx-auto rounded-lg shadow">
 
-                <button className="cursor-pointer absolute top-2 right-4 px-4 py-2 rounded-full hover:bg-gray-300" onClick={() => showDetail(null, false)} >X</button>
+                <button className="cursor-pointer absolute top-2 right-4 px-4 py-2 rounded-full hover:opacity-70" onClick={() => showDetail(null, false)} >
+                    <ImCross />
+                </button>
 
-                <div className="text-center font-bold text-(--color4) text-2xl" >
-                    Application details
+                <br/>
+
+                <div className="text-center font-bold text-(--color1) text-lg" >
+                    Application ID # { application._id }
                 </div>
 
                 <div className="flex flex-col gap-2 mt-4" >
                     <div>
-                        <span className="font-bold" >{application.scholarshipDetails.scholarshipName}, </span>
+                        <span className="font-bold text-(--color1)" >{application.scholarshipDetails.scholarshipName}, </span>
                             
                             <span className="text-(--color3)" >{application.scholarshipDetails.scholarshipCategory}</span>
                         <div> {application.scholarshipDetails.universityName} </div>
@@ -64,26 +71,24 @@ const DetailTag = ({ application, isOpen, showDetail }) => {
                     <br/>
 
                     <div>
-                        <div className="font-bold" > Applicant: </div>
-                        <div> {application.applicantName} </div>
-                        <div> { application.applicantEmail } </div>
+                        <div className="font-bold text-(--color1)" > Applicant's Detail </div>
+                        <div> Name : {application.applicantName} </div>
+                        <div> Contact : { application.applicantEmail } </div>
                         
                     </div>
 
-                    <br/>
-
-                    <div className="font-bold" >Applicant's Educational Qualification</div>
-                    <div> { application.education ? application.education: "No data available" } </div>
-
                     
 
-                    <div className="font-bold" > Applicant's Extracurriculars </div>
+                    <div className="font-bold" >Education : </div>
+                    <div> { application.education ? application.education: "No data available" } </div>
+
+                    <div className="font-bold" >Extracurriculars : </div>
                     <div> { application.extras ? application.extras: "No data Available" } </div>
 
                     
-
+                    
                     <div className="font-bold" >
-                        Applicant's Message
+                        Message : 
                     </div>
 
                     <div>
@@ -92,30 +97,36 @@ const DetailTag = ({ application, isOpen, showDetail }) => {
 
                     <br/>
 
-
-                    <div>
-                        <span className="font-bold" > Payment Status: </span> {application.paymentStatus}
-
-                    </div>
+                    <div className="font-bold text-(--color1)" > Status </div>
                     <div> <span className="font-bold" >Submitted On:</span> <TimeDate date={application.applicationDate} /> </div>
 
-
-                    <div>
-                        <div className="font-bold" >Feedback </div>
-                        <div>{application.feedback ? application.feedback : "No feedback yet"}</div>
-
-                    </div>
-
-                    <br/>
-
                     <div> <span className="font-bold"> Application Status:</span>
-                        <select value={status} onChange={(e) => setStatus(e.target.value)} >
+                        <select value={status} onChange={(e) => setStatus(e.target.value)} 
+                            className="bg-(--color4) text-(--color1a)"
+                            >
                             <option value="pending"  >Pending</option>
                             <option value="approved"  >Approved</option>
                             <option value="processing"  >Processing</option>
                             <option value="rejected"  >Rejected</option>
                         </select>
                     </div>
+
+                    <div>
+                        <span className="font-bold" > Payment Status: </span> {application.paymentStatus}
+
+                    </div>
+                    
+                    <br/>
+
+                    <div>
+                        <div className="font-bold text-(--color1)" >Feedback </div>
+                        <div>{application.feedback ? application.feedback : "No feedback yet"}</div>
+
+                    </div>
+
+                    <br/>
+
+                    
 
 
 
@@ -199,17 +210,20 @@ const FeedbackTag = ({ isOpen, show, app }) => {
                 bg-black/40
             `}
         >
-            <div className="relative w-full max-w-150 bg-white p-6 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
+            <div className="relative w-full max-w-lg bg-(--color4) text-(--color1a) p-6 rounded-xl shadow m-4 mx-auto border-2 border-(--color4)">
 
-                <div className="absolute top-2 right-2 cursor-pointer hover:bg-gray-300 py-2 px-4 rounded-full" onClick={() => show(null, false)} > X </div>
+                <div className="absolute top-2 right-2 cursor-pointer hover:opacity-70 py-2 px-4 rounded-full" onClick={() => show(null, false)} >
+                    <ImCross />
+                </div>
 
-                <div className="text-2xl text-center font-bold text-(--color4)">Write Your Feedback</div>
+                <div className="text-lg text-center font-bold text-(--color1)"> Application ID: { app._id } </div>
 
                 <br/>
 
-                <div className="font-bold" >{ app.scholarshipDetails.scholarshipName }</div>
+                <div className="font-bold text-(--color1)" >{ app.scholarshipDetails.scholarshipName }</div>
 
-                <div>Applicant: { app.applicantName } </div>
+                <div>Applicant's Name : { app.applicantName } </div>
+                <div> Applicant's Contact: { app.applicantEmail } </div>
 
                 <br/>
 
@@ -226,7 +240,7 @@ const FeedbackTag = ({ isOpen, show, app }) => {
                 </label>
 
                 <div className="flex justify-center gap-4" >
-                    <button onClick={SendFeedback} className="button-1234" >Update</button>
+                    <button onClick={SendFeedback} className="button-1234" >Submit Feedback</button>
                     
                 </div>
             </div>

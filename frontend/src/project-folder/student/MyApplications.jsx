@@ -39,8 +39,8 @@ export const MyApplications = () => {
                     <div key={application._id} className='justify-between p-4 rounded-lg flex box-1212 gap-2 flex-col md:flex-row' >
 
                         <div>
-                            <div className='font-semibold text-lg' >{ application.scholarshipDetails.scholarshipName }</div>
-                            <div className='text-sm text-gray-600' >Status: { application.applicationStatus }</div>
+                            <div className='font-semibold text-lg text-(--color4)' >{ application.scholarshipDetails.scholarshipName }</div>
+                            <div className='text-sm text-(--color2)' >Status: { application.applicationStatus }</div>
                         </div>
 
                         <div className='flex gap-2' >

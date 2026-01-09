@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { StarRating } from "../utils/StarRating";
+import { ImCrop, ImCross } from "react-icons/im";
 
-
+// Edit review
 const ReviewModal = ({ open, review, show }) => {
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
@@ -41,18 +42,18 @@ const ReviewModal = ({ open, review, show }) => {
 
     return (
         <div className="fixed inset-0 z-50 block items-center justify-center bg-black/40 overflow-auto">
-            <div className="w-full max-w-lg relative rounded-xl bg-white p-4 shadow-lg m-4 mx-auto border-2 border-(--color4)">
+            <div className="w-full max-w-lg relative rounded-lg bg-(--color4) text-(--color1a) p-4 shadow-lg m-4 mx-auto">
 
                 <button
                     onClick={() => show(null, false)}
-                    className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300"
+                    className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80"
                 >
-                    X
+                    <ImCross />
                 </button>
 
+                <br />
 
-
-                <div className="mb-2 text-xl text-center font-bold text-(--color4)">Edit review</div>
+                <div className="mb-2 text-xl text-center font-bold text-(--color1)">Edit review</div>
 
                 <div className="font-bold" > {review.scholarshipDetails.scholarshipName} </div>
 

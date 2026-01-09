@@ -1,11 +1,7 @@
 import { updateProfile } from "firebase/auth";
 import { auth } from './firebase.config';
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { AuthContext } from "./context";
-import { Loading } from "../miscel/Loading";
-import { NotFound } from "../miscel/NotFound";
-import { Navigate, useLocation } from "react-router-dom";
-import { Grid, Phone } from "lucide-react";
 import { toast } from "react-toastify";
 import { PrivateRoute } from "./auth";
 import { DownWindowContext } from '../Nav/context';
@@ -13,30 +9,26 @@ import { FaRegSmile } from "react-icons/fa";
 import axios from "axios";
 
 
+
+
 export const UpdateProfile = () => {
-    const { user, loading, setUser } = useContext(AuthContext);
-    const location = useLocation();
-    const [name, setName] = useState("");
-    const [photo, setPhoto] = useState("");
+    const { user } = useContext(AuthContext);
+    const { DownWindowTag } = useContext(DownWindowContext)
     const [imageFile, setImageFile] = useState(null);
-    const [number, setNumber] = useState("");
-    const [email, setEmail] = useState("");
     const { axiosInstance } = useContext(AuthContext);
+    const [ profile, setProfile ] = useState( { name: "", photo: "", contact: "", bio: "", profession: "", location: "" } )
 
+    useEffect( () => {
+        if(!user) return;
 
-    useEffect(() => {
-        if (!user) return;
-        //console.log(user)
-        setName(user.displayName);
-        setPhoto(user.photoURL);
-        setNumber(user.phoneNumber);
-        setEmail(1);
-    }, [user])
+        setProfile(user);
+    }, [user] )
+    
 
 
     async function Update() {
         try {
-            const updation = { displayName: name, phoneNumber: number };
+            
 
             if (imageFile) {
                 // Convert file to base64
@@ -60,18 +52,19 @@ export const UpdateProfile = () => {
                 );
 
                 const imageUrl = res.data.data.display_url;
-                setPhoto(imageUrl);
-                updation.photoURL = imageUrl;
+                setProfile( { ...profile, photo: imageUrl } );
+                
             }
 
-            // Update Firebase profile
-            await updateProfile(auth.currentUser, updation);
+            // Update Firebase profile\
+            let res = await axiosInstance.post( "/auth/profile", profile )
+            
 
             toast.success("Profile Updated Successfully");
-            console.log("Updated profile:", updation);
+            
         } catch (error) {
-            console.error(error);
-            toast.error(error.message || "Something went wrong");
+            console.error(error.message);
+            
         }
     }
 
@@ -90,31 +83,50 @@ export const UpdateProfile = () => {
         <PrivateRoute>
             <div className="cen-ver flex-grow relative" >
                 <div className="box-1 max-w-[600px] w-full" >
-                    <div id='profile-head'  >
-                        <div className="rounded-full bg-cover bg-center h-40 w-40 relative"
-                            style={{ backgroundImage: `url(${photo})` }} >
 
-                            <div className="rounded-full bg-[var(--color1)] absolute top-[75%] right-2 cursor-pointer" >
-                                <FaRegSmile title="upload image" className="text-2xl" />
-                                <input type="file" onChange={imageChange} className="opacity-0 absolute top-0 left-0 h-full w-full" />
-                            </div>
-                        </div>
-                        <div className="cen-ver" >
-                            <span className="text-2xl font-bold" >{user?.displayName}</span>
-                            <span> {user?.email} </span>
+                    <div className="cen-hor gap-2" >
+                        
+                        <span className="font-bold text-xl text-(--color4)" > { profile.username} </span> 
+            
+                        <span> { profile.role } </span>
+                    </div>
+
+                    <br/>
+
+                    <div className="rounded-full bg-cover bg-center h-40 w-40 relative mx-auto"
+                        style={{ backgroundImage: `url(${profile.photo})` }} >
+
+                        <div className="rounded-full bg-[var(--color1)] absolute top-[75%] right-2 cursor-pointer" >
+                            <FaRegSmile title="upload image" className="text-2xl" />
+                            <input type="file" onChange={imageChange} className="opacity-0 absolute top-0 left-0 h-full w-full" />
                         </div>
                     </div>
+
+
                     <br />
 
                     <div className="grid grid-cols-[1fr_3fr] gap-4" >
                         <div className="flex justify-end items-center font-bold" >Name</div>
-                        <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your Name" />
+                        <input type="text" value={profile.name} onChange={(e) => setProfile( { ...profile, name: e.target.value } )} placeholder="Your Name" />
+
+                        <div className="flex justify-end items-center font-bold" >Bio</div>
+                        <textarea className="resize-none p-2" rows={5} type="text" value={profile.bio} onChange={(e) => setProfile( { ...profile, bio: e.target.value } ) } placeholder="Your Bio" />
+
+                        <div className="flex justify-end items-center font-bold" >Contact</div>
+                        <input type="text" value={profile.contact} onChange={(e) => setProfile({ ...profile, contact: e.target.value })} placeholder="Your Contact" />
+
+                        <div className="flex justify-end items-center font-bold" >Location</div>
+                        <input type="text" value={profile.contact} onChange={(e) => setProfile({ ...profile, location: e.target.value })} placeholder="Your Location" />
+
+                        <div className="flex justify-end items-center font-bold" >Profession</div>
+                        <input type="text" value={profile.profession} onChange={(e) => setProfile({ ...profile, profession: e.target.value })} placeholder="Your Profession" />
+
                     </div>
                     <br />
                     <button onClick={Update} className="button-1234"  >Update</button>
                 </div>
 
-                
+
 
             </div>
         </PrivateRoute>

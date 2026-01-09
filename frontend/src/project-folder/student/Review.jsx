@@ -35,7 +35,7 @@ export const Review = () => {
                 { reviews && reviews.map( (review) => (
                     <div key={review._id} className='box-1212 p-4 rounded-lg flex gap-2 flex-col md:flex-row justify-between' >
                         <div>
-                            <div className='mt-2' > { review.scholarshipDetails.scholarshipName } </div>                            
+                            <div className='mt-2 text-(--color4)' > { review.scholarshipDetails.scholarshipName } </div>                            
                         </div>
 
                         <div className='flex gap-2' >

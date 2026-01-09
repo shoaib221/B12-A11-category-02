@@ -47,21 +47,3 @@ export const Form = () => {
 
 
 
-export const Home = () => {
-    
-
-    
-        
-    
-
-    useEffect(() => {
-        
-    }, [])
-
-    return (
-        <>
-            <Form />
-        </>
-    );
-};
-

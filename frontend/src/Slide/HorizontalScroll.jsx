@@ -4,7 +4,7 @@ const Story = ({ story }) => {
 
     return (
         <div className='flex flex-col justify-between px-2 min-w-80 
-                        bg-(--color4) hover:bg-(--color4)/80 text-white p-2'  >
+                        bg-(--color4b) hover:opacity-80 text-white/70 p-2'  >
 
             <div className="flex-1 text-justify" >
                 {story.comment}
@@ -93,14 +93,10 @@ const stories = [
 
 
 export const ScrollProduct = () => {
-
-
     return (
-
         <div className='flex overflow-auto h-96 gap-2' >
             {stories && stories.map((story, index) => <Story key={index} story={story} />)}
         </div>
-
     )
 }
 

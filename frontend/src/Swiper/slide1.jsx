@@ -73,13 +73,23 @@ export function InfiniteSlider() {
                             onClick={() =>
                                 navigate(`/scholarship-detail/${elem._id}`)
                             }
-                            className="slide-item text-outline-123"
+                            className="slide-item"
                             style={{
                                 backgroundImage: `url(${elem.image})`, backgroundSize: "cover", height: "100%",
-                                backgroundPosition: "center", backgroundRepeat: "no-repeat", backgroundColor: 'var(--color1)', textAlign: 'center'
+                                backgroundPosition: "center", backgroundRepeat: "no-repeat", textAlign: 'center',
+                                display: 'flex', alignItems: 'flex-end', justifyContent: 'center', cursor: 'pointer'
                             }}
                         >
-                            {elem.scholarshipName}
+                            {/* Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+
+                            {/* Title */}
+                            <div className="relative z-10 flex  p-4">
+                                <div className="font-bold text-white tracking-wide">
+                                    {elem.scholarshipName}
+                                </div>
+                            </div>
+                            
                         </div>
                     </SwiperSlide>
                 ))}

@@ -8,6 +8,7 @@ import './Nav.css';
 import { DownWindowContext } from './context.jsx';
 import { Breaker } from '../miscel/Breaker.jsx';
 import { FaGraduationCap } from "react-icons/fa6";
+import { useThemeContext } from '../react-library/Theme/Theme.jsx';
 
 
 export const Logo = () => {
@@ -25,6 +26,7 @@ export const Nav = () => {
     const { user } = useContext(AuthContext);
     const { down1, DownWindow, navi, LargeScreenTag } = useContext(DownWindowContext)
     const [opener1, setOpener1] = useState(false)
+    const { ThemeButton2 } = useThemeContext();
 
     function Opener1() {
         setOpener1(prev => !prev)
@@ -62,6 +64,8 @@ export const Nav = () => {
                         <Theme /> */}
 
                         <div onClick={() => navigate('/dashboard')} className='p-1 text-center w-full'  >Dashboard</div>
+                        <Breaker />
+                        <ThemeButton2 />
                         <Breaker />
                         <SignOut />
                         

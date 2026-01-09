@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import { ImCross } from "react-icons/im";
 
 
 let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
@@ -62,12 +63,13 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
         >
 
 
-            <div className="w-full mx-auto max-w-160 bg-white relative p-8 rounded-lg" >
-                <div className="absolute right-4 top-4 cursor-pointer" onClick={() => show(null, false)} >
-                    X
+            <div className="w-full mx-auto max-w-160 bg-(--color4) text-(--color1a) relative p-8 rounded-lg" >
+                <div className="absolute right-4 top-4 cursor-pointer hover:opacity-70" onClick={() => show(null, false)} >
+                    <ImCross />
                 </div>
+                <br/>
 
-                <div className="text-center text-(--color4) font-bold" > {scholarship?.scholarshipName} </div>
+                <div className="text-center text-(--color1) font-bold" > {scholarship?.scholarshipName} </div>
                 <br />
 
                 <form noValidate>
@@ -82,7 +84,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. Oxford University"
                         />
-                        {errors.universityName && <p className="text-red-600 text-sm mt-1">{errors.universityName.message}</p>}
+                        {errors.universityName && <p className="text-(--color5) text-sm mt-1">{errors.universityName.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -93,7 +95,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. https://example.com/avatar.jpg"
                         />
-                        {errors.image && <p className="text-red-600 text-sm mt-1">{errors.image.message}</p>}
+                        {errors.image && <p className="text-(--color5) text-sm mt-1">{errors.image.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -104,7 +106,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. Argentina"
                         />
-                        {errors.country && <p className="text-red-600 text-sm mt-1">{errors.country.message}</p>}
+                        {errors.country && <p className="text-(--color5) text-sm mt-1">{errors.country.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -115,7 +117,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. Buens Aires"
                         />
-                        {errors.city && <p className="text-red-600 text-sm mt-1">{errors.city.message}</p>}
+                        {errors.city && <p className="text-(--color5) text-sm mt-1">{errors.city.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -126,7 +128,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. 128"
                         />
-                        {errors.worldRank && <p className="text-red-600 text-sm mt-1">{errors.worldRank.message}</p>}
+                        {errors.worldRank && <p className="text-(--color5) text-sm mt-1">{errors.worldRank.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -137,7 +139,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. Mathematics"
                         />
-                        {errors.subjectCategory && <p className="text-red-600 text-sm mt-1">{errors.subjectCategory.message}</p>}
+                        {errors.subjectCategory && <p className="text-(--color5) text-sm mt-1">{errors.subjectCategory.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -148,7 +150,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. Full-funded"
                         />
-                        {errors.scholarshipCategory && <p className="text-red-600 text-sm mt-1">{errors.scholarshipCategory.message}</p>}
+                        {errors.scholarshipCategory && <p className="text-(--color5) text-sm mt-1">{errors.scholarshipCategory.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -159,7 +161,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. Bachelor's"
                         />
-                        {errors.degree && <p className="text-red-600 text-sm mt-1">{errors.degree.message}</p>}
+                        {errors.degree && <p className="text-(--color5) text-sm mt-1">{errors.degree.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -170,7 +172,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. 1000"
                         />
-                        {errors.tuitionFees && <p className="text-red-600 text-sm mt-1">{errors.tuitionFees.message}</p>}
+                        {errors.tuitionFees && <p className="text-(--color5) text-sm mt-1">{errors.tuitionFees.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -181,7 +183,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. 20"
                         />
-                        {errors.applicationFees && <p className="text-red-600 text-sm mt-1">{errors.applicationFees.message}</p>}
+                        {errors.applicationFees && <p className="text-(--color5) text-sm mt-1">{errors.applicationFees.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -192,7 +194,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. 20"
                         />
-                        {errors.serviceCharge && <p className="text-red-600 text-sm mt-1">{errors.serviceCharge.message}</p>}
+                        {errors.serviceCharge && <p className="text-(--color5) text-sm mt-1">{errors.serviceCharge.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -203,7 +205,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
                             placeholder="i.g. 31/12/2026"
                         />
-                        {errors.deadline && <p className="text-red-600 text-sm mt-1">{errors.deadline.message}</p>}
+                        {errors.deadline && <p className="text-(--color5) text-sm mt-1">{errors.deadline.message}</p>}
                     </label>
 
 
@@ -216,7 +218,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                             placeholder="Write about it..."
                             rows={5}
                         />
-                        {errors.deadline && <p className="text-red-600 text-sm mt-1">{errors.deadline.message}</p>}
+                        {errors.deadline && <p className="text-(--color5) text-sm mt-1">{errors.deadline.message}</p>}
                     </label>
 
 
@@ -230,7 +232,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         type="submit"
                         disabled={isSubmitting}
                         onClick={handleSubmit(UpdateScholarship)}
-                        className="button-1234 hover:opacity-90 disabled:opacity-60"
+                        className="font-bold hover:opacity-70 disabled:opacity-60"
                     >
                         {isSubmitting ? "Updating..." : "Update"}
                     </button>
@@ -239,7 +241,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <button
                             onClick={DeleteScholarship}
                             disabled={isSubmitting}
-                            className="button-1234" style={{ backgroundColor: 'var(--color5)' }}
+                            className="font-bold hover:opacity-70" 
                         >
                             Delete
                         </button>

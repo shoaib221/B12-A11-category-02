@@ -12,6 +12,20 @@
 }
 
 .button-1234 {
+    background-color: var(--color1);
+    color: var(--color4);
+    text-align: center;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: .5rem;
+    cursor: pointer;
+    min-width: 5rem;
+    font-weight: bold;
+}
+
+.button-1234sel {
     background-color: var(--color4);
     color: var(--color1);
     text-align: center;
@@ -19,17 +33,18 @@
     padding-bottom: .5rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    border-radius: .7rem;
+    border-radius: .5rem;
     cursor: pointer;
-    min-width: 6rem;
+    min-width: 5rem;
+    font-weight: bold;
 }
 
 .button-1234:hover {
-    opacity: 85%;
+    opacity: .7;
 }
 
 .box-1212 {
-    box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 8px 15px -3px var(--color2a);
     padding-top: .5rem;
     padding-bottom: .5rem;
     padding-left: 1rem;

@@ -1,0 +1,65 @@
+
+
+[color-theme="light"] {
+	--color1: white;
+	--color1a: #b8b8b8;
+	--color2: black;
+	--color2a: rgb(0,0,0, .5);
+	--color3: #d2d2d2;
+	--color3a: #a9a9a9;
+	--color4: #00053d;
+	--color4a: #00053d;
+	--color4b: #00053d;
+	--color5: #c40000;
+	--color6: #a45200;
+	--color7: #003c29;
+	--color7a: rgb(145, 247, 145);
+	--shadow-1: rgba(0, 0, 0, 0.2);
+	--shadow-2: rgba(0, 0, 0, 0.4);
+	
+
+}
+
+
+[color-theme="dark"] {
+	--color1: #00053d;
+	--color1a: rgb(0, 7, 89);
+	--color2: rgb(177, 177, 177);
+	--color2a: rgb(177, 177, 177, .5);
+	--color3: #414141;
+	--color4: #ffffff;
+	--color4a: #cecece;
+	--color4b: #000649;
+	--color5: #da0000;
+	--shadow-1: rgba(255, 255, 255, 0.2);
+	--shadow-2: rgba(255, 255, 255, 0.15);
+}
+
+
+[color-theme="chocolate"] {
+	--color1: rgb(47, 0, 0);
+	--color2: white;
+	--color3: #abaab1;
+	--color4: #5764fb;
+	--shadow-1: rgba(255, 255, 255, 0.2);
+	--shadow-2: rgba(255, 255, 255, 0.15);
+}
+
+[color-theme="sea"] {
+	--color1: rgb(17, 0, 57);
+	--color2: white;
+	--color3: #abaab1;
+	--color4: #5764fb;
+	--shadow-1: rgba(255, 255, 255, 0.2);
+	--shadow-2: rgba(255, 255, 255, 0.15);
+}
+
+
+[color-theme="sky"] {
+	--color1: rgb(85, 124, 255);
+	--color2: rgb(0, 0, 0);
+	--color3: #abaab1;
+	--color4: #5764fb;
+	--shadow-1: rgba(255, 255, 255, 0.2);
+	--shadow-2: rgba(255, 255, 255, 0.15);
+}

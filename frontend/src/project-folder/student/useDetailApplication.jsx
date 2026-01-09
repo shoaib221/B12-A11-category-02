@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useAuthContext } from "../../auth/context";
 import { set } from "react-hook-form";
 import { toast } from "react-toastify";
+import { ImCross } from "react-icons/im";
+import { Button3 } from "../../react-library/Buttons/button";
 
 
 let DetailTag = ( { application, show, showDetail, refetch } ) => {
@@ -48,15 +50,19 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
                 bg-black/40 overflow-auto
             `}
         >
-            {application && <div className={`relative w-full max-w-200 bg-white p-4 rounded-lg shadow 
-                border-2 border-(--color4) m-4 mx-auto mx-auto`}>
+            {application && <div className={`relative w-full max-w-200 bg-(--color4) text-(--color1a) p-4 rounded-lg shadow 
+                border-2 border-(--color4) m-4 mx-auto`}>
 
-                <button onClick={() => showDetail(null, false)} className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:bg-gray-300" >X</button>
+                <button onClick={() => showDetail(null, false)} className="rounded-full absolute top-2 right-2 py-2 px-4 cursor-pointer hover:opacity-80" >
+                    <ImCross />
+                </button>
 
-                <div className="text-2xl text-(--color4) text-center font-bold" >Application Detail</div>
                 <br/>
 
-                <div className="font-bold"     >
+                <div className="text-lg text-(--color1) text-center font-bold" >Application ID # {application._id}</div>
+                <br/>
+
+                <div className="font-bold text-(--color1)"     >
 
                     {application.scholarshipDetails.scholarshipName}
                     <span className="text-sm font-normal ml-2" >( {application.scholarshipDetails.scholarshipCategory} )</span>
@@ -78,25 +84,31 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
                 </div>
 
                 
-
+                
                 
 
                 <br />
 
-                <div className="font-bold" >Applicant</div>
+                <div className="font-bold text-(--color1)" >Applicant's Detail</div>
                 <div>
+                    <span className="font-bold" > Name :  </span>
                     { application.applicantName }
                 </div>
 
                 <div>
-                    <div className="font-bold" >Applicant's Education: </div>
+                    <span className="font-bold" > Contact :  </span>
+                    { application.applicantEmail }
+                </div>
+
+                <div>
+                    <div className="font-bold" >Education : </div>
                     <div>
                         {application.education ? application.education: "No data available"}
                     </div>
                 </div>
 
                 <div>
-                    <div className="font-bold" >Applicant's Extracurriculars: </div>
+                    <div className="font-bold" >Extracurriculars : </div>
                     <div>
                         {application.extras? application.extras: "No data available" }
                     </div>
@@ -104,7 +116,7 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
 
 
                 <div>
-                    <div className="font-bold" >Applicant's Message: </div>
+                    <div className="font-bold" >Message : </div>
                     <div>
                         {application.message ? application.message: "No message available" }
                     </div>
@@ -113,23 +125,27 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
                 <br />
 
 
+                <div className="font-bold text-(--color1)" >Payments</div>
+
                 <div>
                     <span className="font-bold" >Tuition Fees:  </span>
-                    {application.scholarshipDetails.tuitionFees}
+                    {application.scholarshipDetails.tuitionFees} USD
                 </div>
 
 
                 <div>
                     <span className="font-bold" >Application Fees: </span>
-                    {application.scholarshipDetails.applicationFees}
+                    {application.scholarshipDetails.applicationFees} USD
                 </div>
 
                 <div>
                     <span className="font-bold" > Service Charge: </span>
-                    {application.scholarshipDetails.applicationFees}
+                    {application.scholarshipDetails.applicationFees} USD
                 </div>
 
                 <br />
+
+                <div className="font-bold text-(--color1)" >Status</div>
 
                 <div>
                     <span className="font-bold" >Application Status: </span>
@@ -142,7 +158,7 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
                 </div>
                 <br />
 
-                <div className="font-bold" >Feedback</div>
+                <div className="font-bold text-(--color1)" >Feedback</div>
                 <div>
                     {application.feedback ? application.feedback : "No feedback yet"}
                 </div>
@@ -151,7 +167,7 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
 
                 <div className="flex justify-center gap-4" >
                     {application.paymentStatus === 'unpaid' && <button onClick={Pay} className="bg-blue-600 text-white p-2 rounded-xl min-w-24 cursor-pointer" >Pay</button>}
-                    {application.applicationStatus === 'pending' && <button onClick={DeleteAopplication} className="bg-red-800 text-white p-2 rounded-xl min-w-24 cursor-pointer" >Delete</button>}
+                    {application.applicationStatus === 'pending' && <Button3 onClick={DeleteAopplication}  >Delete</Button3>}
 
 
                 </div>

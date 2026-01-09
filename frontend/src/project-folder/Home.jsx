@@ -10,6 +10,7 @@ import { ScrollProduct } from '../Slide/HorizontalScroll.jsx';
 import { Timeline } from '../daisyUi/Timeline.jsx';
 import { Chart } from '../Charts/charts.jsx';
 import { FAQs } from "../miscel/FAQs.jsx"
+import { Banner12 } from '../react-library/banner/banner1.jsx';
 
 
 
@@ -35,7 +36,7 @@ export const Home = () => {
     return (
         <div className='block flex-grow relative flex-1 w-full' >
             
-            <Banner2 />
+            <Banner12 />
             <br /><br />
             <div className='text-center text-2xl font-bold' > <span className='text-[var(--color4)]' >Top</span>  Scholarships</div>
             <InfiniteSlider />
