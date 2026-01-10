@@ -1,10 +1,11 @@
 import React from 'react';
 import { useAuthContext } from '../../auth/context';
 import { useReviewDetail } from "../student/useReview.jsx"
+import { Loading } from '../../miscel/Loading.jsx';
 
 export const AllReviews = () => {
     const { axiosInstance, user } = useAuthContext();
-    const [ reviews, setReviews ] = React.useState([]);
+    const [ reviews, setReviews ] = React.useState(null);
     const { ReviewDetailTag, showReviewDetail } = useReviewDetail()
 
     async function FetchReviews() {
@@ -23,11 +24,11 @@ export const AllReviews = () => {
             <ReviewDetailTag />
             
             <div className='mt-4 flex flex-col gap-4' >
-                { reviews && reviews.map( (review) => (
+                { reviews ? reviews.map( (review) => (
                     <div key={review._id} className='gap-2 justify-between box-1212 p-4 rounded-lg flex-col md:flex-row flex' >
                         <div>
-                            <div className='font-semibold text-lg' > { review.scholarshipDetails.scholarshipName }</div>
-                            <div className='text-sm text-gray-600' >Reviewer: { review.reviewerName }</div>
+                            <div className='font-semibold text-lg text-(--color4)' > { review.scholarshipDetails.scholarshipName }</div>
+                            <div className='text-sm text-(--color2)' >Reviewer: { review.reviewerName }</div>
                             
                         </div>
 
@@ -37,7 +38,10 @@ export const AllReviews = () => {
                         </div>
 
                     </div>
-                )) }
+                ))
+                :
+                <Loading />
+             }
             </div>
         </div>
     );

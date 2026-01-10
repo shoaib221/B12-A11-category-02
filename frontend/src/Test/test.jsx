@@ -22,9 +22,9 @@ export const Test = () => {
 
     return (
         <PrivateRoute>
-            <div className='flex flex-col gap-2' >
-                {error && <p className='text-red-600' >{error}</p>}
-                {data && data.map(elem => <p className='border' key={elem._id} >{elem.name}</p>)}
+            <div className='h-[50rem] sticky top-1 self-start border' >
+                
+                Hello
             </div>
         </PrivateRoute>
     );

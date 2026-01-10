@@ -80,7 +80,7 @@ const ReviewModal = ({ open, review, show }) => {
 
                     <button
                         onClick={UpdateReview}
-                        className="button-1234"
+                        className="button-91"
                     >
                         Update
                     </button>

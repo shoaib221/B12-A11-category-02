@@ -80,7 +80,7 @@ const ReviewTag = ({ open, app, show }) => {
 
                     <button
                         onClick={AddReview}
-                        className="button-1234"
+                        className="button-91"
                     >
                         Add Review
                     </button>
@@ -234,7 +234,7 @@ let ReviewDetailTag = ({ review, isOpen, showReviewDetail }) => {
 
                 <div className="flex justify-center gap-4 mt-4" >
 
-                    <button className="button-1234" style={{ backgroundColor: 'var(--color5)' }} onClick={DeleteReview} >Delete</button>
+                    <button className="button-91"  onClick={DeleteReview} >Delete</button>
                 </div>
             </div>}
         </div>

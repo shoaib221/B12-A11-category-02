@@ -166,8 +166,8 @@ let DetailTag = ( { application, show, showDetail, refetch } ) => {
                 <br />
 
                 <div className="flex justify-center gap-4" >
-                    {application.paymentStatus === 'unpaid' && <button onClick={Pay} className="bg-blue-600 text-white p-2 rounded-xl min-w-24 cursor-pointer" >Pay</button>}
-                    {application.applicationStatus === 'pending' && <Button3 onClick={DeleteAopplication}  >Delete</Button3>}
+                    {application.paymentStatus === 'unpaid' && <button onClick={Pay} className="button-91" >Pay</button>}
+                    {application.applicationStatus === 'pending' && <button className="button-91" onClick={DeleteAopplication}  >Delete</button>}
 
 
                 </div>

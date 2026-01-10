@@ -44,7 +44,7 @@
 }
 
 .box-1212 {
-    box-shadow: 0 8px 15px -3px var(--color2a);
+    box-shadow: 0 4px 8px -3px var(--color2a);
     padding-top: .5rem;
     padding-bottom: .5rem;
     padding-left: 1rem;

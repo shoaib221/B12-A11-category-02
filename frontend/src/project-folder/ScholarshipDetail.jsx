@@ -1,11 +1,10 @@
 import React, { use, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuthContext } from '../auth/context';
-import { Review } from './student/Review';
 import { PrivateRoute } from '../auth/auth';
-import { Breaker } from '../miscel/Breaker';
 import { toast } from 'react-toastify';
 import { TimeDate } from '../miscel/TimeDate';
+import { Loading } from '../miscel/Loading';
 
 
 
@@ -35,7 +34,7 @@ export const ScholarshipDetail = () => {
     };
 
     useEffect(() => {
-        if(!scholarship) return;
+        if (!scholarship) return;
         fetchReviews();
 
     }, [scholarship])
@@ -49,7 +48,7 @@ export const ScholarshipDetail = () => {
 
     const Apply = async () => {
 
-        if(!education || !extras || !message ) {
+        if (!education || !extras || !message) {
             toast.error("Fill up all the fields");
             return;
         }
@@ -72,42 +71,46 @@ export const ScholarshipDetail = () => {
         }
     }
 
+    if (!scholarship) return <Loading />
+
 
     return (
         <PrivateRoute>
-            <div className='max-w-[700px] mx-auto flex-1 w-full' >
-                {scholarship && <>
+            <div className="mx-auto flex-1 w-full  gap-4 flex flex-col lg:flex-row" >
 
-                    <div className='h-48 lg:h-60 w-full bg-cover bg-left bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} >
+                <div className="w-full lg:max-w-[32rem] lg:min-w-[32rem] self-start lg:sticky top-0 px-2" >
+                    <div className='h-72 lg:h-90 w-full rounded-lg bg-cover bg-center bg-no-repeat' style={{ backgroundImage: `url(${scholarship.image})` }} ></div>
+                    <br/>
+                    <div className='text-xl text-(--color4) font-bold' > {scholarship.universityName} <span  >({scholarship.worldRank})</span> </div>
+                    <div> {scholarship.city} , {scholarship.country}</div>
+                </div>
 
-                    </div>
-                    <br />
+                <div className='px-2 flex-grow' >
 
-                    <div className='text-2xl text-[var(--color4)] font-bold' >
+                    <div className='text-xl text-(--color4) font-bold' >
                         {scholarship.scholarshipName}
                         <span className='text-(--color2) text-sm' > {scholarship.scholarshipCategory} </span>
                     </div>
                     <div className='font-bold' >{scholarship.degree} in {scholarship.subjectCategory}</div>
+
                     
-                    <div >{scholarship.universityName} <span  >({scholarship.worldRank})</span> </div>
-                    <div  > {scholarship.city} , {scholarship.country} </div>
                     <div className='text-(--color2)' > Deadline: <TimeDate date={scholarship?.deadline} /> </div>
 
                     <br />
 
-                    <div className='font-bold text-xl' > Expenses </div>
+                    <div className='text-xl text-(--color4) font-bold' > Expenses </div>
                     <div> Application Fees: {scholarship.applicationFees} USD </div>
                     <div> Service Charge: {scholarship.serviceCharge} USD </div>
                     <div> Tuition Fees: {scholarship.tuitionFees} USD </div>
-                    <div> Net payable: { scholarship.applicationFees + scholarship.serviceCharge } USD </div>
+                    <div> Net payable: {scholarship.applicationFees + scholarship.serviceCharge} USD </div>
 
-                    <br/>
+                    <br />
 
-                    { scholarship.description && <> <div className='font-bold text-xl' >Description</div>
+                    {scholarship.description && <> <div className='font-bold text-xl' >Description</div>
 
-                    <div> { scholarship.description}  </div> <br /> </>}
+                        <div> {scholarship.description}  </div> <br /> </>}
 
-                    
+
                     <div className='font-bold text-xl' ></div>
 
                     {/* <div>
@@ -117,56 +120,58 @@ export const ScholarshipDetail = () => {
                     <br />
 
                     {user.role === 'student' && <>
-                        <div className="text-2xl text-[var(--color4)] font-bold"  >Apply Now</div>
-                        <br/>
-                        <div className='font-bold text-xl' >Education</div>
+                        <div className="text-xl text-[var(--color4)] font-bold"  >Apply Now</div>
+                        <br />
+                        <div className='font-bold' >Education</div>
                         <textarea
                             value={education} onChange={(e) => setEducation(e.target.value)}
                             placeholder='Write your educational qualifications'
-                            className='resize-none block w-full max-w-[600px]'
-                            rows={3}
+                            className='resize-none block w-full max-w-[600px] p-2'
+                            rows={5}
                             required
                         ></textarea>
                         <br />
-                        <div className='font-bold text-xl' >Extra Curriculars</div>
+                        <div className='font-bold' >Extra Curriculars</div>
                         <textarea
                             value={extras} onChange={(e) => setExtras(e.target.value)}
                             placeholder='Write your hobbies'
-                            className='resize-none block w-full max-w-[600px]'
-                            rows={3}
+                            className='resize-none block w-full max-w-[600px] p-2'
+                            rows={5}
                         ></textarea>
 
                         <br />
-                        <div className='font-bold text-xl' >Message</div>
+                        <div className='font-bold' >Message</div>
                         <textarea
                             value={message} onChange={(e) => setMessage(e.target.value)}
                             placeholder='Want to add any message?'
-                            className='resize-none block w-full max-w-[600px]'
-                            rows={3}
+                            className='resize-none block w-full max-w-[600px] p-2'
+                            rows={5}
                         ></textarea>
 
                         <br />
                         <button
-                        onClick={Apply}
-                        className='button-1234' >Submit</button>
+                            onClick={Apply}
+                            className='button-91' >Submit</button>
 
                     </>}
 
-                    <br/><br/><br/>
+                    <br /><br /><br />
 
-                    <div className='text-2xl font-bold text-[var(--color4)]' >Top Reviews</div>
+                    <div className='text-xl font-bold text-[var(--color4)]' >Top Reviews</div>
 
-                    { reviews && reviews.map( (review) => (
-                    <div key={review._id} className='box-1212 p-4 mb-4 rounded-lg flex justify-between' >
-                        <div>
-                            <div className='mt-2 flex gap-2' > { [ ...Array( review.rating ) ].map( elem => <span key={elem} className='text-orange-500' >★</span> ) } </div>
-                            <div className='mt-2' > { review.comment } </div>
-                            <div className='text-[var(--color3)]' > Reviewer: { review.reviewerName } </div>
+                    {reviews && reviews.map((review) => (
+                        <div key={review._id} className='box-1212 p-4 mb-4 rounded-lg flex justify-between' >
+                            <div>
+                                <div className='mt-2 flex gap-2' > {[...Array(review.rating)].map(elem => <span key={elem} className='text-orange-500' >★</span>)} </div>
+                                <div className='mt-2' > {review.comment} </div>
+                                <div className='text-(--color2a)' > Reviewer: {review.reviewerName} </div>
+                            </div>
                         </div>
-                    </div>
-                )) }
+                    ))}
 
-                </>}
+                </div>
+
+
             </div>
         </PrivateRoute>
     );

@@ -91,9 +91,9 @@ export const UpdateProfile = () => {
                         <span> { profile.role } </span>
                     </div>
 
-                    <br/>
+                    <br/><br/>
 
-                    <div className="rounded-full bg-cover bg-center h-40 w-40 relative mx-auto"
+                    <div className="rounded-full bg-cover bg-center h-40 w-40 relative mx-auto my-4"
                         style={{ backgroundImage: `url(${profile.photo})` }} >
 
                         <div className="rounded-full bg-[var(--color1)] absolute top-[75%] right-2 cursor-pointer" >
@@ -103,7 +103,7 @@ export const UpdateProfile = () => {
                     </div>
 
 
-                    <br />
+                    <br /><br/>
 
                     <div className="grid grid-cols-[1fr_3fr] gap-4" >
                         <div className="flex justify-end items-center font-bold" >Name</div>
@@ -116,7 +116,7 @@ export const UpdateProfile = () => {
                         <input type="text" value={profile.contact} onChange={(e) => setProfile({ ...profile, contact: e.target.value })} placeholder="Your Contact" />
 
                         <div className="flex justify-end items-center font-bold" >Location</div>
-                        <input type="text" value={profile.contact} onChange={(e) => setProfile({ ...profile, location: e.target.value })} placeholder="Your Location" />
+                        <input type="text" value={profile.location} onChange={(e) => setProfile({ ...profile, location: e.target.value })} placeholder="Your Location" />
 
                         <div className="flex justify-end items-center font-bold" >Profession</div>
                         <input type="text" value={profile.profession} onChange={(e) => setProfile({ ...profile, profession: e.target.value })} placeholder="Your Profession" />

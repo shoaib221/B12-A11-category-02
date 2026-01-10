@@ -72,16 +72,15 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                 <div className="text-center text-(--color1) font-bold" > {scholarship?.scholarshipName} </div>
                 <br />
 
+
                 <form noValidate>
-
-
 
                     <label className="block mb-3">
                         <span className="text-sm font-bold">University Name</span>
                         <input
                             type="text"
                             {...register("universityName", { required: "University name is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. Oxford University"
                         />
                         {errors.universityName && <p className="text-(--color5) text-sm mt-1">{errors.universityName.message}</p>}
@@ -92,10 +91,10 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("image", { required: "Image URL is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg  px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. https://example.com/avatar.jpg"
                         />
-                        {errors.image && <p className="text-(--color5) text-sm mt-1">{errors.image.message}</p>}
+                        {errors.image && <p className="text-(--color5) text-sm mt-1">{errors.image?.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -103,7 +102,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("country", { required: "Country is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. Argentina"
                         />
                         {errors.country && <p className="text-(--color5) text-sm mt-1">{errors.country.message}</p>}
@@ -114,7 +113,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("city", { required: "City is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. Buens Aires"
                         />
                         {errors.city && <p className="text-(--color5) text-sm mt-1">{errors.city.message}</p>}
@@ -125,7 +124,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("worldRank", { required: "World Rank is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. 128"
                         />
                         {errors.worldRank && <p className="text-(--color5) text-sm mt-1">{errors.worldRank.message}</p>}
@@ -136,7 +135,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("subjectCategory", { required: "Subject Category is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg  px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. Mathematics"
                         />
                         {errors.subjectCategory && <p className="text-(--color5) text-sm mt-1">{errors.subjectCategory.message}</p>}
@@ -147,7 +146,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("scholarshipCategory", { required: "Scholarship category is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. Full-funded"
                         />
                         {errors.scholarshipCategory && <p className="text-(--color5) text-sm mt-1">{errors.scholarshipCategory.message}</p>}
@@ -158,7 +157,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("degree", { required: "Degree is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. Bachelor's"
                         />
                         {errors.degree && <p className="text-(--color5) text-sm mt-1">{errors.degree.message}</p>}
@@ -169,10 +168,10 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="number"
                             {...register("tuitionFees", { required: "Tuition fees is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. 1000"
                         />
-                        {errors.tuitionFees && <p className="text-(--color5) text-sm mt-1">{errors.tuitionFees.message}</p>}
+                        {errors.tuitionFees && <p className="text-(--color5) text-sm mt-1">{errors.tuitionFees?.message}</p>}
                     </label>
 
                     <label className="block mb-3">
@@ -180,7 +179,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="number"
                             {...register("applicationFees", { required: "Application fees is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. 20"
                         />
                         {errors.applicationFees && <p className="text-(--color5) text-sm mt-1">{errors.applicationFees.message}</p>}
@@ -191,7 +190,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="number"
                             {...register("serviceCharge", { required: "Service charge is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. 20"
                         />
                         {errors.serviceCharge && <p className="text-(--color5) text-sm mt-1">{errors.serviceCharge.message}</p>}
@@ -202,7 +201,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <input
                             type="text"
                             {...register("deadline", { required: "Deadline is required", minLength: { value: 2, message: "Too short" } })}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring ${errors.name ? "border-red-500" : ""}`}
                             placeholder="i.g. 31/12/2026"
                         />
                         {errors.deadline && <p className="text-(--color5) text-sm mt-1">{errors.deadline.message}</p>}
@@ -214,7 +213,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <textarea
                             type="text"
                             {...register("description")}
-                            className={`mt-1 block w-full rounded-lg border px-3 py-2 focus:outline-none focus:ring resize-none ${errors.name ? "border-red-500" : "border-gray-300"}`}
+                            className={`mt-1 block w-full rounded-lg px-3 py-2 focus:outline-none focus:ring resize-none ${errors.name ? "border-red-500" : ""}`}
                             placeholder="Write about it..."
                             rows={5}
                         />
@@ -232,7 +231,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         type="submit"
                         disabled={isSubmitting}
                         onClick={handleSubmit(UpdateScholarship)}
-                        className="font-bold hover:opacity-70 disabled:opacity-60"
+                        className="font-bold text-(--color1) hover:opacity-70 disabled:opacity-60"
                     >
                         {isSubmitting ? "Updating..." : "Update"}
                     </button>
@@ -241,7 +240,7 @@ let UpdateTag1 = ({ isOpen, scholarship, show, refetch }) => {
                         <button
                             onClick={DeleteScholarship}
                             disabled={isSubmitting}
-                            className="font-bold hover:opacity-70" 
+                            className="font-bold hover:opacity-70 text-(--color1)"
                         >
                             Delete
                         </button>

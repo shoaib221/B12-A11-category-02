@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { AdminRoute } from "../../auth/auth";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { Loading } from "../../miscel/Loading";
 
 
 
@@ -42,7 +43,7 @@ export const RoleChange = ({ user, refetch }) => {
         <div className="box-1212 gap-4 grid grid-cols-[1fr] md:grid-cols-[1fr_1fr_1fr] mb-2" >
             <div className="cen-ver gap-1" >
                 <div className="font-bold" >{user.name}</div>
-                <div className="text-[var(--color3)]" > {user.username} </div>
+                <div className="text-(--color2a)" > {user.username} </div>
             </div>
 
             <div className="gap-1 font-bold cen-ver">
@@ -55,7 +56,7 @@ export const RoleChange = ({ user, refetch }) => {
 
             <div className="cen-hor gap-1" >
                 <button className="button-1234" onClick={Update} >Update</button>
-                <button className="button-1234" style={{ backgroundColor: 'var(--color5)' }} onClick={DeleteUser} >Delete</button>
+                <button className="button-1234"  onClick={DeleteUser} >Delete</button>
             </div>
         </div>
     )
@@ -66,7 +67,7 @@ export const RoleChange = ({ user, refetch }) => {
 export const ManageUsers = () => {
     const { axiosInstance, user } = useAuthContext();
     const [filter, setFilter] = useState("")
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState(null)
 
 
 
@@ -126,7 +127,10 @@ export const ManageUsers = () => {
 
 
 
-                {users.map((elem) => <RoleChange refetch={fetchUsers} user={elem} />)}
+                { users ? users.map((elem) => <RoleChange refetch={fetchUsers} user={elem} />)
+                :
+                <Loading />
+                }
 
             </div>
         </AdminRoute>

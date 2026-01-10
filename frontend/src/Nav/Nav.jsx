@@ -63,8 +63,8 @@ export const Nav = () => {
                         <Breaker />
                         <Theme /> */}
 
-                        <div onClick={() => navigate('/dashboard')} className='p-1 text-center w-full'  >Dashboard</div>
-                        <Breaker />
+                        
+                        
                         <ThemeButton2 />
                         <Breaker />
                         <SignOut />

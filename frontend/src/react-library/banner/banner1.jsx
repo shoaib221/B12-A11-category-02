@@ -126,7 +126,7 @@ export function Banner12() {
 
             <div className='italic' >
                 Finding the right scholarship can be life-changing, but searching for it shouldn’t feel overwhelming. Our platform is designed to make scholarship hunting simple, smart, and stress-free. We gather trusted scholarships from around the world and present them in one place, so students can easily discover opportunities that match their academic goals, skills, and backgrounds. Whether you are a high-school student, an undergraduate, or a graduate applicant, we help you stay informed about deadlines, eligibility, and application tips. With the right guidance and resources, your dream education becomes more achievable. Unlock your future by finding the scholarship that fits you.
-                Search Scholarships
+                
 
             </div>
             <br/>

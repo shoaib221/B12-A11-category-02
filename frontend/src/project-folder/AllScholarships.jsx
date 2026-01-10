@@ -5,20 +5,22 @@ import { FaSearch } from "react-icons/fa";
 import { toast } from 'react-toastify';
 import './project.css';
 import { Button2 } from '../react-library/Buttons/button';
+import { Loading } from '../miscel/Loading';
 
 
 export const AllScholarships = () => {
-    const [scholarships, setScholarships] = React.useState([]);
+    const [scholarships, setScholarships] = React.useState(null);
     const { axiosInstance } = useAuthContext();
     const navigate = useNavigate();
     const [searchBy, setSearchBy] = useState("");
     const [searchPattern, setSearchPattern] = useState("");
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState( 1 );
+
     const [limit, setLimit] = useState(10);
-    const [totalPages, setTotalPages] = useState(1);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
-        if (page > totalPages) setPage(totalPages);
+        if (page > totalPages) setPage(1);
     }, [totalPages])
 
     useEffect(() => {
@@ -30,8 +32,8 @@ export const AllScholarships = () => {
             let response = await axiosInstance.get(`/scholarship/all?searchBy=${searchBy}&searchPattern=${searchPattern}&page=${page}&limit=${limit}`);
             setScholarships(response.data.scholarships);
             setTotalPages(response.data.totalPages);
-            console.log(response.data)
-            toast.success("Successfully fetched")
+            console.log(response.data);
+            
         } catch (err) {
             console.error(err.response.data.error)
         }
@@ -40,19 +42,20 @@ export const AllScholarships = () => {
 
     return (
         <div className='block' >
-            <div className='text-2xl font-bold flex-1 text-center text-(--color4)' >All Scholarships</div>
+            <div className='text-2xl font-bold flex-1 text-center text-(--color4)' >Search For Scholarships</div>
             <br />
 
             <div className='flex gap-2 items-center px-2 justify-between' >
                 
-                <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} className='min-w-24 max-w-32' >
-                    <option value="" >Search By</option>
-                    <option value="scholarshipName" >Scholarhip Name</option>
-                    <option value="universityName" >University Name</option>
-                    <option value="degree" >Degree</option>
-                    <option value="scholarshipCategory" >Scholarship Category</option>
-                    <option value="subjectCategory" >Subject Category</option>
-                    <option value="location" >Location</option>
+                <select value={searchBy} onChange={(e) => setSearchBy(e.target.value)} >
+                    
+                    <option className='bg-(--color4) text-(--color1)' value="" >Search By</option>
+                    <option className='bg-(--color4) text-(--color1)' value="scholarshipName" >Scholarhip Name</option>
+                    <option className='bg-(--color4) text-(--color1)' value="universityName" >University Name</option>
+                    <option className='bg-(--color4) text-(--color1)' value="degree" >Degree</option>
+                    <option className='bg-(--color4) text-(--color1)' value="scholarshipCategory" >Scholarship Category</option>
+                    <option className='bg-(--color4) text-(--color1)' value="subjectCategory" >Subject Category</option>
+                    <option className='bg-(--color4) text-(--color1)' value="location" >Location</option>
                 </select>
 
                 <input className='flex-1 min-w-24' placeholder='Search for...' value={searchPattern} onChange={(e) => setSearchPattern(e.target.value)} />
@@ -60,10 +63,10 @@ export const AllScholarships = () => {
                 <FaSearch title='Submit' onClick={SearchScholarships} className='text-2xl text-[var(--color4)] cursor-pointer min-w-8' />
             </div>
 
-
+            
 
             <div className='mt-4 flex flex-col gap-4' >
-                {scholarships && scholarships.map((scholarship) => (
+                {scholarships ? scholarships.map((scholarship) => (
                     <div
 
                         key={scholarship._id} className='box-1212 p-4 rounded-lg flex justify-between items-center gap-1' >
@@ -72,28 +75,31 @@ export const AllScholarships = () => {
                             <div className='text-sm text-(--color2)' >{scholarship.universityName}</div>
                         </div>
                         <div>
-                            <Button2 onClick={() => navigate(`/scholarship-detail/${scholarship._id}`)} >
+                            <button className='button-1234' onClick={() => navigate(`/scholarship-detail/${scholarship._id}`)} >
                                 View Details
-                            </Button2>
+                            </button>
                         </div>
                     </div>
-                ))}
+                    
+                ))
+                :
+                <Loading/>
+            }
+
+                
             </div>
 
             <br />
 
-            <div className='flex gap-2 flex-wrap' >
+            { totalPages > 0 && <div className='flex gap-2 flex-wrap justify-center items-center' >
                 {page > 1 && <div className='button-1234' onClick={() => setPage(x => x - 1)} > Previuos </div>}
-                {totalPages && [...Array(totalPages).keys()].map(i => (
-                    <div key={i} className={`p-1 cursor-pointer min-w-12 cen-hor ${i + 1 === page && 'button-1234'}`} onClick={() => setPage(i + 1)} >
+                { [...Array(totalPages).keys()].map(i => (
+                    <div key={i} className={`p-1 cursor-pointer min-w-12 cen-hor ${ (i+1) === page ? 'button-91' : '' }`} onClick={() => setPage(i + 1)} >
                         {i + 1}
                     </div>
                 ))}
-
-
-
                 {page < totalPages && <div className='button-1234' onClick={() => setPage(x => x + 1)} >Next</div>}
-            </div>
+            </div>}
         </div>
     );
 };

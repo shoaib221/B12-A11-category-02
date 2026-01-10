@@ -47,7 +47,6 @@ const App = () => {
                             <Route path='all-scholarships' element={ <AllScholarships /> } />
                             <Route path="scholarship-detail/:id" element={ <ScholarshipDetail /> } />
                             <Route path='dashboard' element={ <Dashboard /> } />
-                            
                             <Route path='manage-users' element={ <ManageUsers /> } />
                             <Route path='payment_success' element={ <SuccesfulPayment /> } />
                             <Route path='payment_failed' element={ <FailedPayment /> } />

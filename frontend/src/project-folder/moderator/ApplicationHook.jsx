@@ -100,7 +100,7 @@ const DetailTag = ({ application, isOpen, showDetail }) => {
                     <div className="font-bold text-(--color1)" > Status </div>
                     <div> <span className="font-bold" >Submitted On:</span> <TimeDate date={application.applicationDate} /> </div>
 
-                    <div> <span className="font-bold"> Application Status:</span>
+                    <div> <span className="font-bold"> Application Status : </span>
                         <select value={status} onChange={(e) => setStatus(e.target.value)} 
                             className="bg-(--color4) text-(--color1a)"
                             >
@@ -133,7 +133,7 @@ const DetailTag = ({ application, isOpen, showDetail }) => {
                 </div>
                 <br/>
                 <div className="flex justify-center gap-4 mt-4" >
-                    <button className="button-1234" onClick={Decision} >Update</button>
+                    <button className="button-91" onClick={Decision} >Update</button>
                     
                 </div>
             </div>}
@@ -240,7 +240,7 @@ const FeedbackTag = ({ isOpen, show, app }) => {
                 </label>
 
                 <div className="flex justify-center gap-4" >
-                    <button onClick={SendFeedback} className="button-1234" >Submit Feedback</button>
+                    <button onClick={SendFeedback} className="button-91" >Submit Feedback</button>
                     
                 </div>
             </div>

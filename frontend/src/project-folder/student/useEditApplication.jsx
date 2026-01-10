@@ -100,7 +100,7 @@ const EditTag = ({ isOpen, application, show }) => {
                 </label>
 
                 <div className="flex justify-center gap-4" >
-                    { application.applicationStatus === 'pending' && <button  className="button-1234" onClick={ Update  } >Update</button>}
+                    { application.applicationStatus === 'pending' && <button  className="button-91" onClick={ Update  } >Update</button>}
                     
                 </div>
             </div>}

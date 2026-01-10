@@ -29,7 +29,7 @@ export const Entry = () => {
     return (
         <>
             <Nav />
-            <div className='flex-1 relative overflow-hidden p-4 flex flex-col' >
+            <div className='flex-grow p-4' >
                 <DownWindowTag />
                 <Outlet />
             </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuthContext } from "../../auth/context"
 
 import { Pie, PieChart, ResponsiveContainer } from 'recharts';
+import { Loading } from "../../miscel/Loading";
 
 // #region Sample data
 
@@ -58,6 +59,8 @@ export const Analytics = () => {
         if (!user) return;
         Fetch();
     }, [user])
+
+    if(!analytics) return <Loading />
 
     return (
         <div>

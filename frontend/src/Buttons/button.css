@@ -35,3 +35,20 @@
     color: var(--color1);
     cursor: pointer;
 }
+
+.button-91 {
+    background-color: var(--color4);
+    color: var(--color1);
+    font-weight: bold;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    cursor: pointer;
+    border-radius: .5rem;
+}
+
+.button-91:hover {
+    opacity: 0.7;
+}
+

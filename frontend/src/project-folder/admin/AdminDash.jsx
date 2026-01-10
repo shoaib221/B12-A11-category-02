@@ -14,11 +14,11 @@ export const AdminDash = () => {
         <div className='flex flex-col lg:flex-row gap-8 flex-1' >
 
             <div className='flex flex-row lg:flex-col overflow-auto gap-2 p-2' >
-                <div className={`${ cur === 'profile'? 'button-1234': ""  } box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur('profile') } >My Profile</div>
-                <div className={`${ cur === 'add'? 'button-1234': ""  } box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur('add') } >Add Scholarship</div>
-                <div className={`${ cur === 'scholarships'? 'button-1234': ""  } box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur('scholarships') } > Manage Scholarships </div>
-                <div className={`${ cur === 'users'? 'button-1234': ""  } box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur( 'users' ) } > Manage Users </div>
-                <div className={`${ cur === 'ana'? 'button-1234': ""  } box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur( 'ana' ) } > Analytics </div>
+                <div className={`${ cur === 'profile'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur('profile') } >My Profile</div>
+                <div className={`${ cur === 'add'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur('add') } >Add Scholarship</div>
+                <div className={`${ cur === 'scholarships'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur('scholarships') } > Manage Scholarships </div>
+                <div className={`${ cur === 'users'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur( 'users' ) } > Manage Users </div>
+                <div className={`${ cur === 'ana'? 'button-1234sel': ""  } button-1234 box-1212 cursor-pointer min-w-32`} style={{ minWidth: '8rem' }} onClick={ () => setCur( 'ana' ) } > Analytics </div>
             </div>
 
             <div className='flex-1' >
